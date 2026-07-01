@@ -1,0 +1,48 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'emergency';
+  size?: 'small' | 'medium' | 'large';
+  icon?: string;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  text,
+  href,
+  variant = 'primary',
+  size = 'medium',
+  icon,
+  external = false,
+  class: className = '',
+} = Astro.props;
+
+// Variant Classes
+const variantClasses = {
+  primary: 'bg-safety-yellow text-deep-navy font-bold hover:brightness-95 transition-all shadow-md active:scale-95 hover:shadow-lg',
+  secondary: 'bg-electric-blue text-white font-bold hover:bg-deep-navy transition-all active:scale-95 shadow-md',
+  tertiary: 'bg-transparent border-2 border-white text-white font-bold hover:bg-white/10 transition-all active:scale-95',
+  emergency: 'bg-emergency-red text-white font-bold hover:bg-red-700 transition-all active:scale-95 shadow-lg',
+};
+
+// Size Classes
+const sizeClasses = {
+  small: 'py-2 px-4 text-sm rounded-md',
+  medium: 'py-3 px-6 text-base rounded-lg',
+  large: 'py-4 px-8 text-lg rounded-xl',
+};
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class={`inline-flex items-center justify-center gap-2 transition-all duration-200 text-center ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+>
+  {icon && (
+    <span class="material-symbols-outlined select-none text-xl">{icon}</span>
+  )}
+  <span>{text}</span>
+</a>

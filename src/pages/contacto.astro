@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const emergencyList = [
+  'Humo o chispas provenientes de paneles eléctricos o tomas.',
+  'Olor a quemado persistente cerca de cableado.',
+  'Pérdida total de energía sin reporte de falla general en la zona.',
+  'Disyuntores (breakers) que se disparan repetidamente.'
+];
+---
+
+<Layout 
+  title="Contacto | Genesis Electrical Corporation"
+  description="Póngase en contacto con los electricistas licenciados de Genesis Electrical Corporation en Miami, Florida. Solicite un presupuesto gratuito o contáctenos por emergencias 24/7."
+>
+  <!-- Header Section -->
+  <section class="relative py-20 flex items-center justify-center overflow-hidden pt-32">
+    <div class="absolute inset-0 z-0">
+      <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLBXkIn_Zg2H8pC4xRPSWEwrBHwGHF67UUqIWBVPOgcrGyPnEJyEjPpN1Hg4e7u1ToyBhxdnpNwRwElHK7YxMcpekRjcRT_BFEeWUUc-ZqG-aagn-HXIx_6wTrqzM6HTKpD6EvMmslUy8pfx_5E3ke9G4edsOBQr2KP4lXKkG-1UwUFGH2hUTEmgAsAfwSA6sWmNWBWH3s7nvX6Q_jMwnIs4hQk7hx3BXRwS_jpwiTIIGBZnEqJsbg2wpvtCfhQ0fRtdDr4JFl2XI');"></div>
+      <div class="absolute inset-0 bg-deep-navy/80 backdrop-blur-[2px]"></div>
+    </div>
+    <div class="relative z-10 text-center px-margin-mobile max-w-2xl">
+      <h1 class="font-display-lg text-white text-display-lg-mobile md:text-display-lg font-bold mb-4">Contacto</h1>
+      <p class="text-white/95 font-body-lg text-lg">¿Tiene alguna duda o necesita un presupuesto? Estamos aquí para ayudarle en todo Miami.</p>
+    </div>
+  </section>
+
+  <!-- Contact Grid & Form -->
+  <section class="py-24 px-base md:px-margin-desktop max-w-container-max mx-auto bg-white">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <!-- Left Side: Info -->
+      <div class="space-y-12">
+        <div>
+          <h2 class="font-headline-lg text-3xl font-bold text-deep-navy mb-6">Póngase en Contacto</h2>
+          <p class="text-on-surface-variant font-body-md text-base leading-relaxed">
+            Ya sea para una pequeña reparación en casa, la planificación eléctrica de un local comercial o una emergencia de madrugada, nuestro equipo de técnicos licenciados en Miami está listo para asistirle.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-6">
+            <span class="material-symbols-outlined text-[40px] text-electric-blue select-none">call</span>
+            <div class="text-body-lg text-lg font-body-lg font-semibold text-deep-navy">
+              <a href="tel:+17867202328" class="hover:text-electric-blue transition-colors">(786) 720-2328</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-6">
+            <span class="material-symbols-outlined text-[40px] text-electric-blue select-none">mail</span>
+            <div class="text-body-lg text-lg font-body-lg font-semibold text-deep-navy">
+              <a href="mailto:info@genesiselectrical.com" class="hover:text-electric-blue transition-colors">info@genesiselectrical.com</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-6">
+            <span class="material-symbols-outlined text-[40px] text-electric-blue select-none">location_on</span>
+            <div class="text-body-lg text-base font-body-lg text-on-surface-variant">
+              <span>Dirección: 185 NW 13th Ave Suite 736, Miami, FL 33125</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-6">
+            <span class="material-symbols-outlined text-[40px] text-electric-blue select-none">schedule</span>
+            <div class="text-body-lg text-base font-body-lg text-on-surface-variant">
+              <span>Horario: Lunes a Domingo, 7:00 AM - 7:00 PM</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-6">
+            <span class="material-symbols-outlined text-[40px] text-electric-blue select-none">warning</span>
+            <div class="text-body-lg text-base font-body-lg font-semibold text-emergency-red">
+              <span>Emergencias: Disponibles fuera de horario regular</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Form Component -->
+      <div>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Map Section -->
+  <section class="bg-surface-subtle py-[100px] px-base md:px-margin-desktop text-center">
+    <div class="max-w-container-max mx-auto">
+      <h2 class="font-headline-lg text-[36px] font-bold text-deep-navy mb-12">Nuestra Ubicación</h2>
+      <div class="w-full h-[500px] rounded-[12px] overflow-hidden shadow-lg border border-outline-variant/30 mb-6">
+        <iframe 
+          allowfullscreen="" 
+          class="w-full h-full border-0" 
+          loading="lazy" 
+          title="Google Map Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.833502905389!2d-80.21855662366881!3d25.776019577344933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6e08c4e7235%3A0xb3df6c27f7f45a0e!2s185%20NW%2013th%20Ave%2C%20Miami%2C%20FL%2033125!5e0!3m2!1sen!2sus!4v1715600000000!5m2!1sen!2sus"
+        ></iframe>
+      </div>
+      <p class="text-deep-navy font-bold text-body-lg text-lg">📍 185 NW 13th Ave Suite 736, Miami, FL 33125</p>
+    </div>
+  </section>
+
+  <!-- Emergencies Section -->
+  <section class="bg-red-50/50 py-[100px] px-base md:px-margin-desktop">
+    <div class="max-w-container-max mx-auto flex flex-col items-center text-center">
+      <h2 class="font-headline-lg text-[42px] font-bold text-emergency-red mb-8">¿Tiene una Emergencia Eléctrica?</h2>
+      <div class="max-w-3xl space-y-4 mb-10 text-on-surface-variant text-base md:text-lg">
+        <p>Las fallas eléctricas no esperan. Un cortocircuito o un apagón total en su negocio o residencia puede representar un riesgo serio para la seguridad y la operatividad de sus instalaciones.</p>
+        <p>En Genesis Electrical Corporation, contamos con personal altamente capacitado y certificado para responder de manera inmediata ante cualquier situación crítica, garantizando una solución segura y duradera en el menor tiempo posible.</p>
+      </div>
+      
+      <a class="bg-emergency-red text-white px-12 py-6 rounded-xl font-bold flex items-center gap-3 hover:bg-red-700 transition-all scale-up shadow-xl mb-12 text-xl md:text-[24px]" href="tel:+17867202328">
+        🚨 Emergencia 24/7: (786) 720-2328
+      </a>
+
+      <div class="text-left max-w-2xl bg-white p-8 rounded-2xl shadow-md border border-red-100">
+        <h3 class="font-headline-md text-deep-navy font-bold mb-4 text-lg">Cuándo Llamar Inmediatamente:</h3>
+        <ul class="space-y-3">
+          {emergencyList.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-emergency-red select-none text-xl font-bold">priority_high</span>
+              <span class="text-body-md text-on-surface-variant text-sm md:text-base">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

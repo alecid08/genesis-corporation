@@ -1,0 +1,50 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<div class="faq-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all duration-300 hover:shadow-md">
+  <button class="faq-toggle w-full flex items-center justify-between p-6 text-left group focus:outline-none">
+    <span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors font-bold text-base md:text-lg">
+      {question}
+    </span>
+    <span class="faq-icon material-symbols-outlined text-outline transition-transform duration-300 select-none">
+      add
+    </span>
+  </button>
+  <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+    <div class="p-6 text-body-md text-on-surface-variant leading-relaxed">
+      <Fragment set:html={answer} />
+    </div>
+  </div>
+</div>
+
+<script>
+  // Accordion Logic
+  const toggles = document.querySelectorAll('.faq-toggle');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const item = toggle.closest('.faq-item');
+      if (!item) return;
+      
+      const content = item.querySelector('.faq-content') as HTMLElement;
+      const icon = toggle.querySelector('.faq-icon') as HTMLElement;
+      
+      if (content && icon) {
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+        
+        if (isOpen) {
+          content.style.maxHeight = '0px';
+          icon.textContent = 'add';
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon.textContent = 'remove';
+        }
+      }
+    });
+  });
+</script>

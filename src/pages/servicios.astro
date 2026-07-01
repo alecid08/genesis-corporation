@@ -1,0 +1,257 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+
+const residentialServices = [
+  {
+    icon: 'troubleshoot',
+    title: 'Diagnóstico',
+    features: ['Pruebas de circuito', 'revisión de fugas a tierra', 'análisis de voltaje'],
+    situations: ['Luces parpadeantes', 'disyuntores que saltan frecuentemente']
+  },
+  {
+    icon: 'lightbulb',
+    title: 'Iluminación',
+    features: ['Diseño LED', 'domótica', 'iluminación de acento y jardines'],
+    situations: ['Remodelación o mejora de eficiencia energética']
+  },
+  {
+    icon: 'electrical_services',
+    title: 'Paneles',
+    features: ['Actualización de amperaje', 'reemplazo de tableros FPE'],
+    situations: ['Paneles antiguos', 'olor a quemado o ruidos extraños']
+  },
+  {
+    icon: 'outlet',
+    title: 'Accesorios',
+    features: ['Instalación GFCI', 'puertos USB integrados', 'smart switches'],
+    situations: ['Actualización estética o seguridad en zonas húmedas']
+  },
+  {
+    icon: 'settings_input_component',
+    title: 'Cableado',
+    features: ['Recableado total de casas antiguas y sistemas propensos a cortocircuitos'],
+    situations: ['Propiedades con cableado de aluminio o más de 30 años de antigüedad']
+  },
+  {
+    icon: 'heat_pump',
+    title: 'Aire Acond.',
+    features: ['Conexiones eléctricas dedicadas y seguras para sistemas HVAC'],
+    situations: ['Instalación de nueva unidad de aire acondicionado central']
+  },
+  {
+    icon: 'security',
+    title: 'Seguridad',
+    features: ['Alarmas de incendio integradas', 'detectores de monóxido de carbono'],
+    situations: ['Mejora de sistemas de alerta residencial y cumplimiento de códigos']
+  },
+  {
+    icon: 'connected_tv',
+    title: 'Smart Home',
+    features: ['Integración de termostatos, cerraduras y sistemas de audio inteligentes'],
+    situations: ['Automatización del hogar y control centralizado desde dispositivos']
+  }
+];
+
+const commercialServices = [
+  {
+    icon: 'apartment',
+    title: 'Nuevas Construcciones',
+    description: 'Diseño y ejecución completa de planos eléctricos para edificios comerciales, oficinas y locales de retail.'
+  },
+  {
+    icon: 'construction',
+    title: 'Remodelaciones',
+    description: 'Modernización de infraestructuras eléctricas obsoletas para cumplir con los códigos vigentes del condado.'
+  },
+  {
+    icon: 'bolt',
+    title: 'Mantenimiento Preventivo',
+    description: 'Inspecciones periódicas y termografía para prevenir fallas críticas en instalaciones industriales.'
+  },
+  {
+    icon: 'emergency_home',
+    title: 'Alumbrado de Emergencia',
+    description: 'Sistemas de respaldo y señalización de salida obligatorios para seguridad ocupacional.'
+  },
+  {
+    icon: 'solar_power',
+    title: 'Eficiencia Energética',
+    description: 'Auditorías energéticas y optimización de consumo para reducir costos operativos comerciales.'
+  },
+  {
+    icon: 'terminal',
+    title: 'Centros de Datos',
+    description: 'Cableado estructurado y sistemas de alimentación ininterrumpida (UPS) para servidores.'
+  }
+];
+---
+
+<Layout 
+  title="Nuestros Servicios Eléctricos | Genesis Electrical Corporation"
+  description="Soluciones eléctricas de vanguardia residenciales y comerciales en Miami, Florida. Expertos en diagnóstico, paneles, iluminación LED, cargadores EV y emergencias."
+>
+  <!-- Hero Section -->
+  <header class="relative pt-20 h-[500px] flex items-center overflow-hidden">
+    <div class="absolute inset-0 bg-deep-navy/70 z-10"></div>
+    <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8vQ0kbNutAvAjFUybLzDjEezewqwSIMcJCIIvJGbgHUq-YHmwT-vsHB5jG0-R4k9-K5LrfkB4bph_YAQofiBs4Q81JNlWwgikTWJBn0wT3CcGGcxaLTsN1EGUUN_CKMHgYmEiZFNLwdkIPO6UuGr9MITvtNz7ZkZDRy_A1lmO3KaekcOENtCWLh9ulHT0gfFGYopOz0hZnKCZgzPtOyMGZDA9A-DVkYHFc032mH4VIPXsY80yil83OucIlvQSz6v0X_h2Hi8fZ14')"></div>
+    <div class="relative z-20 px-base md:px-margin-desktop max-w-container-max mx-auto w-full">
+      <div class="max-w-2xl">
+        <div class="bg-safety-yellow text-deep-navy inline-block px-4 py-1 rounded-full text-[12px] font-bold mb-6 tracking-widest uppercase">Expertos Certificados</div>
+        <h1 class="text-on-primary font-headline-lg text-4xl md:text-[56px] md:leading-[64px] mb-6 font-bold">Nuestros Servicios Eléctricos</h1>
+        <p class="text-on-primary/90 text-body-lg mb-8 max-w-xl">Soluciones eléctricas de vanguardia para residencias de lujo y complejos comerciales en Miami. Seguridad, eficiencia y tecnología a su disposición.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Residential Services Section -->
+  <section id="residencial" class="py-20 md:py-[120px] bg-white">
+    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+      <div class="mb-16">
+        <h2 class="font-headline-lg text-headline-lg text-deep-navy mb-4 font-bold text-3xl">Servicios Residenciales</h2>
+        <div class="w-24 h-1.5 bg-safety-yellow rounded-full"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+        {residentialServices.map((service) => (
+          <ServiceCard
+            icon={service.icon}
+            title={service.title}
+            features={service.features}
+            situations={service.situations}
+            theme="light"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Commercial Services Section -->
+  <section id="comercial" class="py-20 md:py-[120px] bg-deep-navy text-on-primary">
+    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+      <div class="mb-16">
+        <h2 class="font-headline-lg text-headline-lg mb-4 font-bold text-3xl">Servicios Comerciales</h2>
+        <div class="w-24 h-1.5 bg-safety-yellow rounded-full"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        {commercialServices.map((service) => (
+          <ServiceCard
+            icon={service.icon}
+            title={service.title}
+            description={service.description}
+            theme="dark"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialized Services Section -->
+  <section class="py-20 md:py-[120px] bg-surface-bright">
+    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-headline-lg text-headline-lg text-deep-navy mb-4 font-bold text-3xl">Servicios Especializados</h2>
+        <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">Tecnología de punta para necesidades eléctricas modernas y protección de alta gama.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <!-- EV Chargers -->
+        <div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-56 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMcAvIoSX06aGq72fcm5BkKxmkOBVvtKT33t-4AZ9fWEbNZ-ZDJvIAxO-0Gy4kAFmQJ1FBFsu-X_U2kAaf8absPoCIg_dfoqFj-MZnhaw6X7wgZPw76O1cWCzjnPADsCVTAmHa2uuTo-NgzhUo1mTwb27n12DgMtYwJg1AAnniVNUr01Fr8JsZBvpf5URTtiV9Dzn1JBU5_be-PMPMrzu1piN3XXskU0vQkkzdJfmDQMbHH6WZ050fExaceHkvQ7Cg5W9fW3_GYN0')"></div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="material-symbols-outlined text-electric-blue font-bold text-2xl">ev_station</span>
+              <h3 class="font-headline-md text-headline-md text-deep-navy font-bold text-xl">Cargadores EV</h3>
+            </div>
+            <p class="text-body-md text-on-surface-variant mb-6 text-sm">Instalación de estaciones de carga Nivel 2 y Tesla Wall Connectors con certificación oficial.</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Certificación Tesla
+              </li>
+              <li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Gestión de Permisos
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Generators -->
+        <div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-56 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDAd34yD0CWXpV1WGxYcSfiJH_hc6coLQzNMlgsH0xBkm587J9WcAbusGmdfTkAqG_FULNeDsazTFnaVSdn10gaPnGBUiH9uqJGTkJbcYJwZCny3YBt5QFKrfIZl2z2jie6toHRgRMtXiYp1nxfKtlcZUEztjH58MY0B1RkMBjwr0wiP-PzYTGANG-1RnM7hqN08xUr5J_CY4MJDfko2KFGwkWAVZus7sCzfH4ef1Ez6TtXWwc8soVHmWJCl9amtsetXsN4XAkbxzA')"></div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="material-symbols-outlined text-electric-blue font-bold text-2xl">elevator</span>
+              <h3 class="font-headline-md text-headline-md text-deep-navy font-bold text-xl">Generadores</h3>
+            </div>
+            <p class="text-body-md text-on-surface-variant mb-6 text-sm">Sistemas de respaldo automático Generac para garantizar energía ininterrumpida durante tormentas.</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Respaldo Automático
+              </li>
+              <li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Mantenimiento Anual
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Surge Protection -->
+        <div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-56 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8IAaNCC6oXjP1Jqlt5lrngwlxW3mh9ud9hYmWm8cRt0b6GaAb5-BuOxTuZ3ZF186td2wMxL88cyR8y8bXKUvvYmZaJUZjr57QY8Jfb_MNlsps7PiT9HGEX3K6EM7qPxNzoWyAiebhQA4aUKR_8KC7ncnEmi3byeF-2kJaOdpRMDQjy39kfD83Fe5T7f6Wr4BJUZygvzc-GnoYf81TGV4foRa11JGRXrBgYSBDY8AYi91yMPrnZ_NMbIYRMVWvQ8zGsAdfqw3psOs')"></div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="material-symbols-outlined text-electric-blue font-bold text-2xl">shield_with_heart</span>
+              <h3 class="font-headline-md text-headline-md text-deep-navy font-bold text-xl">Sobretensiones</h3>
+            </div>
+            <p class="text-body-md text-on-surface-variant mb-6 text-sm">Protección para toda la casa contra rayos y fluctuaciones de red, cuidando sus electrodomésticos.</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Garantía de Equipos
+              </li>
+              <li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Instalación en Panel
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-20">
+    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+      <div class="bg-gradient-to-r from-electric-blue to-deep-navy rounded-3xl p-12 text-center text-on-primary shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-8 opacity-10 select-none">
+          <span class="material-symbols-outlined text-[200px]">electric_bolt</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg mb-6 relative z-10 font-bold text-2xl md:text-3xl">¿Listo para asegurar su propiedad?</h2>
+        <p class="text-body-lg mb-10 max-w-xl mx-auto relative z-10">Obtenga una estimación gratuita hoy mismo. Nuestros técnicos están listos para atenderle con la máxima profesionalidad.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
+          <a href="/contacto" class="bg-safety-yellow text-deep-navy px-10 py-4 rounded-lg font-bold hover:scale-105 transition-transform text-center shadow-lg">Agendar Inspección Gratis</a>
+          <a href="/contacto" class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-lg font-bold hover:bg-white/10 transition-colors text-center">Ver Proyectos Realizados</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Hover animation logic for cards
+  document.querySelectorAll('.service-card, .group').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const icon = card.querySelector('.material-symbols-outlined') as HTMLElement;
+      if (icon) {
+        icon.style.transform = 'scale(1.1) translateY(-4px)';
+        icon.style.transition = 'transform 0.3s ease';
+      }
+    });
+    card.addEventListener('mouseleave', () => {
+      const icon = card.querySelector('.material-symbols-outlined') as HTMLElement;
+      if (icon) {
+        icon.style.transform = 'scale(1) translateY(0)';
+      }
+    });
+  });
+</script>

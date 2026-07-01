@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="¡Gracias! | Genesis Electrical Corporation"
+  description="Hemos recibido su mensaje. Nos pondremos en contacto con usted lo antes posible."
+>
+  <style>
+    .success-animation {
+      animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+
+  <main class="flex-grow flex items-center justify-center py-[100px] px-margin-mobile bg-surface-subtle">
+    <div class="w-full max-w-[700px] bg-white rounded-xl shadow-md p-8 md:p-12 text-center flex flex-col items-center border border-outline-variant/30">
+      <!-- Icon -->
+      <div class="success-animation mb-8 select-none">
+        <span class="material-symbols-outlined text-[120px] text-success-green" style="font-variation-settings: 'FILL' 1;">
+          check_circle
+        </span>
+      </div>
+      
+      <!-- Heading -->
+      <h1 class="font-display-lg text-[36px] md:text-[48px] leading-[1.2] font-bold text-deep-navy mb-6">
+        ¡Gracias por Contactarnos!
+      </h1>
+      
+      <!-- Body Text -->
+      <div class="space-y-4 mb-10 text-on-surface-variant text-base md:text-lg">
+        <p class="max-w-[550px] mx-auto leading-relaxed">
+          Hemos recibido su mensaje y nos pondremos en contacto con usted dentro de las próximas 24-48 horas.
+        </p>
+        <p class="max-w-[550px] mx-auto leading-relaxed">
+          Si es una emergencia, por favor llámenos directamente al <span class="font-bold text-deep-navy">(786) 720-2328</span>.
+        </p>
+      </div>
+      
+      <!-- Highlight Box -->
+      <div class="w-full bg-[#E3F2FD] p-6 md:p-8 rounded-[12px] border border-[#BBDEFB] mb-12">
+        <p class="font-headline-md text-deep-navy text-lg md:text-xl flex flex-wrap items-center justify-center gap-2">
+          <span>📞</span>
+          <span>¿Necesita Atención Inmediata? Llámenos:</span> 
+          <a class="font-bold hover:underline text-electric-blue" href="tel:+17867202328">(786) 720-2328</a>
+        </p>
+      </div>
+      
+      <!-- Button -->
+      <a class="group inline-flex items-center gap-2 px-8 py-3 border-2 border-electric-blue text-electric-blue rounded-lg font-bold hover:bg-electric-blue/5 transition-all text-base" href="/">
+        <span class="material-symbols-outlined transition-transform group-hover:-translate-x-1 select-none text-xl">arrow_back</span>
+        Volver al Inicio
+      </a>
+    </div>
+  </main>
+</Layout>

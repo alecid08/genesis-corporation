@@ -1,0 +1,107 @@
+---
+const pathname = Astro.url.pathname;
+const cleanPath = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
+
+const navItems = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
+  { label: 'Contacto', href: '/contacto' },
+  { label: 'Emergencia 24/7', href: '/emergencia' },
+  { label: 'FAQ', href: '/faq' },
+];
+---
+
+<header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md transition-transform duration-300" id="main-header">
+  <div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <!-- Logo -->
+    <a href="/" class="font-display-lg text-lg md:text-headline-md font-bold text-electric-blue hover:opacity-90 transition-opacity">
+      Genesis Electrical
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center space-x-6">
+      {navItems.map((item) => {
+        const isActive = cleanPath === item.href || (item.href !== '/' && cleanPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={isActive 
+              ? "text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" 
+              : "text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg"}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right Side CTA and Mobile Menu Toggle -->
+    <div class="flex items-center gap-4">
+      <a class="bg-safety-yellow text-deep-navy font-bold py-2.5 px-4 md:py-3 md:px-6 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-2 text-sm md:text-base whitespace-nowrap" href="tel:+17867202328">
+        <span class="material-symbols-outlined text-lg md:text-xl">call</span>
+        <span class="hidden sm:inline">(786) 720-2328</span>
+        <span class="sm:hidden">Llamar</span>
+      </a>
+
+      <!-- Hamburger Button -->
+      <button id="mobile-menu-toggle" class="lg:hidden text-deep-navy focus:outline-none p-2 rounded-lg hover:bg-surface-container-high" aria-label="Toggle Menu">
+        <span class="material-symbols-outlined text-2xl block" id="menu-icon">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-surface border-t border-surface-variant absolute w-full left-0 top-20 shadow-lg px-base py-6 space-y-4">
+    {navItems.map((item) => {
+      const isActive = cleanPath === item.href || (item.href !== '/' && cleanPath.startsWith(item.href));
+      return (
+        <a
+          href={item.href}
+          class={`block py-2 px-4 rounded-lg font-medium transition-colors ${
+            isActive 
+              ? "bg-electric-blue/10 text-electric-blue font-bold" 
+              : "text-deep-navy hover:bg-surface-container-high hover:text-electric-blue"
+          }`}
+        >
+          {item.label}
+        </a>
+      );
+    })}
+  </div>
+</header>
+
+<script>
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+
+  if (toggleBtn && mobileMenu && menuIcon) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        menuIcon.textContent = 'close';
+      } else {
+        mobileMenu.classList.add('hidden');
+        menuIcon.textContent = 'menu';
+      }
+    });
+  }
+
+  // Header Scroll behavior (Hide on scroll down, show on scroll up)
+  let lastScroll = 0;
+  const header = document.getElementById('main-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > lastScroll && currentScroll > 120) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = 'translateY(0)';
+      }
+      lastScroll = currentScroll;
+    });
+  }
+</script>

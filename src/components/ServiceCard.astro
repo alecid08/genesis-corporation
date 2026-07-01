@@ -1,0 +1,86 @@
+---
+interface Props {
+  icon: string; // Material symbols icon name, e.g., 'lightbulb'
+  title: string;
+  description?: string;
+  features?: string[];
+  situations?: string[];
+  ctaText?: string;
+  ctaHref?: string;
+  theme?: 'light' | 'dark' | 'emergency';
+}
+
+const { icon, title, description, features, situations, ctaText, ctaHref, theme = 'light' } = Astro.props;
+---
+
+<div class={`service-card group relative p-8 rounded-xl transition-all duration-300 scale-up ${
+  theme === 'light'
+    ? 'bg-surface-subtle shadow-[0_4px_20px_rgba(0,51,102,0.06)] hover:shadow-xl text-on-surface'
+    : theme === 'emergency'
+      ? 'bg-emergency-red/5 border border-emergency-red/25 shadow-xl hover:shadow-2xl text-on-surface'
+      : 'bg-white/5 border border-white/10 hover:bg-white/10 text-on-primary'
+}`}>
+  {theme === 'light' && (
+    <div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all duration-300 rounded-t-xl group-hover:h-[4px]"></div>
+  )}
+  {theme === 'emergency' && (
+    <div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-emergency-red transition-all duration-300 rounded-t-xl group-hover:h-[4px]"></div>
+  )}
+  <span class={`material-symbols-outlined text-4xl mb-6 block ${
+    theme === 'light' ? 'text-electric-blue' : theme === 'emergency' ? 'text-emergency-red' : 'text-safety-yellow'
+  }`}>
+    {icon}
+  </span>
+  <h3 class={`font-headline-md text-headline-md mb-4 ${
+    theme === 'light' ? 'text-deep-navy' : theme === 'emergency' ? 'text-emergency-red' : 'text-on-primary'
+  }`}>
+    {title}
+  </h3>
+  
+  {description && (
+    <p class={`text-body-md ${theme === 'light' ? 'text-on-surface-variant' : 'text-on-primary/70'}`}>
+      {description}
+    </p>
+  )}
+
+  {(features || situations) && (
+    <div class="space-y-4">
+      {features && features.length > 0 && (
+        <div>
+          <p class={`text-label-md font-bold uppercase mb-2 ${theme === 'light' ? 'text-electric-blue' : 'text-safety-yellow'}`}>Incluye</p>
+          <ul class="space-y-2">
+            {features.map((item) => (
+              <li class="flex items-start gap-2">
+                <span class={`material-symbols-outlined text-lg select-none ${theme === 'emergency' ? 'text-emergency-red' : 'text-success-green'}`}>
+                  {theme === 'emergency' ? 'emergency_home' : 'check_circle'}
+                </span>
+                <span class="text-sm text-on-surface-variant">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {situations && situations.length > 0 && (
+        <div>
+          <p class={`text-label-md font-bold uppercase mb-2 ${theme === 'light' ? 'text-electric-blue' : 'text-safety-yellow'}`}>Cuándo</p>
+          <ul class="space-y-2">
+            {situations.map((item) => (
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-electric-blue text-lg select-none font-bold">priority_high</span>
+                <span class="text-sm text-on-surface-variant">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )}
+
+  {ctaText && ctaHref && (
+    <div class="mt-6">
+      <a href={ctaHref} class={`inline-block font-bold text-sm underline hover:no-underline transition-all ${theme === 'light' ? 'text-electric-blue' : 'text-safety-yellow'}`}>
+        {ctaText} →
+      </a>
+    </div>
+  )}
+</div>

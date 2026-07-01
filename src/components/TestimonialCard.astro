@@ -1,0 +1,49 @@
+---
+interface Props {
+  rating: number; // 1 to 5
+  quote: string;
+  author: string;
+  location: string;
+}
+
+const { rating = 5, quote, author, location } = Astro.props;
+
+// Generate initials from name (e.g. "Ricardo L." -> "RL")
+const initials = author
+  .split(' ')
+  .map(name => name.charAt(0))
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<div class="min-w-full md:min-w-[400px] snap-center bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+  <div>
+    <!-- Rating Stars -->
+    <div class="flex text-safety-yellow mb-4">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <span 
+          class="material-symbols-outlined select-none" 
+          style={`font-variation-settings: 'FILL' ${index < rating ? 1 : 0};`}
+        >
+          star
+        </span>
+      ))}
+    </div>
+    <!-- Quote -->
+    <p class="font-body-lg italic mb-6 text-on-primary">
+      "{quote}"
+    </p>
+  </div>
+
+  <!-- Author Info -->
+  <div class="flex items-center gap-4">
+    <div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-deep-navy font-bold text-lg select-none">
+      {initials}
+    </div>
+    <div>
+      <p class="font-label-lg text-on-primary font-bold">{author}</p>
+      <p class="text-sm text-on-primary/75">{location}</p>
+    </div>
+  </div>
+</div>
