@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>¡Gracias! - Genesis Electrical Corporation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Open+Sans:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f7f9fc",
+                    "on-primary-container": "#b3cdff",
+                    "outline-variant": "#c2c6d4",
+                    "on-secondary-container": "#294f83",
+                    "surface-tint": "#165db2",
+                    "secondary-fixed": "#d5e3ff",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "on-surface-variant": "#424752",
+                    "tertiary": "#745b00",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#aac7ff",
+                    "surface-container-low": "#f2f4f7",
+                    "surface-subtle": "#F9FAFB",
+                    "on-background": "#191c1e",
+                    "primary-container": "#0055aa",
+                    "success-green": "#28A745",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eceef1",
+                    "secondary-container": "#9fc2fe",
+                    "inverse-surface": "#2d3133",
+                    "secondary": "#3a5f94",
+                    "surface-variant": "#e0e3e6",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eff1f4",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f7f9fc",
+                    "outline": "#727783",
+                    "tertiary-fixed": "#ffe08b",
+                    "tertiary-container": "#d0a600",
+                    "electric-blue": "#0055AA",
+                    "on-secondary-fixed": "#001b3c",
+                    "tertiary-fixed-dim": "#f1c100",
+                    "safety-yellow": "#FFCC00",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-container-highest": "#e0e3e6",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "emergency-red": "#CC0000",
+                    "primary-fixed": "#d6e3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#4f3d00",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#aac7ff",
+                    "on-primary-fixed": "#001b3e",
+                    "surface-dim": "#d8dadd",
+                    "on-primary-fixed-variant": "#00458d",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "primary": "#003e7f",
+                    "on-surface": "#191c1e",
+                    "on-error": "#ffffff",
+                    "surface": "#f7f9fc",
+                    "deep-navy": "#003366"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-md": ["Open Sans"],
+                    "label-lg": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "label-md": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "body-lg": ["Open Sans"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .success-animation {
+            animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md">
+<div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
+<span class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue">
+            Genesis Electrical Corporation
+        </span>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/">Inicio</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Servicios</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Sobre Nosotros</a>
+<a class="bg-electric-blue text-white px-6 py-2 rounded-lg font-bold hover:bg-primary transition-all scale-up active:scale-95 font-label-lg text-label-lg" href="tel:7867202328">(786) 720-2328</a>
+</div>
+</div>
+</nav>
+<!-- Main Success Content -->
+<main class="flex-grow flex items-center justify-center py-[150px] px-margin-mobile">
+<div class="w-full max-w-[700px] bg-white rounded-xl shadow-sm p-8 md:p-12 text-center flex flex-col items-center">
+<!-- Icon -->
+<div class="success-animation mb-8">
+<span class="material-symbols-outlined text-[120px] text-success-green" style="font-variation-settings: 'FILL' 1;">
+                check_circle
+            </span>
+</div>
+<!-- Heading -->
+<h1 class="font-display-lg text-[48px] leading-[1.2] font-bold text-deep-navy mb-8">
+            ¡Gracias por Contactarnos!
+        </h1>
+<!-- Body Text -->
+<div class="space-y-4 mb-10">
+<p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
+                Hemos recibido su mensaje y nos pondremos en contacto con usted dentro de las próximas 24-48 horas.
+            </p>
+<p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
+                Si es una emergencia, por favor llámenos directamente al <span class="font-bold text-deep-navy">(786) 720-2328</span>.
+            </p>
+</div>
+<!-- Highlight Box -->
+<div class="w-full bg-[#E3F2FD] p-8 rounded-[12px] border border-[#BBDEFB] mb-12">
+<p class="font-headline-md text-deep-navy text-xl md:text-2xl flex items-center justify-center gap-3">
+<span>📞</span>
+                ¿Necesita Atención Inmediata? Llámenos: 
+                <a class="font-bold hover:underline" href="tel:7867202328">(786) 720-2328</a>
+</p>
+</div>
+<!-- Button -->
+<a class="group inline-flex items-center gap-2 px-8 py-3 border-2 border-electric-blue text-electric-blue rounded-lg font-label-lg text-label-lg font-bold hover:bg-electric-blue/5 transition-all" href="/">
+<span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
+            Volver al Inicio
+        </a>
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative w-full pt-16 pb-8 bg-deep-navy border-t border-white/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="font-display-lg text-headline-md font-bold text-on-primary">Genesis Electrical</span>
+<p class="mt-4 text-on-primary/60 font-body-md text-body-md">Expertos electricistas licenciados sirviendo a todo Miami y sus alrededores.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-headline-md text-headline-md text-safety-yellow mb-2">Servicios</h4>
+<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Residencial</a>
+<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Comercial</a>
+<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Emergencias</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-headline-md text-headline-md text-safety-yellow mb-2">Compañía</h4>
+<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Sobre Nosotros</a>
+<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Seguridad</a>
+<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">FAQ</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-headline-md text-headline-md text-safety-yellow mb-2">Contacto</h4>
+<p class="text-on-primary/80 font-body-md">Miami, Florida</p>
+<p class="text-on-primary/80 font-body-md">(786) 720-2328</p>
+<p class="text-on-primary/80 font-body-md">24/7 Disponible</p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-base text-center mt-12 border-t border-white/5 pt-8">
+<p class="font-label-md text-label-md text-on-primary/40">© 2024 Genesis Electrical Corporation. Todos los derechos reservados.</p>
+</div>
+</footer>
+</body></html>

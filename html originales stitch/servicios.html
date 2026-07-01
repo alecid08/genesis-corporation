@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Servicios | Genesis Electrical Corporation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#745b00",
+                    "electric-blue": "#0055AA",
+                    "surface-tint": "#165db2",
+                    "surface-container": "#eceef1",
+                    "on-primary": "#ffffff",
+                    "surface": "#f7f9fc",
+                    "success-green": "#28A745",
+                    "surface-bright": "#f7f9fc",
+                    "on-primary-fixed": "#001b3e",
+                    "surface-variant": "#e0e3e6",
+                    "primary-container": "#0055aa",
+                    "primary-fixed-dim": "#aac7ff",
+                    "surface-container-highest": "#e0e3e6",
+                    "safety-yellow": "#FFCC00",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#9fc2fe",
+                    "on-surface-variant": "#424752",
+                    "primary": "#003e7f",
+                    "on-background": "#191c1e",
+                    "deep-navy": "#003366",
+                    "inverse-on-surface": "#eff1f4",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "outline-variant": "#c2c6d4",
+                    "secondary-fixed": "#d5e3ff",
+                    "on-primary-fixed-variant": "#00458d",
+                    "tertiary-container": "#d0a600",
+                    "tertiary-fixed": "#ffe08b",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-dim": "#d8dadd",
+                    "on-primary-container": "#b3cdff",
+                    "inverse-surface": "#2d3133",
+                    "background": "#f7f9fc",
+                    "inverse-primary": "#aac7ff",
+                    "emergency-red": "#CC0000",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-secondary-container": "#294f83",
+                    "outline": "#727783",
+                    "surface-subtle": "#F9FAFB",
+                    "surface-container-high": "#e6e8eb",
+                    "secondary": "#3a5f94",
+                    "on-tertiary-container": "#4f3d00",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "on-secondary-fixed": "#001b3c",
+                    "tertiary-fixed-dim": "#f1c100",
+                    "surface-container-low": "#f2f4f7",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Open Sans"],
+                    "label-lg": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-md": ["Open Sans"],
+                    "label-md": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "display-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .service-card:hover .accent-strip {
+            height: 4px;
+        }
+        .scale-up { transition: transform 0.2s ease-out; }
+        .scale-up:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue">
+                Genesis Electrical
+            </div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Inicio</a>
+<a class="text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" href="#">Servicios</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Sobre Nosotros</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Contacto</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Emergencia</a>
+</div>
+<div class="flex items-center gap-4">
+<a class="hidden lg:flex items-center gap-2 bg-safety-yellow text-deep-navy px-6 py-2 rounded-lg font-bold hover:brightness-95 transition-all" href="tel:7867202328">
+<span class="material-symbols-outlined">call</span>
+                    (786) 720-2328
+                </a>
+<button class="md:hidden text-deep-navy">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Header Section -->
+<header class="relative pt-20 h-[500px] flex items-center overflow-hidden">
+<div class="absolute inset-0 bg-deep-navy/70 z-10"></div>
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="Close-up shot of a professional electrician installing a complex copper wiring system inside a sleek, modern industrial panel. The lighting is dramatic and cool-toned, with sharp blue highlights reflecting off metallic surfaces to match the brand's professional identity. The composition is clean and technical, emphasizing precision and safety in a high-end commercial environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8vQ0kbNutAvAjFUybLzDjEezewqwSIMcJCIIvJGbgHUq-YHmwT-vsHB5jG0-R4k9-K5LrfkB4bph_YAQofiBs4Q81JNlWwgikTWJBn0wT3CcGGcxaLTsN1EGUUN_CKMHgYmEiZFNLwdkIPO6UuGr9MITvtNz7ZkZDRy_A1lmO3KaekcOENtCWLh9ulHT0gfFGYopOz0hZnKCZgzPtOyMGZDA9A-DVkYHFc032mH4VIPXsY80yil83OucIlvQSz6v0X_h2Hi8fZ14')"></div>
+<div class="relative z-20 px-base md:px-margin-desktop max-w-container-max mx-auto w-full">
+<div class="max-w-2xl">
+<div class="bg-safety-yellow text-deep-navy inline-block px-4 py-1 rounded-full text-label-md font-bold mb-6 tracking-widest uppercase">Expertos Certificados</div>
+<h1 class="text-on-primary font-headline-lg text-[56px] leading-[64px] mb-6 font-bold">Nuestros Servicios Eléctricos</h1>
+<p class="text-on-primary/90 text-body-lg mb-8 max-w-xl">Soluciones eléctricas de vanguardia para residencias de lujo y complejos comerciales en Miami. Seguridad, eficiencia y tecnología a su disposición.</p>
+</div>
+</div>
+</header>
+<!-- Residential Services Section -->
+<section class="py-20 md:py-[120px] bg-white">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy mb-4">Servicios Residenciales</h2>
+<div class="w-24 h-1.5 bg-safety-yellow rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1: Diagnóstico -->
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] hover:shadow-xl transition-all scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">troubleshoot</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Diagnóstico</h3>
+<div class="space-y-4">
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Incluye</p>
+<p class="text-body-md text-on-surface-variant">Pruebas de circuito, revisión de fugas a tierra, análisis de voltaje.</p>
+</div>
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Cuándo</p>
+<p class="text-body-md text-on-surface-variant">Luces parpadeantes, disyuntores que saltan frecuentemente.</p>
+</div>
+</div>
+</div>
+<!-- Card 2: Iluminación -->
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] hover:shadow-xl transition-all scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">lightbulb</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Iluminación</h3>
+<div class="space-y-4">
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Incluye</p>
+<p class="text-body-md text-on-surface-variant">Diseño LED, domótica, iluminación de acento y jardines.</p>
+</div>
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Cuándo</p>
+<p class="text-body-md text-on-surface-variant">Remodelación o mejora de eficiencia energética.</p>
+</div>
+</div>
+</div>
+<!-- Card 3: Paneles -->
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] hover:shadow-xl transition-all scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">electrical_services</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Paneles</h3>
+<div class="space-y-4">
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Incluye</p>
+<p class="text-body-md text-on-surface-variant">Actualización de amperaje, reemplazo de tableros FPE.</p>
+</div>
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Cuándo</p>
+<p class="text-body-md text-on-surface-variant">Paneles antiguos, olor a quemado o ruidos extraños.</p>
+</div>
+</div>
+</div>
+<!-- Card 4: Tomas y Switches -->
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] hover:shadow-xl transition-all scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">outlet</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Accesorios</h3>
+<div class="space-y-4">
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Incluye</p>
+<p class="text-body-md text-on-surface-variant">Instalación GFCI, puertos USB integrados, smart switches.</p>
+</div>
+<div>
+<p class="text-label-md font-bold text-electric-blue uppercase">Cuándo</p>
+<p class="text-body-md text-on-surface-variant">Actualización estética o seguridad en zonas húmedas.</p>
+</div>
+</div>
+</div>
+<!-- Card 5-8 Placeholder Content for Grid -->
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">settings_input_component</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Cableado</h3>
+<div class="space-y-4"><div><p class="text-label-md font-bold text-electric-blue">Incluye</p><p class="text-body-md">Recableado total de casas antiguas.</p></div></div>
+</div>
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">heat_pump</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Aire Acond.</h3>
+<div class="space-y-4"><div><p class="text-label-md font-bold text-electric-blue">Incluye</p><p class="text-body-md">Conexiones eléctricas dedicadas para HVAC.</p></div></div>
+</div>
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">security</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Seguridad</h3>
+<div class="space-y-4"><div><p class="text-label-md font-bold text-electric-blue">Incluye</p><p class="text-body-md">Alarmas de incendio y detectores de CO.</p></div></div>
+</div>
+<div class="service-card group relative bg-surface-subtle p-8 rounded-xl shadow-[0_4px_20px_rgba(0,51,102,0.06)] scale-up">
+<div class="accent-strip absolute top-0 left-0 right-0 h-0 bg-electric-blue transition-all rounded-t-xl"></div>
+<span class="material-symbols-outlined text-electric-blue text-4xl mb-6">connected_tv</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Smart Home</h3>
+<div class="space-y-4"><div><p class="text-label-md font-bold text-electric-blue">Incluye</p><p class="text-body-md">Integración de sistemas inteligentes.</p></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Commercial Services Section -->
+<section class="py-20 md:py-[120px] bg-deep-navy text-on-primary">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4">Servicios Comerciales</h2>
+<div class="w-24 h-1.5 bg-safety-yellow rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Commercial Item 1 -->
+<div class="bg-white/5 border border-white/10 p-10 rounded-xl hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-safety-yellow text-5xl mb-6">apartment</span>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-primary">Nuevas Construcciones</h3>
+<p class="text-body-md text-on-primary/70">Diseño y ejecución completa de planos eléctricos para edificios comerciales, oficinas y locales de retail.</p>
+</div>
+<!-- Commercial Item 2 -->
+<div class="bg-white/5 border border-white/10 p-10 rounded-xl hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-safety-yellow text-5xl mb-6">construction</span>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-primary">Remodelaciones</h3>
+<p class="text-body-md text-on-primary/70">Modernización de infraestructuras eléctricas obsoletas para cumplir con los códigos vigentes del condado.</p>
+</div>
+<!-- Commercial Item 3 -->
+<div class="bg-white/5 border border-white/10 p-10 rounded-xl hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-safety-yellow text-5xl mb-6">bolt</span>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-primary">Mantenimiento Preventivo</h3>
+<p class="text-body-md text-on-primary/70">Inspecciones periódicas y termografía para prevenir fallas críticas en instalaciones industriales.</p>
+</div>
+<!-- Commercial Item 4 -->
+<div class="bg-white/5 border border-white/10 p-10 rounded-xl hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-safety-yellow text-5xl mb-6">emergency_home</span>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-primary">Alumbrado de Emergencia</h3>
+<p class="text-body-md text-on-primary/70">Sistemas de respaldo y señalización de salida obligatorios para seguridad ocupacional.</p>
+</div>
+<!-- Commercial Item 5 -->
+<div class="bg-white/5 border border-white/10 p-10 rounded-xl hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-safety-yellow text-5xl mb-6">solar_power</span>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-primary">Eficiencia Energética</h3>
+<p class="text-body-md text-on-primary/70">Auditorías energéticas y optimización de consumo para reducir costos operativos comerciales.</p>
+</div>
+<!-- Commercial Item 6 -->
+<div class="bg-white/5 border border-white/10 p-10 rounded-xl hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-safety-yellow text-5xl mb-6">terminal</span>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-primary">Centros de Datos</h3>
+<p class="text-body-md text-on-primary/70">Cableado estructurado y sistemas de alimentación ininterrumpida (UPS) para servidores.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Specialized Services Section -->
+<section class="py-20 md:py-[120px] bg-surface-bright">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy mb-4">Servicios Especializados</h2>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">Tecnología de punta para necesidades eléctricas modernas y protección de alta gama.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- EV Chargers -->
+<div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 hover:-translate-y-2 transition-all duration-300">
+<div class="h-56 bg-cover bg-center" data-alt="A futuristic electric vehicle charging station installed in a clean, brightly lit residential garage with high-end finishes. The setting uses a professional color palette of cool grays and deep blues, with the electric car plugged into a sleek, wall-mounted charger. The atmosphere is one of modern sustainability and technological sophistication, mirroring Genesis Electrical's premium service standard." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMcAvIoSX06aGq72fcm5BkKxmkOBVvtKT33t-4AZ9fWEbNZ-ZDJvIAxO-0Gy4kAFmQJ1FBFsu-X_U2kAaf8absPoCIg_dfoqFj-MZnhaw6X7wgZPw76O1cWCzjnPADsCVTAmHa2uuTo-NgzhUo1mTwb27n12DgMtYwJg1AAnniVNUr01Fr8JsZBvpf5URTtiV9Dzn1JBU5_be-PMPMrzu1piN3XXskU0vQkkzdJfmDQMbHH6WZ050fExaceHkvQ7Cg5W9fW3_GYN0')"></div>
+<div class="p-8">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-electric-blue font-bold">ev_station</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy">Cargadores EV</h3>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Instalación de estaciones de carga Nivel 2 y Tesla Wall Connectors con certificación oficial.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+<span class="material-symbols-outlined text-sm">check_circle</span> Certificación Tesla
+                            </li>
+<li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+<span class="material-symbols-outlined text-sm">check_circle</span> Gestión de Permisos
+                            </li>
+</ul>
+</div>
+</div>
+<!-- Generators -->
+<div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 hover:-translate-y-2 transition-all duration-300">
+<div class="h-56 bg-cover bg-center" data-alt="A powerful whole-home standby generator situated neatly on a concrete pad next to a luxury Miami residence. The surrounding landscape is lush and tropical, but the focus is on the clean, industrial lines of the generator housing. The lighting is bright daylight, conveying reliability and peace of mind during storm seasons. The visual style is crisp and professional." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDAd34yD0CWXpV1WGxYcSfiJH_hc6coLQzNMlgsH0xBkm587J9WcAbusGmdfTkAqG_FULNeDsazTFnaVSdn10gaPnGBUiH9uqJGTkJbcYJwZCny3YBt5QFKrfIZl2z2jie6toHRgRMtXiYp1nxfKtlcZUEztjH58MY0B1RkMBjwr0wiP-PzYTGANG-1RnM7hqN08xUr5J_CY4MJDfko2KFGwkWAVZus7sCzfH4ef1Ez6TtXWwc8soVHmWJCl9amtsetXsN4XAkbxzA')"></div>
+<div class="p-8">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-electric-blue font-bold">elevator</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy">Generadores</h3>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Sistemas de respaldo automático Generac para garantizar energía ininterrumpida durante tormentas.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+<span class="material-symbols-outlined text-sm">check_circle</span> Respaldo Automático
+                            </li>
+<li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+<span class="material-symbols-outlined text-sm">check_circle</span> Mantenimiento Anual
+                            </li>
+</ul>
+</div>
+</div>
+<!-- Surge Protection -->
+<div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 hover:-translate-y-2 transition-all duration-300">
+<div class="h-56 bg-cover bg-center" data-alt="A sophisticated whole-house surge protection device integrated into a modern electrical panel. Detailed view showing glowing indicator lights that signify active protection. The aesthetics are high-tech and precise, utilizing the brand's signature electric blue and navy tones. The image emphasizes the concept of shielding expensive home electronics from lightning strikes and grid fluctuations." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8IAaNCC6oXjP1Jqlt5lrngwlxW3mh9ud9hYmWm8cRt0b6GaAb5-BuOxTuZ3ZF186td2wMxL88cyR8y8bXKUvvYmZaJUZjr57QY8Jfb_MNlsps7PiT9HGEX3K6EM7qPxNzoWyAiebhQA4aUKR_8KC7ncnEmi3byeF-2kJaOdpRMDQjy39kfD83Fe5T7f6Wr4BJUZygvzc-GnoYf81TGV4foRa11JGRXrBgYSBDY8AYi91yMPrnZ_NMbIYRMVWvQ8zGsAdfqw3psOs')"></div>
+<div class="p-8">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-electric-blue font-bold">shield_with_heart</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy">Sobretensiones</h3>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Protección para toda la casa contra rayos y fluctuaciones de red, cuidando sus electrodomésticos.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+<span class="material-symbols-outlined text-sm">check_circle</span> Garantía de Equipos
+                            </li>
+<li class="flex items-center gap-2 text-label-md font-bold text-electric-blue">
+<span class="material-symbols-outlined text-sm">check_circle</span> Instalación en Panel
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Final -->
+<section class="py-20">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="bg-gradient-to-r from-electric-blue to-deep-navy rounded-3xl p-12 text-center text-on-primary shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[200px]">electric_bolt</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-6 relative z-10">¿Listo para asegurar su propiedad?</h2>
+<p class="text-body-lg mb-10 max-w-xl mx-auto relative z-10">Obtenga una estimación gratuita hoy mismo. Nuestros técnicos están listos para atenderle con la máxima profesionalidad.</p>
+<div class="flex flex-col md:flex-row justify-center gap-6 relative z-10">
+<button class="bg-safety-yellow text-deep-navy px-10 py-4 rounded-lg font-bold text-label-lg hover:scale-105 transition-transform">Agendar Inspección Gratis</button>
+<button class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-lg font-bold text-label-lg hover:bg-white/10 transition-colors">Ver Proyectos Realizados</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-deep-navy dark:bg-black relative w-full pt-16 pb-8 border-t border-white/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1">
+<div class="font-display-lg text-headline-md font-bold text-on-primary mb-6">Genesis Electrical</div>
+<p class="text-on-primary/60 text-body-md mb-6">Líderes en ingeniería eléctrica en el sur de la Florida. Compromiso inquebrantable con la excelencia y la seguridad.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-on-primary hover:bg-safety-yellow hover:text-deep-navy transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-on-primary hover:bg-safety-yellow hover:text-deep-navy transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">thumb_up</span>
+</a>
+</div>
+</div>
+<div class="col-span-1">
+<h4 class="font-headline-md text-headline-md text-safety-yellow mb-6">Servicios</h4>
+<ul class="space-y-3">
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Residencial</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Comercial</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Emergencias</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Mantenimiento</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-headline-md text-headline-md text-safety-yellow mb-6">Compañía</h4>
+<ul class="space-y-3">
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Sobre Nosotros</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Nuestro Equipo</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">Contacto</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md" href="#">FAQ</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-headline-md text-headline-md text-safety-yellow mb-6">Ubicación</h4>
+<p class="text-on-primary/60 text-body-md mb-4">Miami, FL &amp; Sur de Florida</p>
+<div class="flex items-center gap-3 text-safety-yellow font-bold text-headline-md">
+<span class="material-symbols-outlined">call</span>
+                    (786) 720-2328
+                </div>
+<p class="text-on-primary/60 text-body-md mt-4">Disponible 24/7 para emergencias</p>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-white/5 px-base md:px-margin-desktop max-w-container-max mx-auto">
+<p class="text-on-primary/40 text-label-md text-center">© 2024 Genesis Electrical Corporation. Todos los derechos reservados.</p>
+</div>
+</footer>
+<script>
+        // Micro-interactions for navigation scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-0');
+            } else {
+                nav.classList.add('py-0');
+                nav.classList.remove('py-2');
+            }
+        });
+
+        // Hover animation logic for cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.querySelector('.material-symbols-outlined').style.transform = 'scale(1.1) translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.querySelector('.material-symbols-outlined').style.transform = 'scale(1) translateY(0)';
+            });
+        });
+    </script>
+</body></html>

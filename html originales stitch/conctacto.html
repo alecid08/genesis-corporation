@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contacto | Genesis Electrical Corporation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Components JSON Configuration logic -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#745b00",
+                    "electric-blue": "#0055AA",
+                    "surface-tint": "#165db2",
+                    "surface-container": "#eceef1",
+                    "on-primary": "#ffffff",
+                    "surface": "#f7f9fc",
+                    "success-green": "#28A745",
+                    "surface-bright": "#f7f9fc",
+                    "on-primary-fixed": "#001b3e",
+                    "surface-variant": "#e0e3e6",
+                    "primary-container": "#0055aa",
+                    "primary-fixed-dim": "#aac7ff",
+                    "surface-container-highest": "#e0e3e6",
+                    "safety-yellow": "#FFCC00",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#9fc2fe",
+                    "on-surface-variant": "#424752",
+                    "primary": "#003e7f",
+                    "on-background": "#191c1e",
+                    "deep-navy": "#003366",
+                    "inverse-on-surface": "#eff1f4",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "outline-variant": "#c2c6d4",
+                    "secondary-fixed": "#d5e3ff",
+                    "on-primary-fixed-variant": "#00458d",
+                    "tertiary-container": "#d0a600",
+                    "tertiary-fixed": "#ffe08b",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-dim": "#d8dadd",
+                    "on-primary-container": "#b3cdff",
+                    "inverse-surface": "#2d3133",
+                    "background": "#f7f9fc",
+                    "inverse-primary": "#aac7ff",
+                    "emergency-red": "#CC0000",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-secondary-container": "#294f83",
+                    "outline": "#727783",
+                    "surface-subtle": "#F9FAFB",
+                    "surface-container-high": "#e6e8eb",
+                    "secondary": "#3a5f94",
+                    "on-tertiary-container": "#4f3d00",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "on-secondary-fixed": "#001b3c",
+                    "tertiary-fixed-dim": "#f1c100",
+                    "surface-container-low": "#f2f4f7",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Open Sans"],
+                    "label-lg": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-md": ["Open Sans"],
+                    "label-md": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "display-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scale-up { transition: transform 0.2s ease-in-out; }
+        .scale-up:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body class="bg-white text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
+<a class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue" href="#">
+            Genesis Electrical Corporation
+        </a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Inicio</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Servicios</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Sobre Nosotros</a>
+<a class="text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" href="#">Contacto</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="#">Emergencia</a>
+</div>
+<a class="hidden lg:flex items-center gap-2 bg-safety-yellow text-deep-navy px-6 py-3 rounded-lg font-bold shadow-sm hover:shadow-md transition-all scale-up" href="tel:7867202328">
+<span class="material-symbols-outlined">call</span>
+            (786) 720-2328
+        </a>
+<button class="md:hidden text-deep-navy">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<main class="mt-20">
+<!-- [HEADER SECTION] -->
+<header class="relative py-[120px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDV40-J4LaXeZ_cvbYOZonlwbwqmeLnktmSQZzPdKsVb25VEforJHDoU8XILAX_nQxOmxYQ8jLq1E2Cp4CYCUUyJsHbbLhQRIUNtCEGpB4j8Nk2Afq8Jw5L1ERVXILQLKxqDvJj_TtA4ZpABDN7e_jDm5DLvd3EnT8Jd24FM7904zwZXeoTdGHzVU5pdcxQqoCYeYPB_H3b4yBAai5PIcMPVwdhYcmTqkrBhuDMszlDaXNVa4D4kANPvuSJj69-m6LP0oBIEJl4eZ0')"></div>
+<div class="absolute inset-0 bg-primary/60 backdrop-blur-[2px]"></div>
+<div class="relative z-10 text-center px-4">
+<h1 class="font-display-lg text-[56px] leading-[64px] font-bold text-white mb-4">Contáctenos</h1>
+<p class="text-white font-body-lg text-[22px] leading-[30px] max-w-2xl mx-auto">Estamos Listos para Ayudar con sus Necesidades Eléctricas</p>
+</div>
+</header>
+<!-- [CONTACT INFO + FORM SECTION] -->
+<section class="bg-white py-[100px] px-base md:px-margin-desktop">
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+<!-- Left Side: Contact Info -->
+<div class="space-y-[30px]">
+<h2 class="font-headline-lg text-[32px] font-bold text-deep-navy mb-10">Información de Contacto</h2>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[40px] text-electric-blue">call</span>
+<div class="text-body-lg text-[18px] font-body-lg">
+<span class="block font-bold text-[24px]">Teléfono: (786) 720-2328</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[40px] text-electric-blue">mail</span>
+<div class="text-body-lg text-[18px] font-body-lg">
+<span>Email: info@globalelectriccontractor.com</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[40px] text-electric-blue">location_on</span>
+<div class="text-body-lg text-[18px] font-body-lg">
+<span>Dirección: 185 NW 13th Ave Suite 736, Miami, FL 33125</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[40px] text-electric-blue">schedule</span>
+<div class="text-body-lg text-[18px] font-body-lg">
+<span>Horario: Lunes a Domingo, 7:00 AM - 7:00 PM</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[40px] text-electric-blue">warning</span>
+<div class="text-body-lg text-[18px] font-body-lg font-semibold text-emergency-red">
+<span>Emergencias: Disponibles fuera de horario regular</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Form -->
+<div class="bg-[#F9FAFB] p-10 rounded-[12px] shadow-sm border border-outline-variant">
+<h2 class="font-headline-lg text-[32px] font-bold text-deep-navy mb-8">Envíenos un Mensaje</h2>
+<form action="#" class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-lg text-deep-navy">Nombre</label>
+<input class="w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-0 transition-all bg-white text-body-md" placeholder="Su nombre" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-lg text-deep-navy">Teléfono</label>
+<input class="w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-0 transition-all bg-white text-body-md" placeholder="(786) 000-0000" type="tel"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-deep-navy">Email</label>
+<input class="w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-0 transition-all bg-white text-body-md" placeholder="nombre@correo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-deep-navy">Tipo de Servicio</label>
+<select class="w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-0 transition-all bg-white text-body-md">
+<option>Residencial</option>
+<option>Comercial</option>
+<option>Emergencia</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-deep-navy">Dirección del Proyecto</label>
+<input class="w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-0 transition-all bg-white text-body-md" placeholder="Calle, Ciudad, Zip Code" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-deep-navy">Mensaje</label>
+<textarea class="w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-0 transition-all bg-white text-body-md" placeholder="Cuéntenos sobre su necesidad..." rows="5"></textarea>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 text-electric-blue rounded border-outline-variant focus:ring-0" id="consent" type="checkbox"/>
+<label class="text-body-md text-on-surface-variant" for="consent">Acepto recibir comunicaciones por correo electrónico.</label>
+</div>
+<button class="w-full bg-electric-blue text-white font-bold py-5 rounded-lg hover:bg-deep-navy transition-all scale-up text-[18px]" type="submit">
+                        Enviar Mensaje
+                    </button>
+</form>
+</div>
+</div>
+</section>
+<!-- [LOCATION MAP SECTION] -->
+<section class="bg-[#F5F7FA] py-[100px] px-base md:px-margin-desktop text-center">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-[36px] font-bold text-deep-navy mb-12">Nuestra Ubicación</h2>
+<div class="w-full h-[500px] rounded-[12px] overflow-hidden shadow-lg border border-outline-variant mb-6">
+<iframe allowfullscreen="" class="w-full h-full border-0" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.833502905389!2d-80.21855662366881!3d25.776019577344933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6e08c4e7235%3A0xb3df6c27f7f45a0e!2s185%20NW%2013th%20Ave%2C%20Miami%2C%20FL%2033125!5e0!3m2!1sen!2sus!4v1715600000000!5m2!1sen!2sus"></iframe>
+</div>
+<p class="text-deep-navy font-bold text-body-lg">📍 185 NW 13th Ave Suite 736, Miami, FL 33125</p>
+</div>
+</section>
+<!-- [EMERGENCIES SECTION] -->
+<section class="bg-[#FFF5F5] py-[100px] px-base md:px-margin-desktop">
+<div class="max-w-container-max mx-auto flex flex-col items-center text-center">
+<h2 class="font-headline-lg text-[42px] font-bold text-[#CC0000] mb-8">¿Tiene una Emergencia Eléctrica?</h2>
+<div class="max-w-3xl space-y-4 mb-10">
+<p class="text-on-surface-variant font-body-lg text-[18px]">Las fallas eléctricas no esperan. Un cortocircuito o un apagón total en su negocio o residencia puede representar un riesgo serio para la seguridad y la operatividad de sus instalaciones.</p>
+<p class="text-on-surface-variant font-body-lg text-[18px]">En Genesis Electrical Corporation, contamos con personal altamente capacitado y certificado para responder de manera inmediata ante cualquier situación crítica, garantizando una solución segura y duradera en el menor tiempo posible.</p>
+</div>
+<a class="bg-emergency-red text-white px-12 py-6 rounded-xl font-bold flex items-center gap-3 hover:bg-red-700 transition-all scale-up shadow-xl mb-12 text-[24px]" href="tel:7867202328">
+                🚨 Emergencia 24/7: (786) 720-2328
+            </a>
+<div class="text-left max-w-2xl bg-white p-8 rounded-2xl shadow-sm border border-red-100">
+<h3 class="font-headline-md text-deep-navy mb-4">Cuándo Llamar Inmediatamente:</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emergency-red">priority_high</span>
+<span class="text-body-md">Humo o chispas provenientes de paneles eléctricos o tomas.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emergency-red">priority_high</span>
+<span class="text-body-md">Olor a quemado persistente cerca de cableado.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emergency-red">priority_high</span>
+<span class="text-body-md">Pérdida total de energía sin reporte de falla general en la zona.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emergency-red">priority_high</span>
+<span class="text-body-md">Disyuntores (breakers) que se disparan repetidamente.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emergency-red">priority_high</span>
+<span class="text-body-md">Zumbidos o ruidos extraños en el sistema eléctrico.</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- [SERVICE AREA SECTION] -->
+<section class="bg-white py-[100px] px-base md:px-margin-desktop">
+<div class="max-w-container-max mx-auto text-center">
+<h2 class="font-headline-lg text-[42px] font-bold text-deep-navy mb-16">Sirviendo a Todo Miami-Dade County</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left max-w-4xl mx-auto">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Miami Beach</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Coral Gables</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Doral</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Brickell</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Hialeah</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Kendall</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Pinecrest</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Aventura</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Homestead</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Key Biscayne</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Sunny Isles</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Coconut Grove</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Palmetto Bay</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">North Miami</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">South Miami</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Wynwood</span></div>
+</div>
+</div>
+</section>
+<!-- [FINAL CTA] -->
+<section class="bg-electric-blue py-[100px] px-base md:px-margin-desktop">
+<div class="max-w-container-max mx-auto text-center text-white">
+<p class="font-body-lg text-[18px] mb-8 max-w-2xl mx-auto">¿Listo para comenzar su proyecto eléctrico? Ya sea una pequeña reparación o una instalación industrial, estamos aquí para brindarle excelencia técnica.</p>
+<a class="inline-flex items-center bg-safety-yellow text-deep-navy px-10 py-5 rounded-lg font-bold text-[24px] hover:brightness-110 transition-all scale-up" href="tel:7867202328">
+                📞 Llamar Ahora: (786) 720-2328
+            </a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-navy text-on-primary pt-16 pb-8 border-t border-white/10">
+<div class="max-w-container-max mx-auto px-base md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="space-y-6">
+<div class="font-display-lg text-headline-md font-bold text-on-primary">Genesis Electrical</div>
+<p class="text-on-primary/60 text-body-md">Líderes en soluciones eléctricas seguras y eficientes para el sector residencial y comercial en Miami.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safety-yellow hover:text-deep-navy transition-all" href="#">
+<span class="material-symbols-outlined text-xl">face_nod</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safety-yellow hover:text-deep-navy transition-all" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-safety-yellow mb-6">Servicios</h4>
+<ul class="space-y-3">
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Residencial</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Comercial</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Emergencias</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Mantenimiento</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Seguridad</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-safety-yellow mb-6">Enlaces Rápidos</h4>
+<ul class="space-y-3">
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Inicio</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">Sobre Nosotros</a></li>
+<li><a class="text-safety-yellow font-bold font-label-md text-label-md" href="#">Contacto</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-label-md text-label-md" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-safety-yellow mb-6">Nuestra Oficina</h4>
+<p class="text-on-primary/80 text-body-md mb-4">185 NW 13th Ave,<br/>Miami, FL 33125</p>
+<p class="text-on-primary/80 text-body-md mb-4">T: (786) 720-2328</p>
+<div class="mt-6">
+<img alt="Licensing Logo" class="h-20 opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMc6uVGdmbpxKJxGT4QpITKwsr_KYzJj-UG7Q_ZgfroIt4nWRor4j52qCxB-hSYHRxcDelZUtZpv3qa4D8aAIqtvLvxmpj5uTWh2CQHKoGbhle-5Y9vFZ1M9mtqYkKm7bCOdH_vZYpVIQgmvmDcnxhvScyADSrM-h3yLETofpas4E6e8_SwjQdInUbuidBRJWMgFE0HK_ZTWZ9u8VqVUQrMUqTjkNyY7wVTI0gSGeiieKCuEIUd3M7jseVw8jLvQNLlETcaVby64g"/>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-base md:px-margin-desktop mt-16 pt-8 border-t border-white/10 text-center">
+<p class="text-on-primary/40 font-label-md text-label-md">© 2024 Genesis Electrical Corporation. Todos los derechos reservados.</p>
+</div>
+</footer>
+<script>
+    window.onscroll = function() {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('py-2');
+        } else {
+            nav.classList.remove('py-2');
+        }
+    };
+</script>
+</body></html>
