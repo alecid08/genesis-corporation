@@ -1,195 +1,450 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import TestimonialCard from '../components/TestimonialCard.astro';
-
-const features = [
-  { icon: 'verified_user', title: 'Licenciados', desc: 'Personal certificado y totalmente asegurado para su total tranquilidad en cada proyecto.' },
-  { icon: 'calendar_today', title: '7 Días', desc: 'Disponibilidad total los 7 días de la semana para atender cualquier necesidad eléctrica urgente.' },
-  { icon: 'payments', title: 'Precios', desc: 'Tarifas competitivas y presupuestos transparentes sin cargos ocultos ni sorpresas finales.' },
-  { icon: 'engineering', title: 'Experiencia', desc: 'Años de trayectoria resolviendo los retos eléctricos más complejos en todo Miami-Dade.' },
-  { icon: 'workspace_premium', title: 'Garantía', desc: 'Respaldamos cada trabajo con garantías sólidas que certifican nuestra calidad y compromiso.' },
-  { icon: 'person_search', title: 'Personalizado', desc: 'Soluciones a medida diseñadas específicamente para sus necesidades residenciales o comerciales.' },
-];
-
-const testimonials = [
-  {
-    rating: 5,
-    quote: "Excelente servicio. Llegaron a tiempo para una emergencia eléctrica en mi negocio y resolvieron todo rápidamente. Muy profesionales y amables.",
-    author: "Ricardo L.",
-    location: "Coral Gables, FL"
-  },
-  {
-    rating: 5,
-    quote: "Instalaron toda la iluminación nueva en mi casa. El trabajo fue impecable y el precio muy justo. Definitivamente los recomiendo para cualquier trabajo residencial.",
-    author: "Maria C.",
-    location: "Doral, FL"
-  },
-  {
-    rating: 5,
-    quote: "Genesis Electrical es mi opción de confianza. Son honestos, directos y saben exactamente lo que hacen. La garantía que ofrecen da mucha tranquilidad.",
-    author: "John H.",
-    location: "Miami Beach, FL"
-  }
-];
+const title = "Genesis Electrical Corporation | Electricistas Profesionales en Miami";
+const description = "Genesis Electrical Corporation - Electricistas Profesionales en Miami, Florida. Servicios residenciales, comerciales y emergencias.";
 ---
+<!DOCTYPE html>
 
-<Layout 
-  title="Genesis Electrical Corporation | Electricistas Profesionales en Miami"
-  description="Servicios eléctricos profesionales residenciales, comerciales y de emergencia 24/7 en Miami, Florida. Electricistas licenciados y certificados."
->
-  <!-- Hero Section -->
-  <Hero
-    title="Genesis Electrical Corporation"
-    subtitle="Electricistas Profesionales en Miami, Florida"
-    backgroundImage="https://lh3.googleusercontent.com/aida-public/AB6AXuADaOc-jzoxo-iTj1UVv2gKjR-PzcqD-k8hTVwplOmhXZcXseHAQSQm56SVGDr3NLZ2zCRGaHrpiNyTVdFwvJsmjoMBw1kEQbqe1hme4tP_1xLHcfTKeMgdMbdf_pLePa5vT_HUVcV75lyLdceDZL6_KSSD3OZ6f03evn3J0ylCETxGnQ5-prY0EvZw1t8pSQR20hpLMiwguIO7gMYy5emNG5sbOkJIRNySpmWIvlYcRj8Ucu8BksF6WULd5QlNqJjFbmN8P-XZTFE"
-    primaryCTA={{ text: 'Nuestros Servicios', href: '/servicios' }}
-    secondaryCTA={{ text: 'Solicitar Presupuesto', href: '/contacto' }}
-  />
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{title}</title>
+<meta name="description" content={description}/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#745b00",
+                    "electric-blue": "#0055AA",
+                    "surface-tint": "#165db2",
+                    "surface-container": "#eceef1",
+                    "on-primary": "#ffffff",
+                    "surface": "#f7f9fc",
+                    "success-green": "#28A745",
+                    "surface-bright": "#f7f9fc",
+                    "on-primary-fixed": "#001b3e",
+                    "surface-variant": "#e0e3e6",
+                    "primary-container": "#0055aa",
+                    "primary-fixed-dim": "#aac7ff",
+                    "surface-container-highest": "#e0e3e6",
+                    "safety-yellow": "#FFCC00",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#9fc2fe",
+                    "on-surface-variant": "#424752",
+                    "primary": "#003e7f",
+                    "on-background": "#191c1e",
+                    "deep-navy": "#003366",
+                    "inverse-on-surface": "#eff1f4",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "outline-variant": "#c2c6d4",
+                    "secondary-fixed": "#d5e3ff",
+                    "on-primary-fixed-variant": "#00458d",
+                    "tertiary-container": "#d0a600",
+                    "tertiary-fixed": "#ffe08b",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-dim": "#d8dadd",
+                    "on-primary-container": "#b3cdff",
+                    "inverse-surface": "#2d3133",
+                    "background": "#f7f9fc",
+                    "inverse-primary": "#aac7ff",
+                    "emergency-red": "#CC0000",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-secondary-container": "#294f83",
+                    "outline": "#727783",
+                    "surface-subtle": "#F9FAFB",
+                    "surface-container-high": "#e6e8eb",
+                    "secondary": "#3a5f94",
+                    "on-tertiary-container": "#4f3d00",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "on-secondary-fixed": "#001b3c",
+                    "tertiary-fixed-dim": "#f1c100",
+                    "surface-container-low": "#f2f4f7",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Open Sans"],
+                    "label-lg": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "body-md": ["Open Sans"],
+                    "label-md": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "display-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md">
+<div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue">
+                Genesis Electrical Corporation
+            </div>
+<nav class="hidden lg:flex items-center space-x-8">
+<a class="text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" href="/">Inicio</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/servicios">Servicios</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/sobre-nosotros">Sobre Nosotros</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/contacto">Contacto</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/emergencia">Emergencia</a>
+<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/faq">FAQ</a>
+</nav>
+<a class="bg-safety-yellow text-deep-navy font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all scale-up active:scale-95 flex items-center gap-2" href="tel:7867202328">
+<span class="material-symbols-outlined">call</span>
+                (786) 720-2328
+            </a>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[819px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A highly professional electrician in a clean, dark blue uniform working on a modern electrical panel in a high-end Miami residence. The lighting is crisp and cinematic with a 40% deep electric blue overlay, creating a professional and trustworthy atmosphere. The scene highlights technical precision and safety standards in a modern corporate style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADaOc-jzoxo-iTj1UVv2gKjR-PzcqD-k8hTVwplOmhXZcXseHAQSQm56SVGDr3NLZ2zCRGaHrpiNyTVdFwvJsmjoMBw1kEQbqe1hme4tP_1xLHcfTKeMgdMbdf_pLePa5vT_HUVcV75lyLdceDZL6_KSSD3OZ6f03evn3J0ylCETxGnQ5-prY0EvZw1t8pSQR20hpLMiwguIO7gMYy5emNG5sbOkJIRNySpmWIvlYcRj8Ucu8BksF6WULd5QlNqJjFbmN8P-XZTFE')"></div>
+<div class="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
+</div>
+<div class="relative z-10 px-base md:px-margin-desktop max-w-container-max mx-auto w-full">
+<div class="max-w-2xl text-on-primary">
+<h1 class="font-display-lg text-[60px] leading-[1.1] font-bold mb-6">
+                        Genesis Electrical Corporation
+                    </h1>
+<p class="font-headline-md text-headline-md mb-8 opacity-90">
+                        Electricistas Profesionales en Miami, Florida
+                    </p>
+<div class="flex flex-wrap gap-4">
+<a href="/servicios" class="bg-safety-yellow text-deep-navy font-bold py-4 px-8 rounded-lg shadow-lg hover:brightness-95 transition-all text-lg inline-block text-center">
+                            Nuestros Servicios
+                        </a>
+<a href="/contacto" class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white/10 transition-all text-lg inline-block text-center">
+                            Solicitar Presupuesto
+                        </a>
+</div>
+</div>
+</div>
+</section>
+<!-- ¿Por Qué Elegirnos? -->
+<section class="py-24 bg-surface-subtle">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy text-center mb-16">¿Por Qué Elegirnos?</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Feature Cards -->
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all group">
+<span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">verified_user</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-3">Licenciados</h3>
+<p class="text-on-surface-variant font-body-md">Personal certificado y totalmente asegurado para su total tranquilidad en cada proyecto.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
+<span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">calendar_today</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-3">7 Días</h3>
+<p class="text-on-surface-variant font-body-md">Disponibilidad total los 7 días de la semana para atender cualquier necesidad eléctrica urgente.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
+<span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">payments</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-3">Precios</h3>
+<p class="text-on-surface-variant font-body-md">Tarifas competitivas y presupuestos transparentes sin cargos ocultos ni sorpresas finales.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
+<span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">engineering</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-3">Experiencia</h3>
+<p class="text-on-surface-variant font-body-md">Años de trayectoria resolviendo los retos eléctricos más complejos en todo Miami-Dade.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
+<span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">workspace_premium</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-3">Garantía</h3>
+<p class="text-on-surface-variant font-body-md">Respaldamos cada trabajo con garantías sólidas que certifican nuestra calidad y compromiso.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
+<span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">person_search</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-3">Personalizado</h3>
+<p class="text-on-surface-variant font-body-md">Soluciones a medida diseñadas específicamente para sus necesidades residenciales o comerciales.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Servicios Principales -->
+<section class="py-24 bg-white">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-deep-navy text-center mb-16">Servicios Principales</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Residencial -->
+<div class="glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all">
+<span class="material-symbols-outlined text-[80px] text-electric-blue mb-6">home</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-6">Residencial</h3>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Instalaciones de Iluminación LED</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Actualización de Paneles Eléctricos</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Instalación de Ventiladores de Techo</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Reparación de Cableado Antiguo</span></li>
+</ul>
+</div>
+<!-- Comercial -->
+<div class="glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all">
+<span class="material-symbols-outlined text-[80px] text-electric-blue mb-6">business</span>
+<h3 class="font-headline-md text-headline-md text-deep-navy mb-6">Comercial</h3>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Mantenimiento Preventivo Industrial</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Sistemas Eléctricos Trifásicos</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Iluminación de Seguridad y Exterior</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">Auditorías de Eficiencia Energética</span></li>
+</ul>
+</div>
+<!-- Emergencia -->
+<div class="glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all bg-emergency-red/5 border-emergency-red/20">
+<span class="material-symbols-outlined text-[80px] text-emergency-red mb-6" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h3 class="font-headline-md text-headline-md text-emergency-red mb-6">Emergencia 24/7</h3>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-emergency-red">emergency_home</span> <span class="font-body-md text-on-surface">Reparación Inmediata de Apagones</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-emergency-red">emergency_home</span> <span class="font-body-md text-on-surface">Cortocircuitos y Fallos de Panel</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-emergency-red">emergency_home</span> <span class="font-body-md text-on-surface">Atención en Menos de 60 Minutos</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-emergency-red">emergency_home</span> <span class="font-body-md text-on-surface">Servicio en Toda el Área de Miami</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonios -->
+<section class="py-24 bg-electric-blue">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-on-primary">
+<h2 class="font-headline-lg text-headline-lg text-center mb-16">Lo Que Dicen Nuestros Clientes</h2>
+<div class="flex overflow-x-auto snap-x snap-mandatory gap-gutter pb-8 no-scrollbar">
+<!-- Testimonial 1 -->
+<div class="min-w-full md:min-w-[400px] snap-center bg-white/10 backdrop-blur p-8 rounded-2xl">
+<div class="flex text-safety-yellow mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg italic mb-6">"Excelente servicio. Llegaron a tiempo para una emergencia eléctrica en mi negocio y resolvieron todo rápidamente. Muy profesionales y amables."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-deep-navy font-bold">RL</div>
+<div>
+<p class="font-label-lg">Ricardo L.</p>
+<p class="text-sm opacity-80">Coral Gables, FL</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="min-w-full md:min-w-[400px] snap-center bg-white/10 backdrop-blur p-8 rounded-2xl">
+<div class="flex text-safety-yellow mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg italic mb-6">"Instalaron toda la iluminación nueva en mi casa. El trabajo fue impecable y el precio muy justo. Definitivamente los recomiendo para cualquier trabajo residencial."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-deep-navy font-bold">MC</div>
+<div>
+<p class="font-label-lg">Maria C.</p>
+<p class="text-sm opacity-80">Doral, FL</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="min-w-full md:min-w-[400px] snap-center bg-white/10 backdrop-blur p-8 rounded-2xl">
+<div class="flex text-safety-yellow mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-lg italic mb-6">"Genesis Electrical es mi opción de confianza. Son honestos, directos y saben exactamente lo que hacen. La garantía que ofrecen da mucha tranquilidad."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-deep-navy font-bold">JH</div>
+<div>
+<p class="font-label-lg">John H.</p>
+<p class="text-sm opacity-80">Miami Beach, FL</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Área de Servicio -->
+<section class="py-24">
+<div class="flex flex-col lg:flex-row h-full">
+<!-- Map Column -->
+<div class="w-full lg:w-1/2 h-[500px] lg:h-auto min-h-[400px]">
+<div class="w-full h-full bg-cover bg-center" data-location="Miami" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNwmkGAsQsFATeKi5YGr7DZB7vElz0Rf3sC7AZZaFkXkmr20y_JFIJO86IJAN9QhROiwcnkK8DC5EM_H6_2pWUiRt6-Za8PJBcv9SsXEqcGDAPVEAUwGsDlLJsv_9S_JU3y1wR4Yov1d8jA_foNVcmAE7-6XKly1ypaQiiVcTC1_XLDpCxD7sorCt5Rx8noHr-Usj2xX9eDj4Vm0JU-lfT4yNSTmlQy4uMOXkQapcI1sXS2-6TKfdwNLO2IT14whKCuCuqBFGYAJg')"></div>
+</div>
+<!-- Service List Column -->
+<div class="w-full lg:w-1/2 px-base md:px-margin-desktop py-12 bg-deep-navy text-on-primary">
+<h2 class="font-headline-lg text-headline-lg mb-8">Nuestra Área de Servicio</h2>
+<p class="font-body-lg mb-8 opacity-90">Atendemos a toda la comunidad de Miami-Dade con tiempos de respuesta rápidos y equipo local.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Miami Beach</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Coral Gables</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Doral</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Hialeah</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Kendall</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Homestead</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Aventura</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Pinecrest</div>
+</div>
+<div class="mt-12 p-6 bg-white/10 rounded-lg border border-white/20">
+<h4 class="font-label-lg mb-2">Sede Principal:</h4>
+<p class="font-body-md opacity-80 italic text-safety-yellow">185 NW 13th Ave, Miami, FL 33125</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Final -->
+<section class="py-24 bg-gradient-to-r from-deep-navy via-primary to-electric-blue text-on-primary">
+<div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-center">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6">¿Listo para solucionar sus problemas eléctricos?</h2>
+<p class="font-body-lg text-lg mb-12 max-w-2xl mx-auto">No arriesgue su seguridad. Contacte hoy mismo a los expertos licenciados de Genesis Electrical Corporation.</p>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="bg-safety-yellow text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href="tel:7867202328">
+<span class="material-symbols-outlined">call</span> Llamar Ahora
+                    </a>
+<a class="bg-white text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href="/contacto">
+<span class="material-symbols-outlined">chat</span> Enviar Mensaje
+                    </a>
+<a class="bg-transparent border-2 border-white text-white font-bold py-5 px-10 rounded-full hover:bg-white/10 transition-all flex items-center gap-3" href="/contacto">
+<span class="material-symbols-outlined">description</span> Pedir Cotización
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-navy dark:bg-black relative w-full pt-16 pb-8 border-t border-white/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-base md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand Info -->
+<div class="flex flex-col gap-6">
+<div class="font-display-lg text-headline-md font-bold text-on-primary">Genesis Electrical</div>
+<p class="text-on-primary/80 font-body-md">Líderes en servicios eléctricos industriales, comerciales y residenciales en el área de Miami-Dade.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-safety-yellow hover:text-deep-navy transition-all" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-safety-yellow hover:text-deep-navy transition-all" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<!-- Quick Links -->
+<div class="flex flex-col gap-4">
+<h4 class="text-safety-yellow font-bold font-headline-md text-headline-md">Nuestros Servicios</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#residencial">Residencial</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#comercial">Comercial</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/emergencia">Emergencias</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#mantenimiento">Mantenimiento</a></li>
+</ul>
+</div>
+<!-- Extra Links -->
+<div class="flex flex-col gap-4">
+<h4 class="text-safety-yellow font-bold font-headline-md text-headline-md">Soporte</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#seguridad">Seguridad</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#instalaciones">Instalaciones</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="#">Política de Privacidad</a></li>
+<li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="#">Términos de Servicio</a></li>
+</ul>
+</div>
+<!-- Contact Info -->
+<div class="flex flex-col gap-4">
+<h4 class="text-safety-yellow font-bold font-headline-md text-headline-md">Contacto</h4>
+<p class="flex items-start gap-3 text-on-primary/80 font-body-md">
+<span class="material-symbols-outlined text-safety-yellow">location_on</span>
+                    185 NW 13th Ave, Miami, FL 33125
+                </p>
+<p class="flex items-center gap-3 text-on-primary/80 font-body-md">
+<span class="material-symbols-outlined text-safety-yellow">call</span>
+                    (786) 720-2328
+                </p>
+<p class="flex items-center gap-3 text-on-primary/80 font-body-md">
+<span class="material-symbols-outlined text-safety-yellow">mail</span>
+                    info@genesiselectrical.com
+                </p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-base md:px-margin-desktop mt-16 pt-8 border-t border-white/10 text-center">
+<p class="text-on-primary/60 font-label-md text-label-md">© 2024 Genesis Electrical Corporation. Todos los derechos reservados.</p>
+</div>
+</footer>
+<script is:inline>
+        // Smooth reveal animations on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-  <!-- ¿Por Qué Elegirnos? -->
-  <section class="py-24 bg-surface-subtle">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
-      <h2 class="font-display-lg text-headline-lg text-deep-navy text-center mb-16 font-bold">¿Por Qué Elegirnos?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-        {features.map((feature) => (
-          <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all duration-300 group">
-            <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">{feature.icon}</span>
-            <h3 class="font-headline-md text-headline-md text-deep-navy mb-3 font-bold text-xl">{feature.title}</h3>
-            <p class="text-on-surface-variant font-body-md text-sm leading-relaxed">{feature.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
 
-  <!-- Servicios Principales -->
-  <section class="py-24 bg-white">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
-      <h2 class="font-display-lg text-headline-lg text-deep-navy text-center mb-16 font-bold">Servicios Principales</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <ServiceCard
-          icon="home"
-          title="Residencial"
-          features={[
-            'Instalaciones de Iluminación LED',
-            'Actualización de Paneles Eléctricos',
-            'Instalación de Ventiladores de Techo',
-            'Reparación de Cableado Antiguo'
-          ]}
-          ctaText="Ver servicios residenciales"
-          ctaHref="/servicios#residencial"
-          theme="light"
-        />
-        <ServiceCard
-          icon="business"
-          title="Comercial"
-          features={[
-            'Mantenimiento Preventivo Industrial',
-            'Sistemas Eléctricos Trifásicos',
-            'Iluminación de Seguridad y Exterior',
-            'Auditorías de Eficiencia Energética'
-          ]}
-          ctaText="Ver servicios comerciales"
-          ctaHref="/servicios#comercial"
-          theme="light"
-        />
-        <ServiceCard
-          icon="warning"
-          title="Emergencia 24/7"
-          features={[
-            'Reparación Inmediata de Apagones',
-            'Cortocircuitos y Fallos de Panel',
-            'Atención en Menos de 60 Minutos',
-            'Servicio en Toda el Área de Miami'
-          ]}
-          ctaText="Llamar a Emergencias"
-          ctaHref="tel:+17867202328"
-          theme="emergency"
-        />
-      </div>
-    </div>
-  </section>
+        document.querySelectorAll('.glass-card, .bg-surface-container-low').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
 
-  <!-- Testimonios -->
-  <section class="py-24 bg-electric-blue">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-on-primary">
-      <h2 class="font-display-lg text-headline-lg text-center mb-16 font-bold">Lo Que Dicen Nuestros Clientes</h2>
-      <div class="flex overflow-x-auto snap-x snap-mandatory gap-gutter pb-8 no-scrollbar">
-        {testimonials.map((testimonial) => (
-          <TestimonialCard {...testimonial} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Área de Servicio -->
-  <section class="py-24">
-    <div class="flex flex-col lg:flex-row h-full">
-      <!-- Map Column -->
-      <div class="w-full lg:w-1/2 h-[500px] lg:h-auto min-h-[400px]">
-        <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNwmkGAsQsFATeKi5YGr7DZB7vElz0Rf3sC7AZZaFkXkmr20y_JFIJO86IJAN9QhROiwcnkK8DC5EM_H6_2pWUiRt6-Za8PJBcv9SsXEqcGDAPVEAUwGsDlLJsv_9S_JU3y1wR4Yov1d8jA_foNVcmAE7-6XKly1ypaQiiVcTC1_XLDpCxD7sorCt5Rx8noHr-Usj2xX9eDj4Vm0JU-lfT4yNSTmlQy4uMOXkQapcI1sXS2-6TKfdwNLO2IT14whKCuCuqBFGYAJg')"></div>
-      </div>
-      <!-- Service List Column -->
-      <div class="w-full lg:w-1/2 px-base md:px-margin-desktop py-12 bg-deep-navy text-on-primary flex flex-col justify-center">
-        <h2 class="font-display-lg text-headline-lg mb-8 font-bold text-3xl">Nuestra Área de Servicio</h2>
-        <p class="font-body-lg mb-8 opacity-90">Atendemos a toda la comunidad de Miami-Dade con tiempos de respuesta rápidos y equipo local.</p>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Miami Beach</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Coral Gables</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Doral</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Hialeah</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Kendall</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Homestead</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Aventura</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Pinecrest</div>
-        </div>
-        <div class="mt-12 p-6 bg-white/10 rounded-lg border border-white/20">
-          <h4 class="font-label-lg mb-2 font-semibold">Sede Principal:</h4>
-          <p class="font-body-md opacity-80 italic text-safety-yellow">185 NW 13th Ave, Miami, FL 33125</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Final -->
-  <section class="py-24 bg-gradient-to-r from-deep-navy via-primary to-electric-blue text-on-primary">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-center">
-      <h2 class="font-display-lg text-display-lg-mobile md:text-[40px] mb-6 font-bold leading-tight">¿Listo para solucionar sus problemas eléctricos?</h2>
-      <p class="font-body-lg text-lg mb-12 max-w-2xl mx-auto">No arriesgue su seguridad. Contacte hoy mismo a los expertos licenciados de Genesis Electrical Corporation.</p>
-      <div class="flex flex-wrap justify-center gap-6">
-        <a class="bg-safety-yellow text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href="tel:+17867202328">
-          <span class="material-symbols-outlined">call</span> Llamar Ahora
-        </a>
-        <a class="bg-white text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href="/contacto">
-          <span class="material-symbols-outlined">chat</span> Enviar Mensaje
-        </a>
-        <a class="bg-transparent border-2 border-white text-white font-bold py-5 px-10 rounded-full hover:bg-white/10 transition-all flex items-center gap-3" href="/contacto">
-          <span class="material-symbols-outlined">description</span> Pedir Cotización
-        </a>
-      </div>
-    </div>
-  </section>
-</Layout>
-
-<script>
-  // Smooth reveal animations on scroll
-  const observerOptions = {
-      threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              entry.target.classList.add('opacity-100', 'translate-y-0');
-              entry.target.classList.remove('opacity-0', 'translate-y-10');
-          }
-      });
-  }, observerOptions);
-
-  document.querySelectorAll('.service-card, .bg-surface-container-low').forEach(el => {
-      el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-      observer.observe(el);
-  });
-</script>
+        // Mobile Scroll behavior for header
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body></html>

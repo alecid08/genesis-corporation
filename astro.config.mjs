@@ -7,6 +7,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://genesiselectrical.com',
   integrations: [sitemap()],
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto'
+  },
   vite: {
     plugins: [tailwindcss()],
   },

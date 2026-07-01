@@ -46,6 +46,54 @@ const {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- LocalBusiness Schema.org Structured Data -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "Electrician",
+      "name": "Genesis Electrical Corporation",
+      "description": "Servicios eléctricos residenciales y comerciales en Miami, Florida. Electricistas licenciados y certificados.",
+      "image": "https://genesiselectrical.com/images/og-image.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "185 NW 13th Ave Suite 736",
+        "addressLocality": "Miami",
+        "addressRegion": "FL",
+        "postalCode": "33125",
+        "addressCountry": "US"
+      },
+      "telephone": "+17867202328",
+      "email": "info@genesiselectrical.com",
+      "url": "https://genesiselectrical.com",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "07:00",
+          "closes": "19:00"
+        }
+      ],
+      "priceRange": "$$",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 25.7760195,
+        "longitude": -80.2185566
+      },
+      "sameAs": [
+        "https://facebook.com",
+        "https://instagram.com"
+      ]
+    }
+  </script>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
   <slot />
