@@ -1,99 +1,10 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 const title = "Emergencia 24/7 | Genesis Electrical Corporation";
 const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. Electricistas licenciados disponibles los 365 días del año.";
 ---
-<!DOCTYPE html>
-
-<html class="scroll-smooth" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>{title}</title>
-<meta name="description" content={description}/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind Configuration -->
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "tertiary": "#745b00",
-                "electric-blue": "#0055AA",
-                "surface-tint": "#165db2",
-                "surface-container": "#eceef1",
-                "on-primary": "#ffffff",
-                "surface": "#f7f9fc",
-                "success-green": "#28A745",
-                "surface-bright": "#f7f9fc",
-                "on-primary-fixed": "#001b3e",
-                "surface-variant": "#e0e3e6",
-                "primary-container": "#0055aa",
-                "primary-fixed-dim": "#aac7ff",
-                "surface-container-highest": "#e0e3e6",
-                "safety-yellow": "#FFCC00",
-                "on-secondary": "#ffffff",
-                "secondary-container": "#9fc2fe",
-                "on-surface-variant": "#424752",
-                "primary": "#003e7f",
-                "on-background": "#191c1e",
-                "deep-navy": "#003366",
-                "inverse-on-surface": "#eff1f4",
-                "on-tertiary": "#ffffff",
-                "surface-container-lowest": "#ffffff",
-                "error": "#ba1a1a",
-                "error-container": "#ffdad6",
-                "on-secondary-fixed-variant": "#1f477b",
-                "outline-variant": "#c2c6d4",
-                "secondary-fixed": "#d5e3ff",
-                "on-primary-fixed-variant": "#00458d",
-                "tertiary-container": "#d0a600",
-                "tertiary-fixed": "#ffe08b",
-                "on-tertiary-fixed-variant": "#584400",
-                "on-error-container": "#93000a",
-                "primary-fixed": "#d6e3ff",
-                "surface-dim": "#d8dadd",
-                "on-primary-container": "#b3cdff",
-                "inverse-surface": "#2d3133",
-                "background": "#f7f9fc",
-                "inverse-primary": "#aac7ff",
-                "emergency-red": "#CC0000",
-                "on-tertiary-fixed": "#241a00",
-                "on-secondary-container": "#294f83",
-                "outline": "#727783",
-                "surface-subtle": "#F9FAFB",
-                "surface-container-high": "#e6e8eb",
-                "secondary": "#3a5f94",
-                "on-tertiary-container": "#4f3d00",
-                "secondary-fixed-dim": "#a7c8ff",
-                "on-secondary-fixed": "#001b3c",
-                "tertiary-fixed-dim": "#f1c100",
-                "surface-container-low": "#f2f4f7",
-                "on-error": "#ffffff",
-                "on-surface": "#191c1e"
-            },
-            "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-            },
-            "spacing": {
-                "base": "8px",
-                "container-max": "1280px",
-                "margin-desktop": "40px",
-                "margin-mobile": "16px",
-                "gutter": "24px"
-            },
-            "fontFamily": {
-                "body": ["Open Sans", "sans-serif"],
-                "display": ["Montserrat", "sans-serif"]
-            }
-          },
-        },
-      }
-    </script>
+<BaseLayout {title} {description}>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -107,8 +18,7 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
             100% { box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
         }
     </style>
-</head>
-<body class="bg-surface text-on-surface font-body overflow-x-hidden">
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-surface/95 dark:bg-surface-dim/95 backdrop-blur-md shadow-md">
 <div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
@@ -454,4 +364,5 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
             }
         });
     </script>
-</body></html>
+</body>
+</BaseLayout>
