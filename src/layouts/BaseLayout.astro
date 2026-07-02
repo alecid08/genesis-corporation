@@ -11,9 +11,14 @@ interface Props {
 const {
   title = "Genesis Electrical Corporation | Electricistas Profesionales en Miami",
   description = "Servicios eléctricos profesionales residenciales, comerciales y de emergencia 24/7 en Miami, Florida. Electricistas licenciados y certificados.",
-  image = "/images/og-image.jpg",
+  image = "/genesis-corporation/images/og-image.jpg",
   keywords = "electricista miami, servicios electricos, emergencia 24/7, genesis electrical, electricista residencial, electricista comercial"
 } = Astro.props;
+
+const siteUrl = 'https://alecid08.github.io/genesis-corporation';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/genesis-corporation') ? image.replace('/genesis-corporation','') : image}`;
+const ogImageFull = `${siteUrl}/images/og-image.jpg`;
 ---
 
 <!DOCTYPE html>
@@ -24,18 +29,25 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="keywords" content={keywords} />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Genesis Electrical Corporation" />
+  <meta name="theme-color" content="#003366" />
+  <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
+  <meta property="og:image" content={ogImageFull} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:locale" content="es_US" />
+  <meta property="og:site_name" content="Genesis Electrical Corporation" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
-  <meta property="twitter:image" content={image} />
+  <meta property="twitter:image" content={ogImageFull} />
 
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -54,7 +66,7 @@ const {
       "@type": "Electrician",
       "name": "Genesis Electrical Corporation",
       "description": "Servicios eléctricos residenciales y comerciales en Miami, Florida. Electricistas licenciados y certificados.",
-      "image": "https://genesiselectrical.com/images/og-image.jpg",
+      "image": "https://alecid08.github.io/genesis-corporation/images/og-image.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "185 NW 13th Ave Suite 736",
@@ -65,7 +77,7 @@ const {
       },
       "telephone": "+17867202328",
       "email": "info@genesiselectrical.com",
-      "url": "https://genesiselectrical.com",
+      "url": "https://alecid08.github.io/genesis-corporation",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
@@ -89,8 +101,8 @@ const {
         "longitude": -80.2185566
       },
       "sameAs": [
-        "https://facebook.com",
-        "https://instagram.com"
+        "https://www.facebook.com",
+        "https://www.instagram.com"
       ]
     }
   </script>

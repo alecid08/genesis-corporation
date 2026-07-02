@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://genesiselectrical.com/sitemap-index.xml
+Sitemap: https://alecid08.github.io/genesis-corporation/sitemap-index.xml
