@@ -50,8 +50,8 @@ const ogImageFull = `${siteUrl}/images/og-image.jpg`;
   <meta property="twitter:image" content={ogImageFull} />
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+  <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

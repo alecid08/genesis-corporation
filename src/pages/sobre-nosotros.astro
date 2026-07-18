@@ -1,328 +1,285 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import aboutHeroImage from '../assets/about-hero.jpg';
+import electricianProfessionalImage from '../assets/electrician-professional.jpg';
+import certificationImage from '../assets/certification.jpg';
 
 const title = "Sobre Nosotros | Genesis Electrical Corporation";
 const description = "Genesis Electrical Corporation - Conozca más sobre nuestra empresa de servicios eléctricos en Miami, Florida. Licenciados y asegurados.";
 ---
-<BaseLayout {title} {description}>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .scale-up { transition: transform 0.2s ease-in-out; }
-        .scale-up:hover { transform: scale(1.02); }
-    </style>
-<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md">
-<nav class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
-<div class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue">
-                Genesis Electrical 
-            </div>
-<div class="hidden lg:flex items-center gap-gutter">
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg"  href="/genesis-corporation/">Inicio</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg"  href="/genesis-corporation/servicios">Servicios</a>
-<a class="text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" href="/genesis-corporation/sobre-nosotros">Sobre Nosotros</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/genesis-corporation/contacto">Contacto</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/genesis-corporation/emergencia">Emergencia</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/genesis-corporation/faq">FAQ</a>
-<a class="bg-electric-blue text-white px-6 py-2 rounded-lg font-bold hover:bg-deep-navy transition-colors font-label-lg text-label-lg" href="tel:7867202328">(786) 720-2328</a>
-</div>
-<button class="lg:hidden text-deep-navy">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</nav>
-</header>
-<!-- Header Section -->
-<section class="relative py-[120px] flex items-center justify-center overflow-hidden pt-32">
-<div class="absolute inset-0 z-0">
-<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLBXkIn_Zg2H8pC4xRPSWEwrBHwGHF67UUqIWBVPOgcrGyPnEJyEjPpN1Hg4e7u1ToyBhxdnpNwRwElHK7YxMcpekRjcRT_BFEeWUUc-ZqG-aagn-HXIx_6wTrqzM6HTKpD6EvMmslUy8pfx_5E3ke9G4edsOBQr2KP4lXKkG-1UwUFGH2hUTEmgAsAfwSA6sWmNWBWH3s7nvX6Q_jMwnIs4hQk7hx3BXRwS_jpwiTIIGBZnEqJsbg2wpvtCfhQ0fRtdDr4JFl2XI');"></div>
-<div class="absolute inset-0 bg-primary/60 backdrop-blur-[2px]"></div>
-</div>
-<div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto">
-<h1 class="font-display-lg text-white text-display-lg-mobile md:text-[56px] font-bold leading-tight mb-4">Sobre Genesis Electrical Corporation</h1>
-<p class="text-white font-body-md text-body-xl">Su Socio Confiable en Servicios Eléctricos en Miami, Florida</p>
-</div>
-</section>
-<!-- Sección: Nuestra Historia -->
-<section class="py-[100px] px-margin-mobile md:px-margin-desktop bg-white">
-<div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-16 items-center">
-<div class="w-full h-[500px] rounded-xl overflow-hidden shadow-2xl">
-<img alt="Electricista Profesional" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_dafk-Ah_3tEA7e_c7dwCkZDad8zz1i1ZnP1_FWwMWEuIwCAORvYSaoeRzwo1susgF-cieakO2Sqg9mAAs3DPGWvASXlqNPiiQ5aD5LfRAqpd9aZIQyMUHeDMCohOpK4lbIrE7088MMqS6DyAz0QFKyRkxd4W490Sv8mLrp0ODTk4Vst5NNHXONLOkt3uVu4kmxOAbQrPq6Art6rzmp85oVFcH-lKUyiYh-SKhydt_W0J0WsK5GFmlC79y-5OYObuQR_fBkpDQ1g"/>
-</div>
-<div class="space-y-8">
-<h2 class="font-headline-lg text-headline-custom text-deep-navy">Comprometidos con la Excelencia Eléctrica</h2>
-<div class="space-y-6 text-on-surface-variant leading-[1.8] font-body-md text-base">
-<p>Desde nuestra fundación en Miami, Genesis Electrical Corporation ha crecido basándose en la confianza y la calidad técnica superior. Nos enorgullecemos de ser un pilar en la comunidad, ofreciendo soluciones que van desde instalaciones residenciales meticulosas hasta complejos sistemas comerciales.</p>
-<p>Nuestra trayectoria está marcada por un compromiso inquebrantable con la seguridad. Entendemos que cada conexión eléctrica es vital para el bienestar de su familia o la operatividad de su negocio, por lo que aplicamos los estándares más rigurosos del código eléctrico nacional.</p>
-<p>Contamos con un equipo de especialistas altamente capacitados que comparten una visión común: la excelencia en el servicio al cliente. Para nosotros, ningún trabajo es demasiado pequeño ni ningún proyecto demasiado complejo cuando se trata de garantizar la tranquilidad de nuestros clientes.</p>
-<p class="pt-4 text-deep-navy">
-<strong class="font-bold">Miami, FL — Sede Central Operativa</strong>
-</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Sección: Nuestra Misión -->
-<section class="py-[100px] bg-brand-light-gray">
-<div class="max-w-[800px] mx-auto text-center px-margin-mobile">
-<div class="flex justify-center mb-10">
-<span class="material-symbols-outlined text-[100px] text-electric-blue" style="font-variation-settings: 'FILL' 1;">stars</span>
-</div>
-<h2 class="font-headline-lg text-headline-xl text-deep-navy mb-8">Nuestra Misión</h2>
-<div class="space-y-6 text-on-surface-variant text-body-lg">
-<p>Proporcionar soluciones eléctricas integrales que garanticen la máxima seguridad, eficiencia energética y continuidad operativa para las familias y empresas de Miami, impulsando el progreso regional a través de la excelencia técnica.</p>
-<p>Buscamos transformar la industria eléctrica local mediante la innovación constante y un modelo de servicio centrado totalmente en la satisfacción y seguridad del cliente final.</p>
-</div>
-</div>
-</section>
-<!-- Sección: Nuestros Valores -->
-<section class="py-[100px] bg-white px-margin-mobile">
-<div class="max-w-container-max mx-auto">
-<h2 class="font-headline-lg text-headline-xl text-deep-navy text-center mb-16">Nuestros Valores Fundamentales</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-<!-- Valor 1 -->
-<div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
-<span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">bolt</span>
-<h3 class="font-headline-md text-deep-navy mb-4">Seguridad Primero</h3>
-<p class="text-on-surface-variant">Protocolos estrictos de protección para garantizar que cada instalación cumpla con los estándares de seguridad más altos.</p>
-</div>
-<!-- Valor 2 -->
-<div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
-<span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">handshake</span>
-<h3 class="font-headline-md text-deep-navy mb-4">Integridad</h3>
-<p class="text-on-surface-variant">Actuamos con honestidad y transparencia total en cada presupuesto, proceso y recomendación técnica.</p>
-</div>
-<!-- Valor 3 -->
-<div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
-<span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">emoji_events</span>
-<h3 class="font-headline-md text-deep-navy mb-4">Excelencia</h3>
-<p class="text-on-surface-variant">Buscamos la perfección en los detalles técnicos y estéticos de cada proyecto eléctrico que realizamos.</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-<!-- Valor 4 -->
-<div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
-<span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">diversity_3</span>
-<h3 class="font-headline-md text-deep-navy mb-4">Servicio al Cliente</h3>
-<p class="text-on-surface-variant">Atencion personalizada y empática, resolviendo sus necesidades con rapidez y profesionalismo.</p>
-</div>
-<!-- Valor 5 -->
-<div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
-<span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">menu_book</span>
-<h3 class="font-headline-md text-deep-navy mb-4">Conocimiento Continuo</h3>
-<p class="text-on-surface-variant">Inversión constante en capacitación sobre nuevas tecnologías eléctricas y normativas vigentes.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Sección: Por Qué Elegirnos -->
-<section class="py-[100px] bg-electric-blue text-white px-margin-mobile">
-<div class="max-w-container-max mx-auto text-center">
-<h2 class="font-headline-lg text-headline-xl mb-6">Por Qué Los Clientes Eligen Genesis Electrical Corporation</h2>
-<p class="font-body-md text-body-lg mb-16 opacity-90">Con una calificación de 5.0 estrellas basada en reseñas de clientes satisfechos por nuestra dedicación y puntualidad.</p>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-<div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
-<span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
-<span class="font-bold">Áreas de trabajo limpias</span>
-</div>
-<div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
-<span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
-<span class="font-bold">Precios claros y transparentes</span>
-</div>
-<div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
-<span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
-<span class="font-bold">Electricistas con licencia y seguro</span>
-</div>
-<div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
-<span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
-<span class="font-bold">Atención al cliente excepcional</span>
-</div>
-<div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
-<span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
-<span class="font-bold">Trabajos conforme a normativa</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Sección: Nuestras Credenciales -->
-<section id="credenciales" class="py-[100px] bg-white px-margin-mobile">
-<div class="max-w-container-max mx-auto grid lg:grid-cols-[1.5fr_1fr] gap-16 items-start">
-<div class="space-y-10">
-<h2 class="font-headline-lg text-headline-custom text-deep-navy">Credenciales y Certificaciones</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-body-md text-on-surface-variant font-semibold">Tipo: Contratista Eléctrico Certificado</span>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-body-md text-on-surface-variant font-semibold">Licencia Estatal: #EC1300XXXX</span>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-body-md text-on-surface-variant font-semibold">Seguro: Full Liability &amp; Workers Comp</span>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-body-md text-on-surface-variant font-semibold">Área: Condado Miami-Dade y Alrededores</span>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-body-md text-on-surface-variant font-semibold">Horario: Lunes a Viernes 8am - 6pm</span>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-body-md text-on-surface-variant font-semibold">Emergencias: Soporte Crítico 24/7</span>
-</div>
-</div>
-<!-- Highlighted Box -->
-<div class="bg-[#FFF9E6] p-8 rounded-xl border border-safety-yellow/30 flex gap-6 items-start">
-<span class="material-symbols-outlined text-safety-yellow text-4xl" style="font-variation-settings: 'FILL' 1;">warning</span>
-<div class="space-y-2">
-<h4 class="font-bold text-deep-navy">Seguridad ante Tormentas en Florida</h4>
-<p class="text-on-surface-variant text-sm">Debido a la alta incidencia de rayos en Florida, recomendamos auditorías anuales en sistemas de puesta a tierra. Nuestros técnicos están especializados en protección contra sobretensiones climáticas.</p>
-</div>
-</div>
-</div>
-<div class="flex justify-center">
-<div class="w-full max-w-[400px] h-[400px] bg-surface-container rounded-2xl overflow-hidden shadow-lg border-8 border-white">
-<img alt="Certificación" class="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTn_yBitu67elO5KHSyjesuXxljLceAM7Qe3lcYWcDrAbu2pnhXBofkcyNQymsGsgFZi7MTyW6fa4dqpUuVvsJsvvzykH0ONmIyuDYPLWvg5zKtRjdQOb38bB54DF8V0wjGFOcZOV6p_5MjlATwWhzPjGlgRQ3yb4XcnEahR8eikANG3MQdOc5-_ygoHnK0fY72E7aVC_OTl1BlIsGCB0llB9BXxj4I3JhInPQ70w2i6ETLAXq32nuhXR-y2lJedOILS53zLAmF5Q"/>
-</div>
-</div>
-</div>
-</section>
-<!-- Sección: Compromiso con la Comunidad -->
-<section class="py-[100px] bg-brand-light-gray px-margin-mobile">
-<div class="max-w-container-max mx-auto text-center">
-<h2 class="font-headline-lg text-headline-xl text-deep-navy mb-8">Sirviendo a la Comunidad de Miami</h2>
-<div class="max-w-[800px] mx-auto space-y-6 text-on-surface-variant text-body-lg mb-16">
-<p>Nuestra presencia se extiende a lo largo de las comunidades más vibrantes del sur de Florida. Estamos orgullosos de haber iluminado hogares y potenciado negocios locales durante más de una década.</p>
-<p>Desde la histórica Coral Gables hasta el moderno horizonte de Brickell, Genesis Electrical es sinónimo de confiabilidad regional.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Coral Gables</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Brickell</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Doral</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Miami Beach</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Aventura</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Coconut Grove</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Pinecrest</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Key Biscayne</span>
-</div>
-<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
-<span class="material-symbols-outlined text-electric-blue font-bold">check</span>
-<span class="font-bold text-deep-navy">Hialeah</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Sección: CTA Final -->
-<section class="py-[100px] bg-gradient-to-r from-deep-navy to-electric-blue text-white px-margin-mobile">
-<div class="max-w-4xl mx-auto text-center space-y-10">
-<h2 class="font-headline-lg text-headline-xl leading-tight">¿Quiere saber más sobre nuestros servicios o necesita una cotización personalizada?</h2>
-<p class="text-xl opacity-90 font-body-md">Nuestro equipo está listo para asesorarlo en su próximo gran proyecto eléctrico.</p>
-<div class="flex flex-wrap justify-center gap-6">
-<a class="bg-safety-yellow text-deep-navy px-10 py-5 rounded-lg font-bold text-lg hover:brightness-110 transition-all flex items-center gap-3 shadow-lg" href="tel:7867202328">
-<span class="material-symbols-outlined">call</span>
-                    Llamar Ahora
-                </a>
-<a class="bg-white text-electric-blue px-10 py-5 rounded-lg font-bold text-lg hover:bg-surface-bright transition-all flex items-center gap-3 shadow-lg" href="/contacto">
-<span class="material-symbols-outlined">mail</span>
-                    Enviar Mensaje
-                </a>
-<a class="bg-transparent border-2 border-white text-white px-10 py-5 rounded-lg font-bold text-lg hover:bg-white/10 transition-all flex items-center gap-3" href="/contacto">
-<span class="material-symbols-outlined">request_quote</span>
-                    Solicitar Presupuesto
-                </a>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="bg-deep-navy dark:bg-black relative w-full pt-16 pb-8 border-t border-white/10">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-base md:px-margin-desktop max-w-container-max mx-auto">
-<div class="space-y-6">
-<div class="font-display-lg text-headline-md font-bold text-on-primary">Genesis Electrical</div>
-<p class="text-on-primary/70 font-body-md text-sm">Excelencia eléctrica en Miami desde hace más de una década. Profesionales certificados a su disposición.</p>
-</div>
-<div>
-<h4 class="text-safety-yellow font-bold mb-6 font-headline-md">Servicios</h4>
-<ul class="space-y-4">
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/servicios#residencial">Residencial</a></li>
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/servicios#comercial">Comercial</a></li>
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/emergencia">Emergencias</a></li>
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/servicios">Mantenimiento</a></li>
-</ul>
-</div>
-<div>
-<h4 class="text-safety-yellow font-bold mb-6 font-headline-md">Compañía</h4>
-<ul class="space-y-4">
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/sobre-nosotros">Sobre Nosotros</a></li>
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/sobre-nosotros#credenciales">Licencias</a></li>
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/contacto">Contacto</a></li>
-<li><a class="text-on-primary/80 hover:text-safety-yellow transition-transform hover:translate-x-1 inline-block font-label-md" href="/faq">FAQ</a></li>
-</ul>
-</div>
-<div>
-<h4 class="text-safety-yellow font-bold mb-6 font-headline-md">Contacto</h4>
-<p class="text-on-primary/80 font-body-md mb-2">(786) 720-2328</p>
-<p class="text-on-primary/80 font-body-md mb-6">info@genesiselectrical.com</p>
-<div class="flex gap-4">
-<a class="text-on-primary/80 hover:text-safety-yellow" href="#"><span class="material-symbols-outlined">facebook</span></a>
-<a class="text-on-primary/80 hover:text-safety-yellow" href="#"><span class="material-symbols-outlined">share</span></a>
-</div>
-</div>
-</div>
-<div class="max-w-container-max mx-auto px-base md:px-margin-desktop mt-16 pt-8 border-t border-white/5 text-center">
-<p class="text-on-primary/50 font-label-md">© 2024 Genesis Electrical Corporation. Todos los derechos reservados.</p>
-</div>
-</footer>
-<script is:inline>
-        // Simple mobile menu toggle logic
-        const menuBtn = document.querySelector('button.lg\\:hidden');
-        if (menuBtn) {
-            menuBtn.addEventListener('click', () => {
-                alert('Menú móvil próximamente');
-            });
-        }
 
-        // Add intersection observer for reveal animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        }, { threshold: 0.1 });
+<Layout title={title} description={description}>
+  <!-- Header Section -->
+  <section class="relative py-[120px] flex items-center justify-center overflow-hidden pt-32">
+    <div class="absolute inset-0 z-0">
+      <Image 
+        src={aboutHeroImage} 
+        alt="Equipo de Genesis Electrical en oficinas de Miami" 
+        class="w-full h-full object-cover" 
+        loading="eager" 
+        fetchpriority="high"
+        width={1920}
+        height={400}
+      />
+      <div class="absolute inset-0 bg-primary/60 backdrop-blur-[2px]"></div>
+    </div>
+    <div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto">
+      <h1 class="font-display-lg text-white text-display-lg-mobile md:text-[56px] font-bold leading-tight mb-4">Sobre Genesis Electrical Corporation</h1>
+      <p class="text-white font-body-md text-body-xl">Su Socio Confiable en Servicios Eléctricos en Miami, Florida</p>
+    </div>
+  </section>
 
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-            observer.observe(section);
-        });
-    </script>
-</body>
-</BaseLayout>
+  <!-- Sección: Nuestra Historia -->
+  <section class="py-[100px] px-margin-mobile md:px-margin-desktop bg-white">
+    <div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div class="w-full h-[500px] rounded-xl overflow-hidden shadow-2xl">
+        <Image 
+          src={electricianProfessionalImage} 
+          alt="Electricista Profesional de Genesis Electrical trabajando" 
+          class="w-full h-full object-cover" 
+          width={800}
+          height={500}
+        />
+      </div>
+      <div class="space-y-8">
+        <h2 class="font-headline-lg text-headline-custom text-deep-navy">Comprometidos con la Excelencia Eléctrica</h2>
+        <div class="space-y-6 text-on-surface-variant leading-[1.8] font-body-md text-base">
+          <p>Desde nuestra fundación en Miami, Genesis Electrical Corporation ha crecido basándose en la confianza y la calidad técnica superior. Nos enorgullecemos de ser un pilar en la comunidad, ofreciendo soluciones que van desde instalaciones residenciales meticulosas hasta complejos sistemas comerciales.</p>
+          <p>Nuestra trayectoria está marcada por un compromiso inquebrantable con la seguridad. Entendemos que cada conexión eléctrica es vital para el bienestar de su familia o la operatividad de su negocio, por lo que aplicamos los estándares más rigurosos del código eléctrico nacional.</p>
+          <p>Contamos con un equipo de especialistas altamente capacitados que comparten una visión común: la excelencia en el servicio al cliente. Para nosotros, ningún trabajo es demasiado pequeño ni ningún proyecto demasiado complejo cuando se trata de garantizar la tranquilidad de nuestros clientes.</p>
+          <p class="pt-4 text-deep-navy">
+            <strong class="font-bold">Miami, FL — Sede Central Operativa</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Nuestra Misión -->
+  <section class="py-[100px] bg-brand-light-gray">
+    <div class="max-w-[800px] mx-auto text-center px-margin-mobile">
+      <div class="flex justify-center mb-10">
+        <span class="material-symbols-outlined text-[100px] text-electric-blue" style="font-variation-settings: 'FILL' 1;">stars</span>
+      </div>
+      <h2 class="font-headline-lg text-headline-xl text-deep-navy mb-8">Nuestra Misión</h2>
+      <div class="space-y-6 text-on-surface-variant text-body-lg">
+        <p>Proporcionar soluciones eléctricas integrales que garanticen la máxima seguridad, eficiencia energética y continuidad operativa para las familias y empresas de Miami, impulsando el progreso regional a través de la excelencia técnica.</p>
+        <p>Buscamos transformar la industria eléctrica local mediante la innovación constante y un modelo de servicio centrado totalmente en la satisfacción y seguridad del cliente final.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Nuestros Valores -->
+  <section class="py-[100px] bg-white px-margin-mobile">
+    <div class="max-w-container-max mx-auto">
+      <h2 class="font-headline-lg text-headline-xl text-deep-navy text-center mb-16">Nuestros Valores Fundamentales</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <!-- Valor 1 -->
+        <div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
+          <span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">bolt</span>
+          <h3 class="font-headline-md text-deep-navy mb-4">Seguridad Primero</h3>
+          <p class="text-on-surface-variant">Protocolos estrictos de protección para garantizar que cada instalación cumpla con los estándares de seguridad más altos.</p>
+        </div>
+        <!-- Valor 2 -->
+        <div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
+          <span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">handshake</span>
+          <h3 class="font-headline-md text-deep-navy mb-4">Integridad</h3>
+          <p class="text-on-surface-variant">Actuamos con honestidad y transparencia total en cada presupuesto, proceso y recomendación técnica.</p>
+        </div>
+        <!-- Valor 3 -->
+        <div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
+          <span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">emoji_events</span>
+          <h3 class="font-headline-md text-deep-navy mb-4">Excelencia</h3>
+          <p class="text-on-surface-variant">Buscamos la perfección en los detalles técnicos y estéticos de cada proyecto eléctrico que realizamos.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Valor 4 -->
+        <div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
+          <span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">diversity_3</span>
+          <h3 class="font-headline-md text-deep-navy mb-4">Servicio al Cliente</h3>
+          <p class="text-on-surface-variant">Atencion personalizada y empática, resolviendo sus necesidades con rapidez y profesionalismo.</p>
+        </div>
+        <!-- Valor 5 -->
+        <div class="bg-brand-card-gray p-10 rounded-2xl border border-outline-variant/30 text-center hover:shadow-xl transition-all duration-300 group">
+          <span class="material-symbols-outlined text-[70px] text-electric-blue mb-6 group-hover:scale-110 transition-transform">menu_book</span>
+          <h3 class="font-headline-md text-deep-navy mb-4">Conocimiento Continuo</h3>
+          <p class="text-on-surface-variant">Inversión constante en capacitación sobre nuevas tecnologías eléctricas y normativas vigentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Por Qué Elegirnos -->
+  <section class="py-[100px] bg-electric-blue text-white px-margin-mobile">
+    <div class="max-w-container-max mx-auto text-center">
+      <h2 class="font-headline-lg text-headline-xl mb-6">Por Qué Los Clientes Eligen Genesis Electrical Corporation</h2>
+      <p class="font-body-md text-body-lg mb-16 opacity-90">Con una calificación de 5.0 estrellas basada en reseñas de clientes satisfechos por nuestra dedicación y puntualidad.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
+          <span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
+          <span class="font-bold">Áreas de trabajo limpias</span>
+        </div>
+        <div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
+          <span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
+          <span class="font-bold">Precios claros y transparentes</span>
+        </div>
+        <div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
+          <span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
+          <span class="font-bold">Electricistas con licencia y seguro</span>
+        </div>
+        <div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
+          <span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
+          <span class="font-bold">Atención al cliente excepcional</span>
+        </div>
+        <div class="bg-brand-dark-blue p-8 rounded-xl border border-white/10 flex flex-col items-center justify-center space-y-4 shadow-lg hover:bg-brand-dark-blue/80 transition-colors">
+          <span class="material-symbols-outlined text-success-green text-3xl font-bold">check_circle</span>
+          <span class="font-bold">Trabajos conforme a normativa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Nuestras Credenciales -->
+  <section id="credenciales" class="py-[100px] bg-white px-margin-mobile">
+    <div class="max-w-container-max mx-auto grid lg:grid-cols-[1.5fr_1fr] gap-16 items-start">
+      <div class="space-y-10">
+        <h2 class="font-headline-lg text-headline-custom text-deep-navy">Credenciales y Certificaciones</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+            <span class="font-body-md text-on-surface-variant font-semibold">Tipo: Contratista Eléctrico Certificado</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+            <span class="font-body-md text-on-surface-variant font-semibold">Licencia Estatal: #EC1300XXXX</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+            <span class="font-body-md text-on-surface-variant font-semibold">Seguro: Full Liability &amp; Workers Comp</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+            <span class="font-body-md text-on-surface-variant font-semibold">Área: Condado Miami-Dade y Alrededores</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+            <span class="font-body-md text-on-surface-variant font-semibold">Horario: Lunes a Viernes 8am - 6pm</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+            <span class="font-body-md text-on-surface-variant font-semibold">Emergencias: Soporte Crítico 24/7</span>
+          </div>
+        </div>
+        <!-- Highlighted Box -->
+        <div class="bg-[#FFF9E6] p-8 rounded-xl border border-safety-yellow/30 flex gap-6 items-start">
+          <span class="material-symbols-outlined text-safety-yellow text-4xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+          <div class="space-y-2">
+            <h4 class="font-bold text-deep-navy">Seguridad ante Tormentas en Florida</h4>
+            <p class="text-on-surface-variant text-sm">Debido a la alta incidencia de rayos en Florida, recomendamos auditorías anuales en sistemas de puesta a tierra. Nuestros técnicos están especializados en protección contra sobretensiones climáticas.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <div class="w-full max-w-[400px] h-[400px] bg-surface-container rounded-2xl overflow-hidden shadow-lg border-8 border-white">
+          <Image 
+            src={certificationImage} 
+            alt="Certificación oficial de Genesis Electrical Corporation en Florida" 
+            class="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all" 
+            width={400}
+            height={400}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Compromiso con la Comunidad -->
+  <section class="py-[100px] bg-brand-light-gray px-margin-mobile">
+    <div class="max-w-container-max mx-auto text-center">
+      <h2 class="font-headline-lg text-headline-xl text-deep-navy mb-8">Sirviendo a la Comunidad de Miami</h2>
+      <div class="max-w-[800px] mx-auto space-y-6 text-on-surface-variant text-body-lg mb-16">
+        <p>Nuestra presencia se extiende a lo largo de las comunidades más vibrantes del sur de Florida. Estamos orgullosos de haber iluminado hogares y potenciado negocios locales durante más de una década.</p>
+        <p>Desde la histórica Coral Gables hasta el moderno horizonte de Brickell, Genesis Electrical es sinónimo de confiabilidad regional.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Coral Gables</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Brickell</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Doral</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Miami Beach</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Aventura</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Coconut Grove</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Pinecrest</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Key Biscayne</span>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center gap-3 border border-outline-variant/20">
+          <span class="material-symbols-outlined text-electric-blue font-bold">check</span>
+          <span class="font-bold text-deep-navy">Hialeah</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: CTA Final -->
+  <section class="py-[100px] bg-gradient-to-r from-deep-navy to-electric-blue text-white px-margin-mobile">
+    <div class="max-w-4xl mx-auto text-center space-y-10">
+      <h2 class="font-headline-lg text-headline-xl leading-tight">¿Quiere saber más sobre nuestros servicios o necesita una cotización personalizada?</h2>
+      <p class="text-xl opacity-90 font-body-md">Nuestro equipo está listo para asesorarlo en su próximo gran proyecto eléctrico.</p>
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="bg-safety-yellow text-deep-navy px-10 py-5 rounded-lg font-bold text-lg hover:brightness-110 transition-all flex items-center gap-3 shadow-lg" href="tel:7867202328">
+          <span class="material-symbols-outlined">call</span>
+          Llamar Ahora
+        </a>
+        <a class="bg-white text-electric-blue px-10 py-5 rounded-lg font-bold text-lg hover:bg-surface-bright transition-all flex items-center gap-3 shadow-lg" href={`${import.meta.env.BASE_URL}contacto`}>
+          <span class="material-symbols-outlined">mail</span>
+          Enviar Mensaje
+        </a>
+        <a class="bg-transparent border-2 border-white text-white px-10 py-5 rounded-lg font-bold text-lg hover:bg-white/10 transition-all flex items-center gap-3" href={`${import.meta.env.BASE_URL}contacto`}>
+          <span class="material-symbols-outlined">request_quote</span>
+          Solicitar Presupuesto
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Add intersection observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+      observer.observe(section);
+    });
+  </script>
+</Layout>

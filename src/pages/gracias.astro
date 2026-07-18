@@ -1,103 +1,56 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
 
 const title = "¡Gracias! - Genesis Electrical Corporation";
 const description = "Mensaje recibido con éxito. Nos pondremos en contacto con usted lo antes posible.";
 ---
-<BaseLayout {title} {description}>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-        }
-        .success-animation {
-            animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        }
-        @keyframes scaleIn {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-    </style>
-<body class="bg-surface font-body-md text-on-surface overflow-x-hidden min-h-screen flex flex-col">
-<!-- Top Navigation Bar -->
-<nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md">
-<div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
-<span class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue">
-            Genesis Electrical Corporation
+
+<Layout title={title} description={description}>
+  <style>
+    .success-animation {
+      animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+
+  <!-- Main Success Content -->
+  <main class="flex-grow flex items-center justify-center py-[150px] px-margin-mobile">
+    <div class="w-full max-w-[700px] bg-white rounded-xl shadow-sm p-8 md:p-12 text-center flex flex-col items-center">
+      <!-- Icon -->
+      <div class="success-animation mb-8">
+        <span class="material-symbols-outlined text-[120px] text-success-green" style="font-variation-settings: 'FILL' 1;">
+          check_circle
         </span>
-<div class="hidden md:flex gap-8 items-center">
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/">Inicio</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/genesis-corporation/servicios">Servicios</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/genesis-corporation/sobre-nosotros">Sobre Nosotros</a>
-<a class="bg-electric-blue text-white px-6 py-2 rounded-lg font-bold hover:bg-primary transition-all scale-up active:scale-95 font-label-lg text-label-lg" href="tel:7867202328">(786) 720-2328</a>
-</div>
-</div>
-</nav>
-<!-- Main Success Content -->
-<main class="flex-grow flex items-center justify-center py-[150px] px-margin-mobile">
-<div class="w-full max-w-[700px] bg-white rounded-xl shadow-sm p-8 md:p-12 text-center flex flex-col items-center">
-<!-- Icon -->
-<div class="success-animation mb-8">
-<span class="material-symbols-outlined text-[120px] text-success-green" style="font-variation-settings: 'FILL' 1;">
-                check_circle
-            </span>
-</div>
-<!-- Heading -->
-<h1 class="font-display-lg text-[48px] leading-[1.2] font-bold text-deep-navy mb-8">
-            ¡Gracias por Contactarnos!
-        </h1>
-<!-- Body Text -->
-<div class="space-y-4 mb-10">
-<p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
-                Hemos recibido su mensaje y nos pondremos en contacto con usted dentro de las próximas 24-48 horas.
-            </p>
-<p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
-                Si es una emergencia, por favor llámenos directamente al <span class="font-bold text-deep-navy">(786) 720-2328</span>.
-            </p>
-</div>
-<!-- Highlight Box -->
-<div class="w-full bg-[#E3F2FD] p-8 rounded-[12px] border border-[#BBDEFB] mb-12">
-<p class="font-headline-md text-deep-navy text-xl md:text-2xl flex items-center justify-center gap-3">
-<span>📞</span>
-                ¿Necesita Atención Inmediata? Llámenos: 
-                <a class="font-bold hover:underline" href="tel:7867202328">(786) 720-2328</a>
-</p>
-</div>
-<!-- Button -->
-<a class="group inline-flex items-center gap-2 px-8 py-3 border-2 border-electric-blue text-electric-blue rounded-lg font-label-lg text-label-lg font-bold hover:bg-electric-blue/5 transition-all" href="/">
-<span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
-            Volver al Inicio
-        </a>
-</div>
-</main>
-<!-- Footer -->
-<footer class="relative w-full pt-16 pb-8 bg-deep-navy border-t border-white/10">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-base md:px-margin-desktop max-w-container-max mx-auto text-white">
-<div class="col-span-1 md:col-span-1">
-<span class="font-display-lg text-headline-md font-bold text-on-primary">Genesis Electrical</span>
-<p class="mt-4 text-on-primary/60 font-body-md text-body-md">Expertos electricistas licenciados sirviendo a todo Miami y sus alrededores.</p>
-</div>
-<div class="flex flex-col gap-4">
-<h4 class="font-headline-md text-headline-md text-safety-yellow mb-2">Servicios</h4>
-<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md text-left" href="/servicios#residencial">Residencial</a>
-<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md text-left" href="/servicios#comercial">Comercial</a>
-<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md text-left" href="/emergencia">Emergencias</a>
-</div>
-<div class="flex flex-col gap-4">
-<h4 class="font-headline-md text-headline-md text-safety-yellow mb-2">Compañía</h4>
-<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md text-left" href="/sobre-nosotros">Sobre Nosotros</a>
-<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md text-left" href="/sobre-nosotros#credenciales">Seguridad</a>
-<a class="text-on-primary/80 hover:text-safety-yellow transition-colors font-body-md text-left" href="/faq">FAQ</a>
-</div>
-<div class="flex flex-col gap-4">
-<h4 class="font-headline-md text-headline-md text-safety-yellow mb-2">Contacto</h4>
-<p class="text-on-primary/80 font-body-md text-left">Miami, Florida</p>
-<p class="text-on-primary/80 font-body-md text-left">(786) 720-2328</p>
-<p class="text-on-primary/80 font-body-md text-left">24/7 Disponible</p>
-</div>
-</div>
-<div class="max-w-container-max mx-auto px-base text-center mt-12 border-t border-white/5 pt-8">
-<p class="font-label-md text-label-md text-on-primary/40">© 2024 Genesis Electrical Corporation. Todos los derechos reservados.</p>
-</div>
-</footer>
-</body>
-</BaseLayout>
+      </div>
+      <!-- Heading -->
+      <h1 class="font-display-lg text-[48px] leading-[1.2] font-bold text-deep-navy mb-8">
+        ¡Gracias por Contactarnos!
+      </h1>
+      <!-- Body Text -->
+      <div class="space-y-4 mb-10">
+        <p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
+          Hemos recibido su mensaje y nos pondremos en contacto con usted dentro de las próximas 24-48 horas.
+        </p>
+        <p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
+          Si es una emergencia, por favor llámenos directamente al <span class="font-bold text-deep-navy">(786) 720-2328</span>.
+        </p>
+      </div>
+      <!-- Highlight Box -->
+      <div class="w-full bg-[#E3F2FD] p-8 rounded-[12px] border border-[#BBDEFB] mb-12">
+        <p class="font-headline-md text-deep-navy text-xl md:text-2xl flex items-center justify-center gap-3">
+          <span>📞</span>
+          ¿Necesita Atención Inmediata? Llámenos: 
+          <a class="font-bold hover:underline" href="tel:7867202328">(786) 720-2328</a>
+        </p>
+      </div>
+      <!-- Button -->
+      <a class="group inline-flex items-center gap-2 px-8 py-3 border-2 border-electric-blue text-electric-blue rounded-lg font-label-lg text-label-lg font-bold hover:bg-electric-blue/5 transition-all" href={import.meta.env.BASE_URL}>
+        <span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
+        Volver al Inicio
+      </a>
+    </div>
+  </main>
+</Layout>

@@ -1,5 +1,12 @@
 ---
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
+const getPath = (href: string) => {
+  if (href.startsWith('/')) {
+    return `${base.replace(/\/$/, '')}${href}`;
+  }
+  return href;
+};
 ---
 
 <footer class="bg-deep-navy dark:bg-black relative w-full pt-16 pb-8 border-t border-white/10 text-on-primary">
@@ -29,22 +36,22 @@ const currentYear = new Date().getFullYear();
     <div class="flex flex-col gap-4">
       <h4 class="text-safety-yellow font-bold font-headline-md text-headline-md">Navegación</h4>
       <ul class="flex flex-col gap-2">
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/">Inicio</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios">Servicios</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/sobre-nosotros">Sobre Nosotros</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/contacto">Contacto</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/emergencia">Emergencias 24/7</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/faq">FAQ</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/')}>Inicio</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/servicios')}>Servicios</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/sobre-nosotros')}>Sobre Nosotros</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/contacto')}>Contacto</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/emergencia')}>Emergencias 24/7</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/faq')}>FAQ</a></li>
       </ul>
     </div>
     <!-- Services Links -->
     <div class="flex flex-col gap-4">
       <h4 class="text-safety-yellow font-bold font-headline-md text-headline-md">Nuestros Servicios</h4>
       <ul class="flex flex-col gap-2">
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#residencial">Residencial</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#comercial">Comercial</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/emergencia">Emergencias</a></li>
-        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href="/servicios#mantenimiento">Mantenimiento</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/servicios#residencial')}>Residencial</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/servicios#comercial')}>Comercial</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/emergencia')}>Emergencias</a></li>
+        <li><a class="text-on-primary/80 hover:text-safety-yellow transition-colors hover:translate-x-1 inline-block font-body-md" href={getPath('/servicios#mantenimiento')}>Mantenimiento</a></li>
       </ul>
     </div>
     <!-- Contact Info -->

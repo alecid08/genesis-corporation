@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        "brand-light-gray": "#F5F7FA",
+        "brand-card-gray": "#F9FAFB",
+        "brand-dark-blue": "#004499",
         "tertiary": "#745b00",
         "electric-blue": "#0055AA",
         "surface-tint": "#165db2",

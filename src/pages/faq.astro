@@ -1,281 +1,262 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import faqHeroImage from '../assets/faq-hero.jpg';
 
 const title = "Preguntas Frecuentes | Genesis Electrical Corporation";
 const description = "Preguntas frecuentes sobre servicios eléctricos, tarifas de emergencia, licencias y garantías en Miami, Florida.";
 ---
-<BaseLayout {title} {description}>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
-        .accordion-item.active .accordion-content {
-            max-height: 500px;
-            padding-top: 16px;
-            padding-bottom: 16px;
-        }
-        .accordion-item.active .icon-plus {
-            transform: rotate(45deg);
-        }
-        .icon-plus {
-            transition: transform 0.3s ease;
-        }
-    </style>
-<body class="bg-surface font-body-md text-on-surface">
-<!-- Emergency Banner -->
-<div class="bg-emergency-red text-white py-2 px-margin-mobile md:px-margin-desktop text-center font-label-md">
-<span>¿EMERGENCIA ELÉCTRICA? SERVICIO 24/7 DISPONIBLE EN MIAMI: (786) 720-2328</span>
-</div>
-<!-- Navigation -->
-<header class="fixed top-10 w-full z-50 transition-all duration-300" id="main-nav">
-<nav class="bg-surface/95 backdrop-blur-md shadow-md h-20 px-base md:px-margin-desktop max-w-container-max mx-auto flex justify-between items-center rounded-b-xl border-x border-b border-outline-variant/20">
-<div class="flex items-center">
-<span class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue">Genesis</span>
-<span class="hidden md:inline-block ml-2 font-display-lg md:text-headline-lg font-light text-deep-navy">Electrical</span>
-</div>
-<div class="hidden md:flex items-center space-x-gutter">
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg" href="/genesis-corporation">Inicio</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg" href="/genesis-corporation/servicios">Servicios</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg" href="/genesis-corporation/sobre-nosotros">Sobre Nosotros</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg" href="/genesis-corporation/contacto">Contacto</a>
-<a class="text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg" href="/genesis-corporation/emergencia">Emergencia</a>
-<a class="text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg" href="/genesis-corporation/faq">FAQ</a>
-</div>
-<div class="flex items-center gap-4">
-<a class="hidden lg:flex items-center gap-2 bg-deep-navy text-white px-6 py-3 rounded-lg font-bold hover:bg-electric-blue transition-all scale-up" href="tel:7867202328">
-<span class="material-symbols-outlined">call</span>
-                    (786) 720-2328
-                </a>
-<button class="md:hidden text-deep-navy">
-<span class="material-symbols-outlined" style="font-size: 32px;">menu</span>
-</button>
-</div>
-</nav>
-</header>
-<!-- Hero Header -->
-<section class="relative h-[450px] flex items-center justify-center overflow-hidden pt-20">
-<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxQ4ExkzcFtlvigTmakzdIxlno5HJz3coU52CAtBM2GeYDnuEM5kN_7YcFB3TLYj5zAA9Re1z4RfiFy3mx0Zoj8RoIjynlQbUUPNfei_mWGsgICAInFMy7RWMXEhr1ZOUO4vQQ97kz4mSjLYd0QeL12WdUrjzOTPo1A8lzu85AgCkzE0BSvw2J9Af_HDA_QpQDyChofha4DFx-Luit5Ck1wn_QEB783smtzYGBLXG3apxdIBGG-ChL30ZecedXkyciOlRABkrRS7s')"></div>
-<div class="absolute inset-0 bg-deep-navy/70 backdrop-blur-[2px]"></div>
-<div class="relative z-10 text-center px-margin-mobile">
-<h1 class="font-display-lg text-white text-display-lg-mobile md:text-display-lg mb-4">Preguntas Frecuentes</h1>
-<p class="text-white/90 font-body-lg max-w-2xl mx-auto">Encuentra respuestas rápidas a tus dudas sobre instalaciones, mantenimiento y servicios de emergencia en Miami.</p>
-</div>
-</section>
-<!-- Search Section -->
-<section class="relative -mt-12 z-20 px-margin-mobile max-w-container-max mx-auto">
-<div class="bg-surface-container-lowest shadow-lg rounded-2xl p-6 md:p-10 border border-outline-variant/30 max-w-3xl mx-auto">
-<div class="relative flex items-center">
-<span class="absolute left-6 material-symbols-outlined text-outline text-2xl">search</span>
-<input id="search-input" class="w-full pl-16 pr-6 py-5 bg-surface-container-low border-2 border-transparent focus:border-electric-blue focus:ring-0 rounded-xl font-body-lg text-on-surface transition-all placeholder:text-outline" placeholder="¿Cómo podemos ayudarte hoy?" type="text"/>
-</div>
-<div class="mt-4 flex flex-wrap gap-2 justify-center">
-<span class="text-label-md text-outline">Búsquedas populares:</span>
-<button class="popular-search text-label-md text-electric-blue hover:underline" data-term="FPL">Certificación FPL</button>
-<button class="popular-search text-label-md text-electric-blue hover:underline" data-term="emergencia">Tarifas de emergencia</button>
-<button class="popular-search text-label-md text-electric-blue hover:underline" data-term="cargadores">Cargadores Tesla</button>
-</div>
-</div>
-</section>
-<!-- FAQ Accordions -->
-<main class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-<!-- Category Navigation -->
-<aside class="lg:col-span-3 space-y-2">
-<h3 class="font-headline-md text-deep-navy mb-6 px-4">Categorías</h3>
-<button class="category-btn w-full text-left p-4 rounded-lg bg-electric-blue text-white font-bold flex items-center justify-between group transition-all" data-category="all">
-<span>General</span>
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</aside>
-<!-- FAQ Content -->
-<div class="lg:col-span-9 space-y-12">
-<!-- General Section -->
-<section class="faq-section">
-<div class="flex items-center gap-4 mb-8">
-<div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-electric-blue">info</span>
-</div>
-<h2 class="font-headline-lg text-deep-navy">Información General</h2>
-</div>
-<div class="space-y-4">
-<!-- Accordion Item 1 -->
-<div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-<button class="w-full flex items-center justify-between p-6 text-left group" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors">¿Cuál es su área de servicio en Miami?</span>
-<span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-</button>
-<div class="accordion-content px-6 bg-white">
-<p class="text-body-md text-on-surface-variant leading-relaxed">
-                                    Genesis Electrical Corporation sirve a todo el condado de Miami-Dade, incluyendo Coral Gables, Coconut Grove, Pinecrest, Doral y Miami Beach. También cubrimos áreas seleccionadas del sur de Broward para proyectos comerciales de gran escala.
-                                </p>
-</div>
-</div>
-<!-- Accordion Item 2 -->
-<div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-<button class="w-full flex items-center justify-between p-6 text-left group" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors">¿Están disponibles para emergencias 24/7?</span>
-<span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-</button>
-<div class="accordion-content px-6 bg-white">
-<p class="text-body-md text-on-surface-variant leading-relaxed">
-                                    Sí, contamos con un equipo de guardia los 365 días del año. Las emergencias eléctricas no esperan, y nosotros tampoco. Puede contactarnos directamente al (786) 720-2328 para asistencia inmediata.
-                                </p>
-</div>
-</div>
-<!-- Accordion Item 3 -->
-<div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-<button class="w-full flex items-center justify-between p-6 text-left group" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors">¿Tienen licencia y seguro en Florida?</span>
-<span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-</button>
-<div class="accordion-content px-6 bg-white">
-<p class="text-body-md text-on-surface-variant leading-relaxed">
-                                    Absolutamente. Genesis Electrical Corporation es una empresa totalmente certificada y asegurada (Florida Electrical Contractor License). Cumplimos con todos los estándares del NEC (National Electrical Code) y las regulaciones locales de construcción.
-                                </p>
-</div>
-</div>
-</div>
-</section>
-<!-- Services Section -->
-<section class="faq-section">
-<div class="flex items-center gap-4 mb-8">
-<div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-electric-blue">bolt</span>
-</div>
-<h2 class="font-headline-lg text-deep-navy">Servicios e Instalaciones</h2>
-</div>
-<div class="space-y-4">
-<div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-<button class="w-full flex items-center justify-between p-6 text-left group" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors">¿Realizan instalaciones de cargadores para vehículos eléctricos?</span>
-<span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-</button>
-<div class="accordion-content px-6 bg-white">
-<p class="text-body-md text-on-surface-variant leading-relaxed">
-                                    Somos instaladores certificados para Tesla Wall Connector y otras marcas principales como ChargePoint y JuiceBox. Realizamos el estudio de carga de su panel existente y gestionamos los permisos necesarios.
-                                </p>
-</div>
-</div>
-<div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-<button class="w-full flex items-center justify-between p-6 text-left group" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors">¿Qué incluye un mantenimiento preventivo comercial?</span>
-<span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-</button>
-<div class="accordion-content px-6 bg-white">
-<p class="text-body-md text-on-surface-variant leading-relaxed">
-                                    Nuestros planes incluyen termografía infrarroja para detectar puntos calientes, torqueo de conexiones, limpieza de paneles y pruebas de sistemas de emergencia/iluminación de salida para cumplir con OSHA.
-                                </p>
-</div>
-</div>
-</div>
-</section>
-<!-- Payments Section -->
-<section class="faq-section">
-<div class="flex items-center gap-4 mb-8">
-<div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-electric-blue">payments</span>
-</div>
-<h2 class="font-headline-lg text-deep-navy">Pagos y Garantía</h2>
-</div>
-<div class="space-y-4">
-<div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-<button class="w-full flex items-center justify-between p-6 text-left group" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-deep-navy/80 group-hover:text-electric-blue transition-colors">¿Qué métodos de pago aceptan?</span>
-<span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-</button>
-<div class="accordion-content px-6 bg-white">
-<p class="text-body-md text-on-surface-variant leading-relaxed">
-                                    Aceptamos todas las tarjetas de crédito principales, Zelle, transferencias ACH y cheques corporativos. Para proyectos residenciales grandes, ofrecemos opciones de financiamiento a través de socios seleccionados.
-                                </p>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-</main>
-<!-- Final CTA Section -->
-<section class="py-20 px-margin-mobile bg-deep-navy relative overflow-hidden text-center text-white">
-<div class="max-w-2xl mx-auto space-y-6">
-<h2 class="font-headline-lg text-safety-yellow">¿No encontraste respuesta a tu pregunta?</h2>
-<p class="font-body-md text-white/80">Escríbenos directamente o llámanos para resolver cualquier consulta en tiempo récord.</p>
-<div class="flex flex-wrap justify-center gap-4 pt-4">
-<a class="bg-safety-yellow text-deep-navy px-8 py-3 rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2" href="tel:7867202328">
-<span class="material-symbols-outlined">call</span> (786) 720-2328
-</a>
-<a class="bg-transparent border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-all flex items-center gap-2" href="/contacto">
-<span class="material-symbols-outlined">mail</span> Enviar Mensaje
-</a>
-</div>
-</div>
-</section>
-<script is:inline>
-        function toggleAccordion(button) {
-            const item = button.parentElement;
-            const content = button.nextElementSibling;
-            
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-                content.style.maxHeight = '0px';
-            } else {
-                const section = item.parentElement;
-                section.querySelectorAll('.accordion-item.active').forEach(activeItem => {
-                    activeItem.classList.remove('active');
-                    activeItem.querySelector('.accordion-content').style.maxHeight = '0px';
-                });
-                
-                item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + 'px';
-            }
-        }
 
-        // Live Search Filtering
-        const searchInput = document.getElementById('search-input');
-        const accordionItems = document.querySelectorAll('.accordion-item');
+<Layout title={title} description={description}>
+  <style>
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion-item.active .icon-plus {
+      transform: rotate(45deg);
+    }
+    .icon-plus {
+      transition: transform 0.3s ease;
+    }
+  </style>
 
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase().trim();
-                accordionItems.forEach(item => {
-                    const question = item.querySelector('button').textContent.toLowerCase();
-                    const answer = item.querySelector('.accordion-content').textContent.toLowerCase();
-                    
-                    if (question.includes(query) || answer.includes(query)) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
+  <!-- Hero Header -->
+  <section class="relative h-[450px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <Image 
+        src={faqHeroImage} 
+        alt="Panel de fusibles y medidor eléctrico" 
+        class="w-full h-full object-cover" 
+        loading="eager" 
+        fetchpriority="high"
+        width={1920}
+        height={450}
+      />
+    </div>
+    <div class="absolute inset-0 bg-deep-navy/70 backdrop-blur-[2px]"></div>
+    <div class="relative z-10 text-center px-margin-mobile">
+      <h1 class="font-display-lg text-white text-display-lg-mobile md:text-display-lg mb-4">Preguntas Frecuentes</h1>
+      <p class="text-white/90 font-body-lg max-w-2xl mx-auto">Encuentra respuestas rápidas a tus dudas sobre instalaciones, mantenimiento y servicios de emergencia en Miami.</p>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="relative -mt-12 z-20 px-margin-mobile max-w-container-max mx-auto">
+    <div class="bg-surface-container-lowest shadow-lg rounded-2xl p-6 md:p-10 border border-outline-variant/30 max-w-3xl mx-auto">
+      <div class="relative flex items-center">
+        <span class="absolute left-6 material-symbols-outlined text-outline text-2xl">search</span>
+        <input id="search-input" class="w-full pl-16 pr-6 py-5 bg-surface-container-low border-2 border-transparent focus:border-electric-blue focus:ring-0 rounded-xl font-body-lg text-on-surface transition-all placeholder:text-outline" placeholder="¿Cómo podemos ayudarte hoy?" type="text"/>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2 justify-center">
+        <span class="text-label-md text-outline">Búsquedas populares:</span>
+        <button class="popular-search text-label-md text-electric-blue hover:underline" data-term="FPL">Certificación FPL</button>
+        <button class="popular-search text-label-md text-electric-blue hover:underline" data-term="emergencia">Tarifas de emergencia</button>
+        <button class="popular-search text-label-md text-electric-blue hover:underline" data-term="cargadores">Cargadores Tesla</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordions -->
+  <main class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <!-- Category Navigation -->
+      <aside class="lg:col-span-3 space-y-2">
+        <h3 class="font-headline-md text-deep-navy mb-6 px-4">Categorías</h3>
+        <button class="category-btn w-full text-left p-4 rounded-lg bg-electric-blue text-white font-bold flex items-center justify-between group transition-all" data-category="all">
+          <span>General</span>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </aside>
+      <!-- FAQ Content -->
+      <div class="lg:col-span-9 space-y-12">
+        <!-- General Section -->
+        <section class="faq-section">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
+              <span class="material-symbols-outlined text-electric-blue">info</span>
+            </div>
+            <h2 class="font-headline-lg text-deep-navy">Información General</h2>
+          </div>
+          <div class="space-y-4">
+            <!-- Accordion Item 1 -->
+            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Cuál es su área de servicio en Miami?</span>
+                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+              </button>
+              <div class="accordion-content">
+                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                  Genesis Electrical Corporation sirve a todo el condado de Miami-Dade, incluyendo Coral Gables, Coconut Grove, Pinecrest, Doral y Miami Beach. También cubrimos áreas seleccionadas del sur de Broward para proyectos comerciales de gran escala.
+                </div>
+              </div>
+            </div>
+            <!-- Accordion Item 2 -->
+            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Están disponibles para emergencias 24/7?</span>
+                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+              </button>
+              <div class="accordion-content">
+                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                  Sí, contamos con un equipo de guardia los 365 días del año. Las emergencias eléctricas no esperan, y nosotros tampoco. Puede contactarnos directamente al (786) 720-2328 para asistencia inmediata.
+                </div>
+              </div>
+            </div>
+            <!-- Accordion Item 3 -->
+            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Tienen licencia y seguro en Florida?</span>
+                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+              </button>
+              <div class="accordion-content">
+                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                  Absolutamente. Genesis Electrical Corporation es una empresa totalmente certificada y asegurada (Florida Electrical Contractor License). Cumplimos con todos los estándares del NEC (National Electrical Code) y las regulaciones locales de construcción.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Services Section -->
+        <section class="faq-section">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
+              <span class="material-symbols-outlined text-electric-blue">bolt</span>
+            </div>
+            <h2 class="font-headline-lg text-deep-navy">Servicios e Instalaciones</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Realizan instalaciones de cargadores para vehículos eléctricos?</span>
+                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+              </button>
+              <div class="accordion-content">
+                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                  Somos instaladores certificados para Tesla Wall Connector y otras marcas principales como ChargePoint y JuiceBox. Realizamos el estudio de carga de su panel existente y gestionamos los permisos necesarios.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Qué incluye un mantenimiento preventivo comercial?</span>
+                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+              </button>
+              <div class="accordion-content">
+                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                  Nuestros planes incluyen termografía infrarroja para detectar puntos calientes, torqueo de conexiones, limpieza de paneles y pruebas de sistemas de emergencia/iluminación de salida para cumplir con OSHA.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Payments Section -->
+        <section class="faq-section">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
+              <span class="material-symbols-outlined text-electric-blue">payments</span>
+            </div>
+            <h2 class="font-headline-lg text-deep-navy">Pagos y Garantía</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Qué métodos de pago aceptan?</span>
+                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+              </button>
+              <div class="accordion-content">
+                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                  Aceptamos todas las tarjetas de crédito principales, Zelle, transferencias ACH y cheques corporativos. Para proyectos residenciales grandes, ofrecemos opciones de financiamiento a través de socios seleccionados.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Final CTA Section -->
+  <section class="py-20 px-margin-mobile bg-deep-navy relative overflow-hidden text-center text-white">
+    <div class="max-w-2xl mx-auto space-y-6">
+      <h2 class="font-headline-lg text-safety-yellow">¿No encontraste respuesta a tu pregunta?</h2>
+      <p class="font-body-md text-white/80">Escríbenos directamente o llámanos para resolver cualquier consulta en tiempo récord.</p>
+      <div class="flex flex-wrap justify-center gap-4 pt-4">
+        <a class="bg-safety-yellow text-deep-navy px-8 py-3 rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2" href="tel:7867202328">
+          <span class="material-symbols-outlined">call</span> (786) 720-2328
+        </a>
+        <a class="bg-transparent border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-all flex items-center gap-2" href={`${import.meta.env.BASE_URL}contacto`}>
+          <span class="material-symbols-outlined">mail</span> Enviar Mensaje
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Accordion toggle function
+    const toggleAccordion = (button: HTMLElement) => {
+      const item = button.parentElement;
+      const content = button.nextElementSibling as HTMLElement;
+      
+      if (item && content) {
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
+          content.style.maxHeight = '0px';
+        } else {
+          const section = item.parentElement;
+          if (section) {
+            section.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+              activeItem.classList.remove('active');
+              const activeContent = activeItem.querySelector('.accordion-content') as HTMLElement;
+              if (activeContent) activeContent.style.maxHeight = '0px';
             });
+          }
+          
+          item.classList.add('active');
+          content.style.maxHeight = content.scrollHeight + 'px';
         }
+      }
+    };
 
-        // Popular searches click binding
-        document.querySelectorAll('.popular-search').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const term = btn.getAttribute('data-term');
-                if (searchInput) {
-                    searchInput.value = term;
-                    searchInput.dispatchEvent(new Event('input'));
-                }
-            });
-        });
+    // Bind event listeners to accordion toggles
+    document.querySelectorAll('.accordion-toggle').forEach(button => {
+      button.addEventListener('click', () => toggleAccordion(button as HTMLElement));
+    });
 
-        // Navigation stickiness
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 40) {
-                nav.style.top = '0';
-            } else {
-                nav.style.top = '2.5rem';
-            }
+    // Live Search Filtering
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        const query = target.value.toLowerCase().trim();
+        accordionItems.forEach(item => {
+          const btn = item.querySelector('button');
+          const content = item.querySelector('.accordion-content');
+          const question = btn ? btn.textContent?.toLowerCase() || '' : '';
+          const answer = content ? content.textContent?.toLowerCase() || '' : '';
+          
+          const element = item as HTMLElement;
+          if (question.includes(query) || answer.includes(query)) {
+            element.style.display = 'block';
+          } else {
+            element.style.display = 'none';
+          }
         });
-    </script>
-</body>
-</BaseLayout>
+      });
+    }
+
+    // Popular searches click binding
+    document.querySelectorAll('.popular-search').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const term = btn.getAttribute('data-term');
+        if (searchInput && term) {
+          searchInput.value = term;
+          searchInput.dispatchEvent(new Event('input'));
+        }
+      });
+    });
+  </script>
+</Layout>

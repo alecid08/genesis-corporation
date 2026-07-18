@@ -2,6 +2,14 @@
 const pathname = Astro.url.pathname;
 const cleanPath = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
 
+const base = import.meta.env.BASE_URL;
+const getPath = (href: string) => {
+  if (href.startsWith('/')) {
+    return `${base.replace(/\/$/, '')}${href}`;
+  }
+  return href;
+};
+
 const navItems = [
   { label: 'Inicio', href: '/' },
   { label: 'Servicios', href: '/servicios' },
@@ -15,17 +23,19 @@ const navItems = [
 <header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md transition-transform duration-300" id="main-header">
   <div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
     <!-- Logo -->
-    <a href="/" class="font-display-lg text-lg md:text-headline-md font-bold text-electric-blue hover:opacity-90 transition-opacity">
+    <a href={base} class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue hover:opacity-90 transition-opacity">
       Genesis Electrical
     </a>
 
     <!-- Desktop Nav -->
     <nav class="hidden lg:flex items-center space-x-6">
       {navItems.map((item) => {
-        const isActive = cleanPath === item.href || (item.href !== '/' && cleanPath.startsWith(item.href));
+        const itemPath = getPath(item.href);
+        const cleanItemPath = itemPath.endsWith('/') && itemPath.length > 1 ? itemPath.slice(0, -1) : itemPath;
+        const isActive = cleanPath === cleanItemPath || (item.href !== '/' && cleanPath.startsWith(cleanItemPath));
         return (
           <a
-            href={item.href}
+            href={itemPath}
             class={isActive 
               ? "text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" 
               : "text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg"}
@@ -54,10 +64,12 @@ const navItems = [
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden lg:hidden bg-surface border-t border-surface-variant absolute w-full left-0 top-20 shadow-lg px-base py-6 space-y-4">
     {navItems.map((item) => {
-      const isActive = cleanPath === item.href || (item.href !== '/' && cleanPath.startsWith(item.href));
+      const itemPath = getPath(item.href);
+      const cleanItemPath = itemPath.endsWith('/') && itemPath.length > 1 ? itemPath.slice(0, -1) : itemPath;
+      const isActive = cleanPath === cleanItemPath || (item.href !== '/' && cleanPath.startsWith(cleanItemPath));
       return (
         <a
-          href={item.href}
+          href={itemPath}
           class={`block py-2 px-4 rounded-lg font-medium transition-colors ${
             isActive 
               ? "bg-electric-blue/10 text-electric-blue font-bold" 

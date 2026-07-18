@@ -2,6 +2,9 @@
 
 @theme {
   /* Colors */
+  --color-brand-light-gray: #F5F7FA;
+  --color-brand-card-gray: #F9FAFB;
+  --color-brand-dark-blue: #004499;
   --color-tertiary: #745b00;
   --color-electric-blue: #0055AA;
   --color-surface-tint: #165db2;
