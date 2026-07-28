@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getPalette } from '../lib/palettes';
 
 interface Props {
   title?: string;
@@ -8,21 +9,23 @@ interface Props {
   keywords?: string;
 }
 
+const tenant = Astro.locals.tenant;
+
 const {
-  title = "Genesis Electrical Corporation | Electricistas Profesionales en Miami",
-  description = "Servicios eléctricos profesionales residenciales, comerciales y de emergencia 24/7 en Miami, Florida. Electricistas licenciados y certificados.",
-  image = "/genesis-corporation/images/og-image.jpg",
-  keywords = "electricista miami, servicios electricos, emergencia 24/7, genesis electrical, electricista residencial, electricista comercial"
+  title = `${tenant.businessName} | Electricistas Profesionales en Miami`,
+  description = `Servicios eléctricos profesionales residenciales, comerciales y de emergencia 24/7 en Miami, Florida. Electricistas licenciados y certificados.`,
+  image = "/images/og-image.jpg",
+  keywords = "electricista miami, servicios electricos, emergencia 24/7, electricista residencial, electricista comercial"
 } = Astro.props;
 
-const siteUrl = 'https://alecid08.github.io/genesis-corporation';
+const siteUrl = `https://${Astro.url.hostname}`;
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
-const ogImage = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/genesis-corporation') ? image.replace('/genesis-corporation','') : image}`;
-const ogImageFull = `${siteUrl}/images/og-image.jpg`;
+const ogImageFull = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const palette = getPalette(tenant.palettePreset);
 ---
 
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="es">
+<html class="scroll-smooth" lang={Astro.locals.locale}>
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -30,8 +33,8 @@ const ogImageFull = `${siteUrl}/images/og-image.jpg`;
   <meta name="description" content={description} />
   <meta name="keywords" content={keywords} />
   <meta name="robots" content="index, follow" />
-  <meta name="author" content="Genesis Electrical Corporation" />
-  <meta name="theme-color" content="#003366" />
+  <meta name="author" content={tenant.businessName} />
+  <meta name="theme-color" content={palette.deepNavy} />
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph / Facebook -->
@@ -40,8 +43,8 @@ const ogImageFull = `${siteUrl}/images/og-image.jpg`;
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImageFull} />
   <meta property="og:url" content={canonicalURL} />
-  <meta property="og:locale" content="es_US" />
-  <meta property="og:site_name" content="Genesis Electrical Corporation" />
+  <meta property="og:locale" content={Astro.locals.locale === 'en' ? 'en_US' : 'es_US'} />
+  <meta property="og:site_name" content={tenant.businessName} />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -50,8 +53,8 @@ const ogImageFull = `${siteUrl}/images/og-image.jpg`;
   <meta property="twitter:image" content={ogImageFull} />
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-  <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" />
 
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,52 +63,34 @@ const ogImageFull = `${siteUrl}/images/og-image.jpg`;
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=arrow_back,arrow_forward,bolt,business,calendar_today,call,chat,check,check_circle,close,description,elevator,emergency_home,engineering,ev_station,home,info,lightbulb,location_on,lock,mail,menu,payments,person_search,priority_high,schedule,search,shield_with_heart,star,support_agent,troubleshoot,verified_user,warning,workspace_premium&display=swap" rel="stylesheet"/>
 
   <!-- LocalBusiness Schema.org Structured Data -->
-  <script type="application/ld+json" is:inline>
-    {
-      "@context": "https://schema.org",
-      "@type": "Electrician",
-      "name": "Genesis Electrical Corporation",
-      "description": "Servicios eléctricos residenciales y comerciales en Miami, Florida. Electricistas licenciados y certificados.",
-      "image": "https://alecid08.github.io/genesis-corporation/images/og-image.jpg",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "185 NW 13th Ave Suite 736",
-        "addressLocality": "Miami",
-        "addressRegion": "FL",
-        "postalCode": "33125",
-        "addressCountry": "US"
-      },
-      "telephone": "+17867202328",
-      "email": "info@genesiselectrical.com",
-      "url": "https://alecid08.github.io/genesis-corporation",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "opens": "07:00",
-          "closes": "19:00"
-        }
-      ],
-      "priceRange": "$$",
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 25.7760195,
-        "longitude": -80.2185566
-      },
-      "sameAs": [
-        "https://www.facebook.com",
-        "https://www.instagram.com"
-      ]
-    }
-  </script>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Electrician",
+    "name": tenant.businessName,
+    "description": description,
+    "image": ogImageFull,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": tenant.address,
+      "addressCountry": "US"
+    },
+    "telephone": tenant.phone,
+    "email": tenant.email,
+    "url": siteUrl,
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "07:00",
+        "closes": "19:00"
+      }
+    ],
+    "priceRange": "$$",
+    "sameAs": Object.values(tenant.socialLinks)
+  })} />
+
+  <!-- Paleta del tenant: sobreescribe los defaults de @theme en global.css -->
+  <style set:html={palette.css} />
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
   <slot />

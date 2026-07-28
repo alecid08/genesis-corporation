@@ -1,0 +1,124 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { createTenant } from '../../../lib/db';
+import { normalizePhoneToE164 } from '../../../lib/tenant';
+import { PALETTE_PRESETS } from '../../../lib/palettes';
+import { env } from 'cloudflare:workers';
+
+let error: string | null = null;
+
+if (Astro.request.method === 'POST' && env.DB) {
+  const form = await Astro.request.formData();
+  const slug = String(form.get('slug') ?? '').trim().toLowerCase();
+  const businessName = String(form.get('business_name') ?? '').trim();
+  const phoneRaw = String(form.get('phone') ?? '').trim();
+  const email = String(form.get('email') ?? '').trim();
+  const address = String(form.get('address') ?? '').trim();
+  const googlePlaceId = String(form.get('google_place_id') ?? '').trim();
+  const palettePreset = String(form.get('palette_preset') ?? PALETTE_PRESETS[0]);
+  const facebook = String(form.get('facebook') ?? '').trim();
+  const instagram = String(form.get('instagram') ?? '').trim();
+  const localeDefault = form.get('locale_default') === 'en' ? 'en' : 'es';
+  const status = form.get('status') === 'live' ? 'live' : 'draft';
+
+  const phone = normalizePhoneToE164(phoneRaw);
+
+  if (!/^[a-z0-9-]+$/.test(slug)) {
+    error = 'El subdominio solo puede tener minúsculas, números y guiones.';
+  } else if (!businessName || !email || !address) {
+    error = 'Nombre, email y dirección son obligatorios.';
+  } else if (!phone) {
+    error = 'Teléfono inválido. Usá un número de EE.UU. de 10 dígitos.';
+  } else {
+    const socialLinks: Record<string, string> = {};
+    if (facebook) socialLinks.facebook = facebook;
+    if (instagram) socialLinks.instagram = instagram;
+
+    try {
+      await createTenant(env.DB, {
+        slug,
+        businessName,
+        phone,
+        email,
+        address,
+        googlePlaceId: googlePlaceId || undefined,
+        palettePreset,
+        socialLinks,
+        localeDefault,
+        status,
+      });
+      return Astro.redirect(`/admin/tenants/${slug}`);
+    } catch (e) {
+      error = `No se pudo crear (¿el subdominio ya existe?): ${(e as Error).message}`;
+    }
+  }
+}
+---
+
+<AdminLayout title="Nuevo tenant">
+  <h1>Nuevo Tenant</h1>
+  {error && <div class="card" style="background:#ffdad6;color:#93000a;">{error}</div>}
+  <form class="card" method="POST">
+    <label for="business_name">Nombre del negocio *</label>
+    <input id="business_name" name="business_name" required placeholder="Acme Electric LLC" />
+
+    <label for="slug">Subdominio *</label>
+    <input id="slug" name="slug" required pattern="[a-z0-9-]+" placeholder="acme-electric" />
+    <p class="hint">Quedará en https://&lt;subdominio&gt;.demos.ladetec.com</p>
+
+    <div class="row">
+      <div>
+        <label for="phone">Teléfono *</label>
+        <input id="phone" name="phone" required placeholder="(305) 555-1234" />
+      </div>
+      <div>
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required placeholder="contacto@negocio.com" />
+      </div>
+    </div>
+
+    <label for="address">Dirección *</label>
+    <input id="address" name="address" required placeholder="123 Main St, Miami, FL 33125" />
+
+    <label for="google_place_id">Google Place ID (opcional, referencia)</label>
+    <input id="google_place_id" name="google_place_id" placeholder="ChIJ..." />
+
+    <label for="palette_preset">Paleta</label>
+    <select id="palette_preset" name="palette_preset">
+      {PALETTE_PRESETS.map((p) => <option value={p}>{p}</option>)}
+    </select>
+
+    <div class="row">
+      <div>
+        <label for="facebook">Facebook (opcional)</label>
+        <input id="facebook" name="facebook" placeholder="https://facebook.com/..." />
+      </div>
+      <div>
+        <label for="instagram">Instagram (opcional)</label>
+        <input id="instagram" name="instagram" placeholder="https://instagram.com/..." />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="locale_default">Idioma por defecto</label>
+        <select id="locale_default" name="locale_default">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div>
+        <label for="status">Estado</label>
+        <select id="status" name="status">
+          <option value="draft">Borrador</option>
+          <option value="live">Publicado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" type="submit">Crear Tenant</button>
+      <a class="btn btn-secondary" href="/admin">Cancelar</a>
+    </div>
+  </form>
+</AdminLayout>

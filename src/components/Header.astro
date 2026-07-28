@@ -1,43 +1,39 @@
 ---
+import { formatPhoneDisplay, telHref } from '../lib/tenant';
+import { t } from '../lib/i18n';
+
+const tenant = Astro.locals.tenant;
+const locale = Astro.locals.locale;
 const pathname = Astro.url.pathname;
 const cleanPath = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
 
-const base = import.meta.env.BASE_URL;
-const getPath = (href: string) => {
-  if (href.startsWith('/')) {
-    return `${base.replace(/\/$/, '')}${href}`;
-  }
-  return href;
-};
-
 const navItems = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '/servicios' },
-  { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
-  { label: 'Contacto', href: '/contacto' },
-  { label: 'Emergencia 24/7', href: '/emergencia' },
-  { label: 'FAQ', href: '/faq' },
+  { label: t(locale, 'nav', 'home'), href: '/' },
+  { label: t(locale, 'nav', 'services'), href: '/servicios' },
+  { label: t(locale, 'nav', 'about'), href: '/sobre-nosotros' },
+  { label: t(locale, 'nav', 'contact'), href: '/contacto' },
+  { label: t(locale, 'nav', 'emergency'), href: '/emergencia' },
+  { label: t(locale, 'nav', 'faq'), href: '/faq' },
 ];
 ---
 
 <header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-md transition-transform duration-300" id="main-header">
   <div class="flex justify-between items-center h-20 px-base md:px-margin-desktop max-w-container-max mx-auto">
     <!-- Logo -->
-    <a href={base} class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue hover:opacity-90 transition-opacity">
-      Genesis Electrical
+    <a href="/" class="font-display-lg text-display-lg-mobile md:text-headline-lg font-bold text-electric-blue hover:opacity-90 transition-opacity">
+      {tenant.businessName}
     </a>
 
     <!-- Desktop Nav -->
     <nav class="hidden lg:flex items-center space-x-6">
       {navItems.map((item) => {
-        const itemPath = getPath(item.href);
-        const cleanItemPath = itemPath.endsWith('/') && itemPath.length > 1 ? itemPath.slice(0, -1) : itemPath;
+        const cleanItemPath = item.href.endsWith('/') && item.href.length > 1 ? item.href.slice(0, -1) : item.href;
         const isActive = cleanPath === cleanItemPath || (item.href !== '/' && cleanPath.startsWith(cleanItemPath));
         return (
           <a
-            href={itemPath}
-            class={isActive 
-              ? "text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg" 
+            href={item.href}
+            class={isActive
+              ? "text-electric-blue border-b-2 border-electric-blue font-bold pb-1 font-label-lg text-label-lg"
               : "text-deep-navy font-medium hover:text-electric-blue transition-colors font-label-lg text-label-lg"}
           >
             {item.label}
@@ -48,10 +44,14 @@ const navItems = [
 
     <!-- Right Side CTA and Mobile Menu Toggle -->
     <div class="flex items-center gap-4">
-      <a class="bg-safety-yellow text-deep-navy font-bold py-2.5 px-4 md:py-3 md:px-6 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-2 text-sm md:text-base whitespace-nowrap" href="tel:+17867202328">
+      <a href={`?lang=${locale === 'en' ? 'es' : 'en'}`} class="text-deep-navy font-bold text-sm hover:text-electric-blue transition-colors" aria-label="Cambiar idioma / Switch language">
+        {locale === 'en' ? 'ES' : 'EN'}
+      </a>
+
+      <a class="bg-safety-yellow text-deep-navy font-bold py-2.5 px-4 md:py-3 md:px-6 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-2 text-sm md:text-base whitespace-nowrap" href={telHref(tenant.phone)}>
         <span class="material-symbols-outlined text-lg md:text-xl">call</span>
-        <span class="hidden sm:inline">(786) 720-2328</span>
-        <span class="sm:hidden">Llamar</span>
+        <span class="hidden sm:inline">{formatPhoneDisplay(tenant.phone)}</span>
+        <span class="sm:hidden">{t(locale, 'nav', 'call')}</span>
       </a>
 
       <!-- Hamburger Button -->
@@ -64,15 +64,14 @@ const navItems = [
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden lg:hidden bg-surface border-t border-surface-variant absolute w-full left-0 top-20 shadow-lg px-base py-6 space-y-4">
     {navItems.map((item) => {
-      const itemPath = getPath(item.href);
-      const cleanItemPath = itemPath.endsWith('/') && itemPath.length > 1 ? itemPath.slice(0, -1) : itemPath;
+      const cleanItemPath = item.href.endsWith('/') && item.href.length > 1 ? item.href.slice(0, -1) : item.href;
       const isActive = cleanPath === cleanItemPath || (item.href !== '/' && cleanPath.startsWith(cleanItemPath));
       return (
         <a
-          href={itemPath}
+          href={item.href}
           class={`block py-2 px-4 rounded-lg font-medium transition-colors ${
-            isActive 
-              ? "bg-electric-blue/10 text-electric-blue font-bold" 
+            isActive
+              ? "bg-electric-blue/10 text-electric-blue font-bold"
               : "text-deep-navy hover:bg-surface-container-high hover:text-electric-blue"
           }`}
         >

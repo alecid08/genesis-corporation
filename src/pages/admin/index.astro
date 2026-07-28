@@ -1,0 +1,47 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { listTenants } from '../../lib/db';
+import { env } from 'cloudflare:workers';
+import { formatPhoneDisplay } from '../../lib/tenant';
+
+const tenants = env.DB ? await listTenants(env.DB) : [];
+---
+
+<AdminLayout title="Tenants">
+  <h1>Tenants</h1>
+  {!env.DB && (
+    <div class="card">
+      <p><strong>No hay binding D1 disponible.</strong></p>
+      <p class="hint">Corré con <code>wrangler dev</code> o desplegado en Cloudflare para ver datos reales.</p>
+    </div>
+  )}
+  {env.DB && tenants.length === 0 && (
+    <div class="card">
+      <p>Todavía no hay tenants. <a href="/admin/tenants/new">Creá el primero</a>.</p>
+    </div>
+  )}
+  {tenants.length > 0 && (
+    <table>
+      <thead>
+        <tr>
+          <th>Negocio</th>
+          <th>Subdominio</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {tenants.map((t) => (
+          <tr>
+            <td>{t.businessName}</td>
+            <td>{t.slug}.demos.ladetec.com</td>
+            <td>{formatPhoneDisplay(t.phone)}</td>
+            <td><span class={`badge ${t.status === 'live' ? 'badge-live' : 'badge-draft'}`}>{t.status}</span></td>
+            <td><a class="btn btn-secondary" href={`/admin/tenants/${t.slug}`}>Editar</a></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</AdminLayout>

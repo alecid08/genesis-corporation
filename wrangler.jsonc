@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "genesis-corporation-platform",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "genesis-corporation-platform",
+      // TODO: reemplazar con el database_id real una vez creada la DB
+      // (wrangler d1 create genesis-corporation-platform)
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "TENANT_ASSETS",
+      // TODO: reemplazar una vez creado el bucket
+      // (wrangler r2 bucket create genesis-corporation-tenant-assets)
+      "bucket_name": "genesis-corporation-tenant-assets"
+    }
+  ]
+}

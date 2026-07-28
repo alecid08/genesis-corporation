@@ -1,0 +1,100 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{title} | Admin</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f7fa;
+      color: #191c1e;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header a { color: white; text-decoration: none; font-weight: 600; }
+    header nav { display: flex; gap: 20px; }
+    header nav a { opacity: 0.85; }
+    header nav a:hover { opacity: 1; }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+    h1 { font-size: 24px; margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid #e0e3e6; font-size: 14px; }
+    th { background: #eceef1; font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    .btn {
+      display: inline-block;
+      background: #0055aa;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover { background: #003366; }
+    .btn-secondary { background: #e0e3e6; color: #191c1e; }
+    .btn-secondary:hover { background: #c2c6d4; }
+    .btn-danger { background: #ba1a1a; }
+    .btn-danger:hover { background: #93000a; }
+    form.card, .card {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 24px;
+    }
+    label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 6px; margin-top: 16px; }
+    label:first-child { margin-top: 0; }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #c2c6d4;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    .badge-live { background: #dff5e1; color: #146c2e; }
+    .badge-draft { background: #fff4d6; color: #745b00; }
+    .actions { display: flex; gap: 12px; margin-top: 24px; }
+    .flash { background: #dff5e1; color: #146c2e; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 14px; }
+    .hint { font-size: 12px; color: #727783; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/admin">Genesis Corp — Plataforma de Demos</a>
+    <nav>
+      <a href="/admin">Tenants</a>
+      <a href="/admin/tenants/new">+ Nuevo</a>
+    </nav>
+  </header>
+  <main>
+    <slot />
+  </main>
+</body>
+</html>
