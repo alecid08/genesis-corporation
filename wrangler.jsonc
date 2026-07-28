@@ -11,17 +11,17 @@
     {
       "binding": "DB",
       "database_name": "nitza-demo-platform",
-      // TODO: reemplazar con el database_id real una vez creada la DB
-      // (wrangler d1 create nitza-demo-platform)
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+      "database_id": "1414b2c6-a48b-4dd0-a7bc-77d3fe22932c"
     }
   ],
   "r2_buckets": [
     {
       "binding": "TENANT_ASSETS",
-      // TODO: reemplazar una vez creado el bucket
-      // (wrangler r2 bucket create nitza-tenant-assets)
       "bucket_name": "nitza-tenant-assets"
     }
+  ],
+  "routes": [
+    { "pattern": "*.tacocars.com/*", "zone_name": "tacocars.com" },
+    { "pattern": "admin.ladetec.com/*", "zone_name": "ladetec.com" }
   ]
 }

@@ -3,7 +3,7 @@ import { env } from 'cloudflare:workers';
 import { getTenantBySlug } from './lib/db';
 import { DEFAULT_TENANT } from './lib/tenant';
 
-const DEMOS_SUFFIX = '.demos.ladetec.com';
+const DEMOS_SUFFIX = '.tacocars.com';
 
 function resolveSlugFromHost(hostname: string, searchParams: URLSearchParams): string | null {
   if (hostname.endsWith(DEMOS_SUFFIX)) {

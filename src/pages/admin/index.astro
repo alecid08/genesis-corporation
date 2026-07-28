@@ -35,7 +35,7 @@ const tenants = env.DB ? await listTenants(env.DB) : [];
         {tenants.map((t) => (
           <tr>
             <td>{t.businessName}</td>
-            <td>{t.slug}.demos.ladetec.com</td>
+            <td>{t.slug}.tacocars.com</td>
             <td>{formatPhoneDisplay(t.phone)}</td>
             <td><span class={`badge ${t.status === 'live' ? 'badge-live' : 'badge-draft'}`}>{t.status}</span></td>
             <td><a class="btn btn-secondary" href={`/admin/tenants/${t.slug}`}>Editar</a></td>
