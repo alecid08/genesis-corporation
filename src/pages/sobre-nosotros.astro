@@ -119,7 +119,7 @@ const description = copy.description;
     <div class="absolute inset-0 z-0">
       <Image 
         src={aboutHeroImage} 
-        alt="Equipo de Genesis Electrical en oficinas de Miami" 
+        alt={`Equipo de ${tenant.businessName} en oficinas de Miami`}
         class="w-full h-full object-cover" 
         loading="eager" 
         fetchpriority="high"
@@ -140,7 +140,7 @@ const description = copy.description;
       <div class="w-full h-[500px] rounded-xl overflow-hidden shadow-2xl">
         <Image 
           src={electricianProfessionalImage} 
-          alt="Electricista Profesional de Genesis Electrical trabajando" 
+          alt={`Electricista Profesional de ${tenant.businessName} trabajando`}
           class="w-full h-full object-cover" 
           loading="lazy"
           decoding="async"

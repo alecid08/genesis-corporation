@@ -1,5 +1,5 @@
 {
-  "name": "genesis-corporation",
+  "name": "nitza-demo-platform",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,8 +12,8 @@
     "astro": "astro",
     "cf-typegen": "wrangler types",
     "git-sync": "./git-sync.sh",
-    "db:migrate:local": "wrangler d1 migrations apply genesis-corporation-platform --local",
-    "db:migrate:remote": "wrangler d1 migrations apply genesis-corporation-platform --remote"
+    "db:migrate:local": "wrangler d1 migrations apply nitza-demo-platform --local",
+    "db:migrate:remote": "wrangler d1 migrations apply nitza-demo-platform --remote"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.5",

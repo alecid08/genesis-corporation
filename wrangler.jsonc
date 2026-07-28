@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "genesis-corporation-platform",
+  "name": "nitza-demo-platform",
   "compatibility_date": "2026-07-01",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
@@ -10,9 +10,9 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "genesis-corporation-platform",
+      "database_name": "nitza-demo-platform",
       // TODO: reemplazar con el database_id real una vez creada la DB
-      // (wrangler d1 create genesis-corporation-platform)
+      // (wrangler d1 create nitza-demo-platform)
       "database_id": "REPLACE_WITH_D1_DATABASE_ID"
     }
   ],
@@ -20,8 +20,8 @@
     {
       "binding": "TENANT_ASSETS",
       // TODO: reemplazar una vez creado el bucket
-      // (wrangler r2 bucket create genesis-corporation-tenant-assets)
-      "bucket_name": "genesis-corporation-tenant-assets"
+      // (wrangler r2 bucket create nitza-tenant-assets)
+      "bucket_name": "nitza-tenant-assets"
     }
   ]
 }
