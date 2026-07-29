@@ -2,9 +2,112 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import emergencyStormImage from '../assets/emergency-storm.jpg';
+import { formatPhoneDisplay, telHref } from '../lib/tenant';
 
-const title = "Emergencia 24/7 | Genesis Electrical Corporation";
-const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. Electricistas licenciados disponibles los 365 días del año.";
+const tenant = Astro.locals.tenant;
+const locale = Astro.locals.locale;
+
+const copy = {
+  es: {
+    title: `Emergencia 24/7 | ${tenant.businessName}`,
+    description: 'Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. Electricistas licenciados disponibles los 365 días del año.',
+    heroTitle: 'Servicio de Emergencia Eléctrica 24/7',
+    heroSubtitle: 'Disponibles Cuando Más Nos Necesita',
+    intro: [
+      'En el estado de Florida, las emergencias eléctricas no son solo una molestia, sino un riesgo real para la seguridad. Con un clima caracterizado por tormentas eléctricas intensas y la amenaza constante de huracanes, es vital contar con un equipo de respuesta inmediata que comprenda los desafíos locales.',
+      'El calor extremo de Miami somete a los sistemas eléctricos a un estrés considerable, provocando fallos en paneles y cableados obsoletos en los momentos menos oportunos. Una interrupción del servicio eléctrico durante una ola de calor no es solo incómoda, puede ser peligrosa para los más vulnerables.',
+      'Nuestros técnicos certificados están equipados con tecnología de diagnóstico de vanguardia para identificar problemas críticos bajo cualquier condición climática. No importa si es un cortocircuito tras una descarga atmosférica o un fallo total del sistema; nuestra misión es restaurar su seguridad y tranquilidad.',
+    ],
+    stepsHeading: 'Pasos a Seguir en una Emergencia',
+    steps: [
+      { emoji: '⚠️', label: 'Aviso', title: 'Si Hay Humo o Fuego:', items: ['Evacúe a todas las personas del inmueble inmediatamente.', 'Llame al 911 antes de intentar cualquier otra acción.', 'No intente apagar un fuego eléctrico con agua.', 'Si es seguro, apague el interruptor principal desde el exterior.', 'Contáctenos una vez que esté en un lugar seguro.'] },
+      { emoji: '⚡', label: 'Rayo', title: 'Descargas Eléctricas:', items: ['No toque a una persona que esté en contacto con la corriente.', 'Desconecte la fuente de energía de inmediato.', 'Use un objeto no conductor (madera seca) para separar a la persona.', 'Llame a emergencias médicas de inmediato.', 'Mantenga el área aislada hasta que lleguen los técnicos.'] },
+      { emoji: '💥', label: 'Fuego', title: 'Zumbidos o Chispas:', items: ['No manipule el tomacorriente o equipo afectado.', 'Desconecte el interruptor correspondiente en el panel.', 'Aleje cualquier material inflamable de la zona.', 'Identifique si el olor a plástico quemado persiste.', 'Llámenos para una inspección térmica de urgencia.'] },
+      { emoji: '🔦', label: 'Linterna', title: 'Apagón Parcial o Total:', items: ['Verifique si sus vecinos tienen energía eléctrica.', 'Revise los breakers principales para ver si alguno saltó.', 'No intente forzar un breaker que vuelve a saltar.', 'Use linternas en lugar de velas para evitar incendios.', 'Llámenos para diagnosticar fallos en la fase de entrada.'] },
+      { emoji: '🏠', label: 'Casa', title: 'Inundación cerca del Panel:', items: ['No camine sobre agua estancada si hay equipos eléctricos cerca.', 'Si el panel está mojado, no lo toque bajo ninguna circunstancia.', 'Contacte a la compañía eléctrica para un corte remoto si es necesario.', 'Mantenga una distancia de seguridad de al menos 3 metros.', 'Espere a que un profesional evalúe la integridad del sistema.'] },
+    ],
+    offerHeading: '¿Qué Ofrecemos en Emergencias?',
+    offer: [
+      { icon: 'speed', title: 'Respuesta Rápida', body: 'Despacho inmediato de técnicos en menos de 60 minutos en toda el área de Miami-Dade.' },
+      { icon: 'search_check', title: 'Diagnóstico Inmediato', body: 'Uso de cámaras termográficas para localizar puntos calientes ocultos sin demoliciones innecesarias.' },
+      { icon: 'build_circle', title: 'Solución Temporal', body: 'Medidas correctivas al instante para garantizar la seguridad mínima mientras se planifica la reparación.' },
+      { icon: 'verified', title: 'Reparación Completa', body: 'Servicio integral desde el reemplazo de breakers hasta la restauración total del cableado crítico.' },
+      { icon: 'payments', title: 'Precios Transparentes', body: 'Tarifas claras sin cargos ocultos, comunicadas antes de iniciar cualquier trabajo de reparación.' },
+      { icon: 'gavel', title: 'Trabajo Conforme a Código', body: 'Todas nuestras intervenciones cumplen estrictamente con el National Electrical Code (NEC).' },
+    ],
+    situationsHeading: 'Emergencias Que Atendemos',
+    situations: [
+      { emoji: '🔥', label: 'Fuego', title: 'Incendios Eléctricos', body: 'Evaluación y restauración tras cortocircuitos que provocan combustión.' },
+      { emoji: '⚡', label: 'Rayo', title: 'Descargas Eléctricas', body: 'Identificación de fugas de corriente y falta de tierra física.' },
+      { emoji: '💥', label: 'Tormenta', title: 'Daños por Tormenta', body: 'Reparación de acometidas y daños causados por rayos o sobretensiones.' },
+      { emoji: '🔦', label: 'Linterna', title: 'Pérdida de Energía', body: 'Fallo total o parcial de fases que afectan el funcionamiento básico.' },
+      { emoji: '🏠', label: 'Casa', title: 'Problemas de Panel', body: 'Breakers que no reenganchan o zumbidos en el centro de carga.' },
+      { emoji: '🚨', label: 'Sirena', title: 'Fallo en Alumbrado', body: 'Inoperancia de luces de seguridad y salidas de emergencia comerciales.' },
+    ],
+    prepHeading: 'Prepárese Antes de la Emergencia',
+    prep: [
+      { icon: 'settings_suggest', title: 'Conozca su Panel Eléctrico', items: ['Identifique claramente cada interruptor.', 'Asegúrese de que el acceso esté libre de obstáculos.', 'Aprenda a operar el interruptor principal.'] },
+      { icon: 'fact_check', title: 'Inspecciones Periódicas', items: ['Revise el panel anualmente con un profesional.', 'Busque signos de corrosión o sobrecalentamiento.', 'Actualice sistemas de fusibles por breakers modernos.'] },
+      { icon: 'bolt', title: 'Instale Protección', items: ['Coloque protectores de sobretensión en todo el hogar.', 'Instale interruptores GFCI en zonas húmedas.', 'Use detectores de arco (AFCI) en dormitorios.'] },
+      { icon: 'power', title: 'Considere un Generador', items: ['Instale un interruptor de transferencia seguro.', 'Mantenga combustible fresco y equipo probado.', 'Evalúe sistemas de respaldo automáticos.'] },
+    ],
+    finalCtaHeading: '¿Tiene una Emergencia Ahora?',
+    emergencyNowLabel: 'EMERGENCIA AHORA',
+    finalCtaBody: '¿No es una emergencia pero necesita servicio pronto? Programe su visita con antelación.',
+    scheduleVisit: 'Reservar Cita Programada',
+  },
+  en: {
+    title: `24/7 Emergency | ${tenant.businessName}`,
+    description: '24/7 Electrical Emergency Service in Miami, Florida. Licensed electricians available 365 days a year.',
+    heroTitle: '24/7 Electrical Emergency Service',
+    heroSubtitle: 'Available When You Need Us Most',
+    intro: [
+      'In the state of Florida, electrical emergencies are not just an inconvenience — they are a real safety risk. With a climate marked by intense electrical storms and the constant threat of hurricanes, having an immediate-response team that understands local challenges is vital.',
+      "Miami's extreme heat puts electrical systems under considerable stress, causing failures in panels and outdated wiring at the least convenient moments. A power outage during a heatwave is not just inconvenient — it can be dangerous for the most vulnerable.",
+      'Our certified technicians are equipped with cutting-edge diagnostic technology to identify critical issues under any weather condition. Whether it is a short circuit after a lightning strike or a total system failure, our mission is to restore your safety and peace of mind.',
+    ],
+    stepsHeading: 'Steps to Follow in an Emergency',
+    steps: [
+      { emoji: '⚠️', label: 'Warning', title: 'If There Is Smoke or Fire:', items: ['Evacuate everyone from the property immediately.', 'Call 911 before attempting anything else.', 'Do not try to put out an electrical fire with water.', 'If safe, shut off the main breaker from outside.', 'Contact us once you are somewhere safe.'] },
+      { emoji: '⚡', label: 'Lightning', title: 'Electrical Shocks:', items: ['Do not touch a person in contact with live current.', 'Disconnect the power source immediately.', 'Use a non-conductive object (dry wood) to separate the person.', 'Call medical emergency services immediately.', 'Keep the area isolated until technicians arrive.'] },
+      { emoji: '💥', label: 'Fire', title: 'Buzzing or Sparks:', items: ['Do not handle the affected outlet or equipment.', 'Turn off the corresponding breaker in the panel.', 'Move any flammable material away from the area.', 'Check whether a burning plastic smell persists.', 'Call us for an urgent thermal inspection.'] },
+      { emoji: '🔦', label: 'Flashlight', title: 'Partial or Total Blackout:', items: ['Check whether your neighbors have power.', 'Check the main breakers to see if any tripped.', 'Do not try to force a breaker that keeps tripping.', 'Use flashlights instead of candles to avoid fires.', 'Call us to diagnose incoming service failures.'] },
+      { emoji: '🏠', label: 'House', title: 'Flooding Near the Panel:', items: ['Do not walk on standing water near electrical equipment.', 'If the panel is wet, do not touch it under any circumstances.', 'Contact the power company for a remote shutoff if needed.', 'Keep a safe distance of at least 10 feet.', 'Wait for a professional to assess the system.'] },
+    ],
+    offerHeading: 'What We Offer in Emergencies',
+    offer: [
+      { icon: 'speed', title: 'Fast Response', body: 'Immediate technician dispatch in under 60 minutes across the Miami-Dade area.' },
+      { icon: 'search_check', title: 'Instant Diagnostics', body: 'Thermal imaging cameras to locate hidden hot spots without unnecessary demolition.' },
+      { icon: 'build_circle', title: 'Temporary Fix', body: 'Instant corrective measures to ensure minimum safety while the repair is planned.' },
+      { icon: 'verified', title: 'Complete Repair', body: 'Full service from breaker replacement to complete restoration of critical wiring.' },
+      { icon: 'payments', title: 'Transparent Pricing', body: 'Clear rates with no hidden fees, communicated before any repair work begins.' },
+      { icon: 'gavel', title: 'Code-Compliant Work', body: 'All our work strictly complies with the National Electrical Code (NEC).' },
+    ],
+    situationsHeading: 'Emergencies We Handle',
+    situations: [
+      { emoji: '🔥', label: 'Fire', title: 'Electrical Fires', body: 'Assessment and restoration after short circuits that cause combustion.' },
+      { emoji: '⚡', label: 'Lightning', title: 'Electrical Shocks', body: 'Identifying current leaks and missing physical grounding.' },
+      { emoji: '💥', label: 'Storm', title: 'Storm Damage', body: 'Repair of service entrances and damage caused by lightning or surges.' },
+      { emoji: '🔦', label: 'Flashlight', title: 'Power Loss', body: 'Total or partial phase failure affecting basic operation.' },
+      { emoji: '🏠', label: 'House', title: 'Panel Issues', body: 'Breakers that will not reset or buzzing in the load center.' },
+      { emoji: '🚨', label: 'Siren', title: 'Lighting Failure', body: 'Malfunctioning safety lights and commercial emergency exits.' },
+    ],
+    prepHeading: 'Prepare Before the Emergency',
+    prep: [
+      { icon: 'settings_suggest', title: 'Know Your Electrical Panel', items: ['Clearly label each breaker.', 'Make sure access stays clear of obstacles.', 'Learn how to operate the main breaker.'] },
+      { icon: 'fact_check', title: 'Periodic Inspections', items: ['Have the panel checked annually by a professional.', 'Watch for signs of corrosion or overheating.', 'Upgrade old fuse systems to modern breakers.'] },
+      { icon: 'bolt', title: 'Install Protection', items: ['Install whole-house surge protectors.', 'Install GFCI outlets in wet areas.', 'Use arc-fault detectors (AFCI) in bedrooms.'] },
+      { icon: 'power', title: 'Consider a Generator', items: ['Install a safe transfer switch.', 'Keep fuel fresh and equipment tested.', 'Evaluate automatic backup systems.'] },
+    ],
+    finalCtaHeading: 'Do You Have an Emergency Right Now?',
+    emergencyNowLabel: 'EMERGENCY NOW',
+    finalCtaBody: "Not an emergency, but need service soon? Schedule your visit in advance.",
+    scheduleVisit: 'Book a Scheduled Visit',
+  },
+}[locale];
+
+const title = copy.title;
+const description = copy.description;
 ---
 
 <Layout title={title} description={description}>
@@ -35,10 +138,10 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
     </div>
     <div class="relative z-20 px-base md:px-margin-desktop max-w-container-max mx-auto w-full text-center">
       <h1 class="font-display text-[56px] font-bold text-white mb-4 leading-tight">
-        Servicio de Emergencia Eléctrica 24/7
+        {copy.heroTitle}
       </h1>
       <p class="font-body text-[22px] text-white/90">
-        Disponibles Cuando Más Nos Necesita
+        {copy.heroSubtitle}
       </p>
     </div>
   </header>
@@ -46,93 +149,28 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
   <!-- [SECCIÓN: INFORMACIÓN PRINCIPAL] -->
   <section class="bg-white py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-[900px] mx-auto text-center space-y-6">
-      <p class="font-body text-[18px] text-on-surface-variant leading-relaxed">
-        En el estado de Florida, las emergencias eléctricas no son solo una molestia, sino un riesgo real para la seguridad. Con un clima caracterizado por tormentas eléctricas intensas y la amenaza constante de huracanes, es vital contar con un equipo de respuesta inmediata que comprenda los desafíos locales.
-      </p>
-      <p class="font-body text-[18px] text-on-surface-variant leading-relaxed">
-        El calor extremo de Miami somete a los sistemas eléctricos a un estrés considerable, provocando fallos en paneles y cableados obsoletos en los momentos menos oportunos. Una interrupción del servicio eléctrico durante una ola de calor no es solo incómoda, puede ser peligrosa para los más vulnerables.
-      </p>
-      <p class="font-body text-[18px] text-on-surface-variant leading-relaxed">
-        Nuestros técnicos certificados están equipados con tecnología de diagnóstico de vanguardia para identificar problemas críticos bajo cualquier condición climática. No importa si es un cortocircuito tras una descarga atmosférica o un fallo total del sistema; nuestra misión es restaurar su seguridad y tranquilidad.
-      </p>
+      {copy.intro.map((paragraph) => (
+        <p class="font-body text-[18px] text-on-surface-variant leading-relaxed">{paragraph}</p>
+      ))}
     </div>
   </section>
 
   <!-- [SECCIÓN: QUÉ HACER EN EMERGENCIA] -->
   <section class="bg-[#F5F7FA] py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto">
-      <h2 class="font-display text-[42px] font-bold text-deep-navy text-center mb-16">Pasos a Seguir en una Emergencia</h2>
+      <h2 class="font-display text-[42px] font-bold text-deep-navy text-center mb-16">{copy.stepsHeading}</h2>
       <div class="max-w-4xl mx-auto flex flex-col gap-[30px]">
-        <!-- Card 1 -->
-        <div class="bg-white p-10 rounded-[12px] border-l-[4px] border-emergency-red shadow-sm flex flex-col md:flex-row gap-8 items-start">
-          <span class="text-[80px] leading-none shrink-0" role="img" aria-label="Aviso">⚠️</span>
-          <div>
-            <h3 class="font-display text-[28px] font-bold text-emergency-red mb-4 text-left">Si Hay Humo o Fuego:</h3>
-            <ol class="font-body text-[18px] text-on-surface-variant space-y-2 list-decimal list-inside">
-              <li>Evacúe a todas las personas del inmueble inmediatamente.</li>
-              <li>Llame al 911 antes de intentar cualquier otra acción.</li>
-              <li>No intente apagar un fuego eléctrico con agua.</li>
-              <li>Si es seguro, apague el interruptor principal desde el exterior.</li>
-              <li>Contáctenos una vez que esté en un lugar seguro.</li>
-            </ol>
+        {copy.steps.map((step) => (
+          <div class="bg-white p-10 rounded-[12px] border-l-[4px] border-emergency-red shadow-sm flex flex-col md:flex-row gap-8 items-start">
+            <span class="text-[80px] leading-none shrink-0" role="img" aria-label={step.label}>{step.emoji}</span>
+            <div>
+              <h3 class="font-display text-[28px] font-bold text-emergency-red mb-4 text-left">{step.title}</h3>
+              <ol class="font-body text-[18px] text-on-surface-variant space-y-2 list-decimal list-inside">
+                {step.items.map((item) => <li>{item}</li>)}
+              </ol>
+            </div>
           </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="bg-white p-10 rounded-[12px] border-l-[4px] border-emergency-red shadow-sm flex flex-col md:flex-row gap-8 items-start">
-          <span class="text-[80px] leading-none shrink-0" role="img" aria-label="Rayo">⚡</span>
-          <div>
-            <h3 class="font-display text-[28px] font-bold text-emergency-red mb-4 text-left">Descargas Eléctricas:</h3>
-            <ol class="font-body text-[18px] text-on-surface-variant space-y-2 list-decimal list-inside">
-              <li>No toque a una persona que esté en contacto con la corriente.</li>
-              <li>Desconecte la fuente de energía de inmediato.</li>
-              <li>Use un objeto no conductor (madera seca) para separar a la persona.</li>
-              <li>Llame a emergencias médicas de inmediato.</li>
-              <li>Mantenga el área aislada hasta que lleguen los técnicos.</li>
-            </ol>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="bg-white p-10 rounded-[12px] border-l-[4px] border-emergency-red shadow-sm flex flex-col md:flex-row gap-8 items-start">
-          <span class="text-[80px] leading-none shrink-0" role="img" aria-label="Fuego">💥</span>
-          <div>
-            <h3 class="font-display text-[28px] font-bold text-emergency-red mb-4 text-left">Zumbidos o Chispas:</h3>
-            <ol class="font-body text-[18px] text-on-surface-variant space-y-2 list-decimal list-inside">
-              <li>No manipule el tomacorriente o equipo afectado.</li>
-              <li>Desconecte el interruptor correspondiente en el panel.</li>
-              <li>Aleje cualquier material inflamable de la zona.</li>
-              <li>Identifique si el olor a plástico quemado persiste.</li>
-              <li>Llámenos para una inspección térmica de urgencia.</li>
-            </ol>
-          </div>
-        </div>
-        <!-- Card 4 -->
-        <div class="bg-white p-10 rounded-[12px] border-l-[4px] border-emergency-red shadow-sm flex flex-col md:flex-row gap-8 items-start">
-          <span class="text-[80px] leading-none shrink-0" role="img" aria-label="Linterna">🔦</span>
-          <div>
-            <h3 class="font-display text-[28px] font-bold text-emergency-red mb-4 text-left">Apagón Parcial o Total:</h3>
-            <ol class="font-body text-[18px] text-on-surface-variant space-y-2 list-decimal list-inside">
-              <li>Verifique si sus vecinos tienen energía eléctrica.</li>
-              <li>Revise los breakers principales para ver si alguno saltó.</li>
-              <li>No intente forzar un breaker que vuelve a saltar.</li>
-              <li>Use linternas en lugar de velas para evitar incendios.</li>
-              <li>Llámenos para diagnosticar fallos en la phase de entrada.</li>
-            </ol>
-          </div>
-        </div>
-        <!-- Card 5 -->
-        <div class="bg-white p-10 rounded-[12px] border-l-[4px] border-emergency-red shadow-sm flex flex-col md:flex-row gap-8 items-start">
-          <span class="text-[80px] leading-none shrink-0" role="img" aria-label="Casa">🏠</span>
-          <div>
-            <h3 class="font-display text-[28px] font-bold text-emergency-red mb-4 text-left">Inundación cerca del Panel:</h3>
-            <ol class="font-body text-[18px] text-on-surface-variant space-y-2 list-decimal list-inside">
-              <li>No camine sobre agua estancada si hay equipos eléctricos cerca.</li>
-              <li>Si el panel está mojado, no lo toque bajo ninguna circunstancia.</li>
-              <li>Contacte a la compañía eléctrica para un corte remoto si es necesario.</li>
-              <li>Mantenga una distancia de seguridad de al menos 3 metros.</li>
-              <li>Espere a que un profesional evalúe la integridad del sistema.</li>
-            </ol>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
@@ -140,44 +178,15 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
   <!-- [SECCIÓN: QUÉ OFRECEMOS] -->
   <section class="bg-electric-blue py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto">
-      <h2 class="font-display text-[42px] font-bold text-white text-center mb-16">¿Qué Ofrecemos en Emergencias?</h2>
+      <h2 class="font-display text-[42px] font-bold text-white text-center mb-16">{copy.offerHeading}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
-          <span class="material-symbols-outlined text-white text-4xl mb-4">speed</span>
-          <h3 class="font-display font-bold text-white text-xl mb-3">Respuesta Rápida</h3>
-          <p class="font-body text-white/80 text-sm leading-relaxed">Despacho inmediato de técnicos en menos de 60 minutos en toda el área de Miami-Dade.</p>
-        </div>
-        <!-- Card 2 -->
-        <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
-          <span class="material-symbols-outlined text-white text-4xl mb-4">search_check</span>
-          <h3 class="font-display font-bold text-white text-xl mb-3">Diagnóstico Inmediato</h3>
-          <p class="font-body text-white/80 text-sm leading-relaxed">Uso de cámaras termográficas para localizar puntos calientes ocultos sin demoliciones innecesarias.</p>
-        </div>
-        <!-- Card 3 -->
-        <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
-          <span class="material-symbols-outlined text-white text-4xl mb-4">build_circle</span>
-          <h3 class="font-display font-bold text-white text-xl mb-3">Solución Temporal</h3>
-          <p class="font-body text-white/80 text-sm leading-relaxed">Medidas correctivas al instante para garantizar la seguridad mínima mientras se planifica la reparación.</p>
-        </div>
-        <!-- Card 4 -->
-        <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
-          <span class="material-symbols-outlined text-white text-4xl mb-4">verified</span>
-          <h3 class="font-display font-bold text-white text-xl mb-3">Reparación Completa</h3>
-          <p class="font-body text-white/80 text-sm leading-relaxed">Servicio integral desde el reemplazo de breakers hasta la restauración total del cableado crítico.</p>
-        </div>
-        <!-- Card 5 -->
-        <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
-          <span class="material-symbols-outlined text-white text-4xl mb-4">payments</span>
-          <h3 class="font-display font-bold text-white text-xl mb-3">Precios Transparentes</h3>
-          <p class="font-body text-white/80 text-sm leading-relaxed">Tarifas claras sin cargos ocultos, comunicadas antes de iniciar cualquier trabajo de reparación.</p>
-        </div>
-        <!-- Card 6 -->
-        <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
-          <span class="material-symbols-outlined text-white text-4xl mb-4">gavel</span>
-          <h3 class="font-display font-bold text-white text-xl mb-3">Trabajo Conforme a Código</h3>
-          <p class="font-body text-white/80 text-sm leading-relaxed">Todas nuestras intervenciones cumplen estrictamente con el National Electrical Code (NEC).</p>
-        </div>
+        {copy.offer.map((card) => (
+          <div class="bg-[#004499] p-[30px] rounded-[12px] border border-white/10 hover:shadow-xl transition-shadow">
+            <span class="material-symbols-outlined text-white text-4xl mb-4">{card.icon}</span>
+            <h3 class="font-display font-bold text-white text-xl mb-3">{card.title}</h3>
+            <p class="font-body text-white/80 text-sm leading-relaxed">{card.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -185,44 +194,15 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
   <!-- [SECCIÓN: SITUACIONES COMUNES] -->
   <section class="bg-white py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto">
-      <h2 class="font-display text-[42px] font-bold text-deep-navy text-center mb-16">Emergencias Que Atendemos</h2>
+      <h2 class="font-display text-[42px] font-bold text-deep-navy text-center mb-16">{copy.situationsHeading}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Situation 1 -->
-        <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
-          <span class="text-4xl block mb-4" role="img" aria-label="Fuego">🔥</span>
-          <h3 class="font-display font-bold text-deep-navy mb-2">Incendios Eléctricos</h3>
-          <p class="font-body text-on-surface-variant text-sm">Evaluación y restauración tras cortocircuitos que provocan combustión.</p>
-        </div>
-        <!-- Situation 2 -->
-        <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
-          <span class="text-4xl block mb-4" role="img" aria-label="Rayo">⚡</span>
-          <h3 class="font-display font-bold text-deep-navy mb-2">Descargas Eléctricas</h3>
-          <p class="font-body text-on-surface-variant text-sm">Identificación de fugas de corriente y falta de tierra física.</p>
-        </div>
-        <!-- Situation 3 -->
-        <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
-          <span class="text-4xl block mb-4" role="img" aria-label="Tormenta">💥</span>
-          <h3 class="font-display font-bold text-deep-navy mb-2">Daños por Tormenta</h3>
-          <p class="font-body text-on-surface-variant text-sm">Reparación de acometidas y daños causados por rayos o sobretensiones.</p>
-        </div>
-        <!-- Situation 4 -->
-        <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
-          <span class="text-4xl block mb-4" role="img" aria-label="Linterna">🔦</span>
-          <h3 class="font-display font-bold text-deep-navy mb-2">Pérdida de Energía</h3>
-          <p class="font-body text-on-surface-variant text-sm">Fallo total o parcial de fases que afectan el funcionamiento básico.</p>
-        </div>
-        <!-- Situation 5 -->
-        <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
-          <span class="text-4xl block mb-4" role="img" aria-label="Casa">🏠</span>
-          <h3 class="font-display font-bold text-deep-navy mb-2">Problemas de Panel</h3>
-          <p class="font-body text-on-surface-variant text-sm">Breakers que no reenganchan o zumbidos en el centro de carga.</p>
-        </div>
-        <!-- Situation 6 -->
-        <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
-          <span class="text-4xl block mb-4" role="img" aria-label="Sirena">🚨</span>
-          <h3 class="font-display font-bold text-deep-navy mb-2">Fallo en Alumbrado</h3>
-          <p class="font-body text-on-surface-variant text-sm">Inoperancia de luces de seguridad y salidas de emergencia comerciales.</p>
-        </div>
+        {copy.situations.map((card) => (
+          <div class="bg-[#F9FAFB] p-[30px] rounded-[12px] border border-surface-container hover:bg-white hover:shadow-md transition-all">
+            <span class="text-4xl block mb-4" role="img" aria-label={card.label}>{card.emoji}</span>
+            <h3 class="font-display font-bold text-deep-navy mb-2">{card.title}</h3>
+            <p class="font-body text-on-surface-variant text-sm">{card.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -230,48 +210,19 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
   <!-- [SECCIÓN: PREPARACIÓN] -->
   <section class="bg-[#FFF9E6] py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto">
-      <h2 class="font-display text-[42px] font-bold text-deep-navy text-center mb-16">Prepárese Antes de la Emergencia</h2>
+      <h2 class="font-display text-[42px] font-bold text-deep-navy text-center mb-16">{copy.prepHeading}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Prep 1 -->
-        <div class="bg-white p-[30px] rounded-[12px] shadow-sm">
-          <span class="material-symbols-outlined text-tertiary text-4xl mb-4">settings_suggest</span>
-          <h3 class="font-display font-bold text-deep-navy text-xl mb-4">Conozca su Panel Eléctrico</h3>
-          <ul class="font-body text-on-surface-variant space-y-2">
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Identifique claramente cada interruptor.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Asegúrese de que el acceso esté libre de obstáculos.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Aprenda a operar el interruptor principal.</li>
-          </ul>
-        </div>
-        <!-- Prep 2 -->
-        <div class="bg-white p-[30px] rounded-[12px] shadow-sm">
-          <span class="material-symbols-outlined text-tertiary text-4xl mb-4">fact_check</span>
-          <h3 class="font-display font-bold text-deep-navy text-xl mb-4">Inspecciones Periódicas</h3>
-          <ul class="font-body text-on-surface-variant space-y-2">
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Revise el panel anualmente con un profesional.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Busque signos de corrosión o sobrecalentamiento.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Actualice sistemas de fusibles por breakers modernos.</li>
-          </ul>
-        </div>
-        <!-- Prep 3 -->
-        <div class="bg-white p-[30px] rounded-[12px] shadow-sm">
-          <span class="material-symbols-outlined text-tertiary text-4xl mb-4">bolt</span>
-          <h3 class="font-display font-bold text-deep-navy text-xl mb-4">Instale Protección</h3>
-          <ul class="font-body text-on-surface-variant space-y-2">
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Coloque protectores de sobretensión en todo el hogar.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Instale interruptores GFCI en zonas húmedas.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Use detectores de arco (AFCI) en dormitorios.</li>
-          </ul>
-        </div>
-        <!-- Prep 4 -->
-        <div class="bg-white p-[30px] rounded-[12px] shadow-sm">
-          <span class="material-symbols-outlined text-tertiary text-4xl mb-4">power</span>
-          <h3 class="font-display font-bold text-deep-navy text-xl mb-4">Considere un Generador</h3>
-          <ul class="font-body text-on-surface-variant space-y-2">
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Instale un interruptor de transferencia seguro.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Mantenga combustible fresco y equipo probado.</li>
-            <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> Evalúe sistemas de respaldo automáticos.</li>
-          </ul>
-        </div>
+        {copy.prep.map((card) => (
+          <div class="bg-white p-[30px] rounded-[12px] shadow-sm">
+            <span class="material-symbols-outlined text-tertiary text-4xl mb-4">{card.icon}</span>
+            <h3 class="font-display font-bold text-deep-navy text-xl mb-4">{card.title}</h3>
+            <ul class="font-body text-on-surface-variant space-y-2">
+              {card.items.map((item) => (
+                <li class="flex gap-2 items-start"><span class="text-tertiary">●</span> {item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -280,16 +231,16 @@ const description = "Servicio de Emergencia Eléctrica 24/7 en Miami, Florida. E
   <section class="relative py-[120px] overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#CC0000] to-[#990000]"></div>
     <div class="relative z-10 px-base md:px-margin-desktop max-w-container-max mx-auto text-center">
-      <h2 class="font-display text-[48px] font-bold text-white mb-8">¿Tiene una Emergencia Ahora?</h2>
-      <a class="inline-block bg-safety-yellow text-black px-12 py-8 rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300 emergency-pulse mb-10" href="tel:7867202328">
+      <h2 class="font-display text-[48px] font-bold text-white mb-8">{copy.finalCtaHeading}</h2>
+      <a class="inline-block bg-safety-yellow text-black px-12 py-8 rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300 emergency-pulse mb-10" href={telHref(tenant.phone)}>
         <span class="text-[24px] font-extrabold uppercase tracking-tight flex items-center gap-4">
-          🚨 EMERGENCIA AHORA: (786) 720-2328
+          🚨 {copy.emergencyNowLabel}: {formatPhoneDisplay(tenant.phone)}
         </span>
       </a>
       <div class="mt-8 max-w-xl mx-auto">
-        <p class="text-white/80 font-body mb-6">¿No es una emergencia pero necesita servicio pronto? Programe su visita con antelación.</p>
-        <a class="inline-block bg-white text-emergency-red px-8 py-4 rounded-lg font-bold hover:bg-surface transition-colors border-2 border-white" href={`${import.meta.env.BASE_URL}contacto`}>
-          📋 Reservar Cita Programada
+        <p class="text-white/80 font-body mb-6">{copy.finalCtaBody}</p>
+        <a class="inline-block bg-white text-emergency-red px-8 py-4 rounded-lg font-bold hover:bg-surface transition-colors border-2 border-white" href="/contacto">
+          📋 {copy.scheduleVisit}
         </a>
       </div>
     </div>

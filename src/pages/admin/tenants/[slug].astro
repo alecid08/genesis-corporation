@@ -1,0 +1,255 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import SubmitButton from '../../../components/SubmitButton.astro';
+import { getTenantForAdmin, updateTenant, setTenantAssetKey, addTestimonial, deleteTestimonial } from '../../../lib/db';
+import { uploadTenantAsset } from '../../../lib/r2';
+import { normalizePhoneToE164, formatPhoneDisplay } from '../../../lib/tenant';
+import { PALETTE_PRESETS } from '../../../lib/palettes';
+import { env } from 'cloudflare:workers';
+
+const { slug } = Astro.params;
+let error: string | null = null;
+let notice: string | null = null;
+
+if (!env.DB || !slug) {
+  return new Response('Not found', { status: 404 });
+}
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const action = String(form.get('_action') ?? '');
+  const current = await getTenantForAdmin(env.DB, slug);
+
+  if (!current) {
+    return new Response('Not found', { status: 404 });
+  }
+
+  if (action === 'update-tenant') {
+    const businessName = String(form.get('business_name') ?? '').trim();
+    const phoneRaw = String(form.get('phone') ?? '').trim();
+    const email = String(form.get('email') ?? '').trim();
+    const address = String(form.get('address') ?? '').trim();
+    const googlePlaceId = String(form.get('google_place_id') ?? '').trim();
+    const palettePreset = String(form.get('palette_preset') ?? PALETTE_PRESETS[0]);
+    const facebook = String(form.get('facebook') ?? '').trim();
+    const instagram = String(form.get('instagram') ?? '').trim();
+    const localeDefault = form.get('locale_default') === 'en' ? 'en' : 'es';
+    const status = form.get('status') === 'live' ? 'live' : 'draft';
+    const phone = normalizePhoneToE164(phoneRaw);
+
+    if (!businessName || !email || !address) {
+      error = 'Nombre, email y dirección son obligatorios.';
+    } else if (!phone) {
+      error = 'Teléfono inválido. Usá un número de EE.UU. de 10 dígitos.';
+    } else {
+      const socialLinks: Record<string, string> = {};
+      if (facebook) socialLinks.facebook = facebook;
+      if (instagram) socialLinks.instagram = instagram;
+
+      await updateTenant(env.DB, current.id, {
+        slug: current.slug,
+        businessName,
+        phone,
+        email,
+        address,
+        googlePlaceId: googlePlaceId || undefined,
+        palettePreset,
+        socialLinks,
+        localeDefault,
+        status,
+      });
+      notice = 'Cambios guardados.';
+    }
+  }
+
+  if ((action === 'upload-logo' || action === 'upload-hero') && env.TENANT_ASSETS) {
+    const file = form.get(action === 'upload-logo' ? 'logo' : 'hero');
+    if (file instanceof File && file.size > 0) {
+      const key = await uploadTenantAsset(env.TENANT_ASSETS, current.slug, action === 'upload-logo' ? 'logo' : 'hero', file);
+      await setTenantAssetKey(env.DB, current.id, action === 'upload-logo' ? 'logo_r2_key' : 'hero_r2_key', key);
+      notice = 'Imagen actualizada.';
+    }
+  }
+
+  if (action === 'add-testimonial') {
+    const author = String(form.get('author') ?? '').trim();
+    const location = String(form.get('location') ?? '').trim();
+    const rating = Number(form.get('rating') ?? 5);
+    const quoteEs = String(form.get('quote_es') ?? '').trim();
+    const quoteEn = String(form.get('quote_en') ?? '').trim();
+
+    if (!author || !location || !quoteEs) {
+      error = 'Autor, ubicación y reseña (español) son obligatorios.';
+    } else {
+      await addTestimonial(env.DB, current.id, {
+        author,
+        location,
+        rating: Math.min(5, Math.max(1, rating)),
+        quoteEs,
+        quoteEn: quoteEn || undefined,
+        sortOrder: current.adminTestimonials.length + 1,
+      });
+      notice = 'Reseña agregada.';
+    }
+  }
+
+  if (action === 'delete-testimonial') {
+    const testimonialId = Number(form.get('testimonial_id'));
+    if (testimonialId) {
+      await deleteTestimonial(env.DB, testimonialId, current.id);
+      notice = 'Reseña eliminada.';
+    }
+  }
+}
+
+const tenant = await getTenantForAdmin(env.DB, slug);
+if (!tenant) {
+  return new Response('Not found', { status: 404 });
+}
+
+const inputClass = "w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-2 focus:ring-electric-blue/20 outline-none transition-all bg-white text-body-md";
+const labelClass = "font-label-lg text-deep-navy block font-semibold mb-2";
+const cardClass = "bg-white p-8 rounded-xl shadow-sm border border-outline-variant mb-6";
+---
+
+<AdminLayout title={tenant.businessName}>
+  <h1 class="font-headline-lg text-headline-lg text-deep-navy mb-2">{tenant.businessName}</h1>
+  <p class="text-label-md text-outline mb-6">
+    <a class="text-electric-blue font-semibold" href={`https://${tenant.slug}.tacocars.com`} target="_blank">https://{tenant.slug}.tacocars.com</a>
+    · <span class={`inline-block px-3 py-0.5 rounded-full text-label-md font-semibold ${tenant.status === 'live' ? 'bg-success-green/15 text-success-green' : 'bg-tertiary-container/25 text-tertiary'}`}>{tenant.status}</span>
+  </p>
+
+  {notice && <div class="p-4 bg-success-green/15 text-success-green rounded-lg text-sm font-medium mb-6">{notice}</div>}
+  {error && <div class="p-4 bg-error-container text-on-error-container rounded-lg text-sm font-medium mb-6">{error}</div>}
+
+  <form class={`${cardClass} space-y-6`} method="POST">
+    <input type="hidden" name="_action" value="update-tenant" />
+    <div>
+      <label class={labelClass} for="business_name">Nombre del negocio *</label>
+      <input class={inputClass} id="business_name" name="business_name" required value={tenant.businessName} />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class={labelClass} for="phone">Teléfono *</label>
+        <input class={inputClass} id="phone" name="phone" required value={formatPhoneDisplay(tenant.phone)} />
+      </div>
+      <div>
+        <label class={labelClass} for="email">Email *</label>
+        <input class={inputClass} id="email" name="email" type="email" required value={tenant.email} />
+      </div>
+    </div>
+
+    <div>
+      <label class={labelClass} for="address">Dirección *</label>
+      <input class={inputClass} id="address" name="address" required value={tenant.address} />
+    </div>
+
+    <div>
+      <label class={labelClass} for="google_place_id">Google Place ID (opcional, referencia)</label>
+      <input class={inputClass} id="google_place_id" name="google_place_id" />
+    </div>
+
+    <div>
+      <label class={labelClass} for="palette_preset">Paleta</label>
+      <select class={inputClass} id="palette_preset" name="palette_preset">
+        {PALETTE_PRESETS.map((p) => <option value={p} selected={p === tenant.palettePreset}>{p}</option>)}
+      </select>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class={labelClass} for="facebook">Facebook (opcional)</label>
+        <input class={inputClass} id="facebook" name="facebook" value={tenant.socialLinks.facebook ?? ''} />
+      </div>
+      <div>
+        <label class={labelClass} for="instagram">Instagram (opcional)</label>
+        <input class={inputClass} id="instagram" name="instagram" value={tenant.socialLinks.instagram ?? ''} />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class={labelClass} for="locale_default">Idioma por defecto</label>
+        <select class={inputClass} id="locale_default" name="locale_default">
+          <option value="es" selected={tenant.localeDefault === 'es'}>Español</option>
+          <option value="en" selected={tenant.localeDefault === 'en'}>English</option>
+        </select>
+      </div>
+      <div>
+        <label class={labelClass} for="status">Estado</label>
+        <select class={inputClass} id="status" name="status">
+          <option value="draft" selected={tenant.status === 'draft'}>Borrador</option>
+          <option value="live" selected={tenant.status === 'live'}>Publicado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="pt-2">
+      <SubmitButton text="Guardar Cambios" />
+    </div>
+  </form>
+
+  <div class={cardClass}>
+    <h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Logo</h3>
+    {tenant.logoR2Key && <p class="mb-4"><img src={`/assets/${tenant.logoR2Key}`} alt="Logo actual" class="max-h-[60px]" /></p>}
+    <form method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
+      <input type="hidden" name="_action" value="upload-logo" />
+      <input type="file" name="logo" accept="image/*" required class="text-label-md" />
+      <SubmitButton text="Subir Logo" variant="outline" size="small" icon="upload" />
+    </form>
+
+    <h3 class="font-headline-md text-headline-md text-deep-navy mb-4 mt-8">Imagen Hero</h3>
+    {tenant.heroR2Key && <p class="mb-4"><img src={`/assets/${tenant.heroR2Key}`} alt="Hero actual" class="max-h-[120px]" /></p>}
+    <form method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
+      <input type="hidden" name="_action" value="upload-hero" />
+      <input type="file" name="hero" accept="image/*" required class="text-label-md" />
+      <SubmitButton text="Subir Hero" variant="outline" size="small" icon="upload" />
+    </form>
+  </div>
+
+  <div class={cardClass}>
+    <h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Reseñas (copiadas de Google Places)</h3>
+    {tenant.adminTestimonials.map((t) => (
+      <div class="border-t border-outline-variant py-3">
+        <strong class="text-deep-navy">{t.author}</strong> <span class="text-outline">— {t.location} ({t.rating}★)</span>
+        <p class="text-body-md my-1.5">{t.quoteEs}</p>
+        <form method="POST" class="inline">
+          <input type="hidden" name="_action" value="delete-testimonial" />
+          <input type="hidden" name="testimonial_id" value={t.id} />
+          <SubmitButton text="Eliminar" variant="emergency" size="small" icon="delete" />
+        </form>
+      </div>
+    ))}
+
+    <h4 class="font-label-lg text-deep-navy font-semibold mt-6 mb-4">Agregar reseña</h4>
+    <form method="POST" class="space-y-4">
+      <input type="hidden" name="_action" value="add-testimonial" />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class={labelClass} for="author">Autor *</label>
+          <input class={inputClass} id="author" name="author" required placeholder="Juan P." />
+        </div>
+        <div>
+          <label class={labelClass} for="location">Ubicación *</label>
+          <input class={inputClass} id="location" name="location" required placeholder="Miami, FL" />
+        </div>
+      </div>
+      <div>
+        <label class={labelClass} for="rating">Rating (1-5)</label>
+        <input class={inputClass} id="rating" name="rating" type="number" min="1" max="5" value="5" />
+      </div>
+      <div>
+        <label class={labelClass} for="quote_es">Reseña (Español) *</label>
+        <textarea class={inputClass} id="quote_es" name="quote_es" rows="3" required></textarea>
+      </div>
+      <div>
+        <label class={labelClass} for="quote_en">Reseña (English, opcional)</label>
+        <textarea class={inputClass} id="quote_en" name="quote_en" rows="3"></textarea>
+      </div>
+      <div class="pt-2">
+        <SubmitButton text="Agregar Reseña" icon="star" />
+      </div>
+    </form>
+  </div>
+</AdminLayout>

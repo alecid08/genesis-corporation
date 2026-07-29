@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nitza-demo-platform",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nitza-demo-platform",
+      "database_id": "1414b2c6-a48b-4dd0-a7bc-77d3fe22932c"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "TENANT_ASSETS",
+      "bucket_name": "nitza-tenant-assets"
+    }
+  ],
+  "routes": [
+    { "pattern": "*.tacocars.com/*", "zone_name": "tacocars.com" },
+    { "pattern": "admin.ladetec.com/*", "zone_name": "ladetec.com" }
+  ]
+}

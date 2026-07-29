@@ -2,9 +2,106 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import faqHeroImage from '../assets/faq-hero.jpg';
+import { formatPhoneDisplay, telHref } from '../lib/tenant';
 
-const title = "Preguntas Frecuentes | Genesis Electrical Corporation";
-const description = "Preguntas frecuentes sobre servicios eléctricos, tarifas de emergencia, licencias y garantías en Miami, Florida.";
+const tenant = Astro.locals.tenant;
+const locale = Astro.locals.locale;
+
+const copy = {
+  es: {
+    title: `Preguntas Frecuentes | ${tenant.businessName}`,
+    description: 'Preguntas frecuentes sobre servicios eléctricos, tarifas de emergencia, licencias y garantías en Miami, Florida.',
+    heroTitle: 'Preguntas Frecuentes',
+    heroBody: 'Encuentra respuestas rápidas a tus dudas sobre instalaciones, mantenimiento y servicios de emergencia en Miami.',
+    searchPlaceholder: '¿Cómo podemos ayudarte hoy?',
+    searchAriaLabel: 'Buscar preguntas frecuentes',
+    popularLabel: 'Búsquedas populares:',
+    popular: [
+      { term: 'FPL', label: 'Certificación FPL' },
+      { term: 'emergencia', label: 'Tarifas de emergencia' },
+      { term: 'cargadores', label: 'Cargadores Tesla' },
+    ],
+    categoriesLabel: 'Categorías',
+    generalLabel: 'General',
+    sections: [
+      {
+        icon: 'info',
+        heading: 'Información General',
+        items: [
+          { q: '¿Cuál es su área de servicio en Miami?', a: `${tenant.businessName} sirve a todo el condado de Miami-Dade, incluyendo Coral Gables, Coconut Grove, Pinecrest, Doral y Miami Beach. También cubrimos áreas seleccionadas del sur de Broward para proyectos comerciales de gran escala.` },
+          { q: '¿Están disponibles para emergencias 24/7?', a: `Sí, contamos con un equipo de guardia los 365 días del año. Las emergencias eléctricas no esperan, y nosotros tampoco. Puede contactarnos directamente al ${formatPhoneDisplay(tenant.phone)} para asistencia inmediata.` },
+          { q: '¿Tienen licencia y seguro en Florida?', a: `Absolutamente. ${tenant.businessName} es una empresa totalmente certificada y asegurada (Florida Electrical Contractor License). Cumplimos con todos los estándares del NEC (National Electrical Code) y las regulaciones locales de construcción.` },
+        ],
+      },
+      {
+        icon: 'bolt',
+        heading: 'Servicios e Instalaciones',
+        items: [
+          { q: '¿Realizan instalaciones de cargadores para vehículos eléctricos?', a: 'Somos instaladores certificados para Tesla Wall Connector y otras marcas principales como ChargePoint y JuiceBox. Realizamos el estudio de carga de su panel existente y gestionamos los permisos necesarios.' },
+          { q: '¿Qué incluye un mantenimiento preventivo comercial?', a: 'Nuestros planes incluyen termografía infrarroja para detectar puntos calientes, torqueo de conexiones, limpieza de paneles y pruebas de sistemas de emergencia/iluminación de salida para cumplir con OSHA.' },
+        ],
+      },
+      {
+        icon: 'payments',
+        heading: 'Pagos y Garantía',
+        items: [
+          { q: '¿Qué métodos de pago aceptan?', a: 'Aceptamos todas las tarjetas de crédito principales, Zelle, transferencias ACH y cheques corporativos. Para proyectos residenciales grandes, ofrecemos opciones de financiamiento a través de socios seleccionados.' },
+        ],
+      },
+    ],
+    ctaHeading: '¿No encontraste respuesta a tu pregunta?',
+    ctaBody: 'Escríbenos directamente o llámanos para resolver cualquier consulta en tiempo récord.',
+    sendMessage: 'Enviar Mensaje',
+  },
+  en: {
+    title: `FAQ | ${tenant.businessName}`,
+    description: 'Frequently asked questions about electrical services, emergency rates, licensing, and warranties in Miami, Florida.',
+    heroTitle: 'Frequently Asked Questions',
+    heroBody: 'Find quick answers to your questions about installations, maintenance, and emergency services in Miami.',
+    searchPlaceholder: 'How can we help you today?',
+    searchAriaLabel: 'Search frequently asked questions',
+    popularLabel: 'Popular searches:',
+    popular: [
+      { term: 'FPL', label: 'FPL Certification' },
+      { term: 'emergencia', label: 'Emergency Rates' },
+      { term: 'cargadores', label: 'Tesla Chargers' },
+    ],
+    categoriesLabel: 'Categories',
+    generalLabel: 'General',
+    sections: [
+      {
+        icon: 'info',
+        heading: 'General Information',
+        items: [
+          { q: 'What is your service area in Miami?', a: `${tenant.businessName} serves all of Miami-Dade County, including Coral Gables, Coconut Grove, Pinecrest, Doral, and Miami Beach. We also cover select areas of southern Broward for large-scale commercial projects.` },
+          { q: 'Are you available for 24/7 emergencies?', a: `Yes, we have an on-call team 365 days a year. Electrical emergencies do not wait, and neither do we. Call us directly at ${formatPhoneDisplay(tenant.phone)} for immediate assistance.` },
+          { q: 'Are you licensed and insured in Florida?', a: `Absolutely. ${tenant.businessName} is a fully certified and insured company (Florida Electrical Contractor License). We comply with all NEC (National Electrical Code) standards and local building regulations.` },
+        ],
+      },
+      {
+        icon: 'bolt',
+        heading: 'Services & Installations',
+        items: [
+          { q: 'Do you install electric vehicle chargers?', a: 'We are certified installers for Tesla Wall Connector and other major brands like ChargePoint and JuiceBox. We assess your existing panel load and handle the necessary permits.' },
+          { q: 'What does commercial preventive maintenance include?', a: 'Our plans include infrared thermography to detect hot spots, connection torque checks, panel cleaning, and testing of emergency/exit lighting systems to meet OSHA requirements.' },
+        ],
+      },
+      {
+        icon: 'payments',
+        heading: 'Payments & Warranty',
+        items: [
+          { q: 'What payment methods do you accept?', a: 'We accept all major credit cards, Zelle, ACH transfers, and corporate checks. For large residential projects, we offer financing options through select partners.' },
+        ],
+      },
+    ],
+    ctaHeading: "Didn't find an answer to your question?",
+    ctaBody: 'Write to us directly or call us to resolve any inquiry in record time.',
+    sendMessage: 'Send Message',
+  },
+}[locale];
+
+const title = copy.title;
+const description = copy.description;
 ---
 
 <Layout title={title} description={description}>
@@ -37,8 +134,8 @@ const description = "Preguntas frecuentes sobre servicios eléctricos, tarifas d
     </div>
     <div class="absolute inset-0 bg-deep-navy/70 backdrop-blur-[2px]"></div>
     <div class="relative z-10 text-center px-margin-mobile">
-      <h1 class="font-display-lg text-white text-display-lg-mobile md:text-display-lg mb-4">Preguntas Frecuentes</h1>
-      <p class="text-white/90 font-body-lg max-w-2xl mx-auto">Encuentra respuestas rápidas a tus dudas sobre instalaciones, mantenimiento y servicios de emergencia en Miami.</p>
+      <h1 class="font-display-lg text-white text-display-lg-mobile md:text-display-lg mb-4">{copy.heroTitle}</h1>
+      <p class="text-white/90 font-body-lg max-w-2xl mx-auto">{copy.heroBody}</p>
     </div>
   </section>
 
@@ -47,13 +144,13 @@ const description = "Preguntas frecuentes sobre servicios eléctricos, tarifas d
     <div class="bg-surface-container-lowest shadow-lg rounded-2xl p-6 md:p-10 border border-outline-variant/30 max-w-3xl mx-auto">
       <div class="relative flex items-center">
         <span class="absolute left-6 material-symbols-outlined text-outline text-2xl">search</span>
-        <input id="search-input" aria-label="Buscar preguntas frecuentes" class="w-full pl-16 pr-6 py-5 bg-surface-container-low border-2 border-transparent focus:border-electric-blue focus:ring-0 rounded-xl font-body-lg text-on-surface transition-all placeholder:text-outline" placeholder="¿Cómo podemos ayudarte hoy?" type="text"/>
+        <input id="search-input" aria-label={copy.searchAriaLabel} class="w-full pl-16 pr-6 py-5 bg-surface-container-low border-2 border-transparent focus:border-electric-blue focus:ring-0 rounded-xl font-body-lg text-on-surface transition-all placeholder:text-outline" placeholder={copy.searchPlaceholder} type="text"/>
       </div>
       <div class="mt-4 flex flex-wrap gap-2 justify-center">
-        <span class="text-label-md text-outline">Búsquedas populares:</span>
-        <button class="popular-search text-label-md text-electric-blue hover:underline" data-term="FPL">Certificación FPL</button>
-        <button class="popular-search text-label-md text-electric-blue hover:underline" data-term="emergencia">Tarifas de emergencia</button>
-        <button class="popular-search text-label-md text-electric-blue hover:underline" data-term="cargadores">Cargadores Tesla</button>
+        <span class="text-label-md text-outline">{copy.popularLabel}</span>
+        {copy.popular.map((p) => (
+          <button class="popular-search text-label-md text-electric-blue hover:underline" data-term={p.term}>{p.label}</button>
+        ))}
       </div>
     </div>
   </section>
@@ -63,116 +160,39 @@ const description = "Preguntas frecuentes sobre servicios eléctricos, tarifas d
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
       <!-- Category Navigation -->
       <aside class="lg:col-span-3 space-y-2">
-        <h3 class="font-headline-md text-deep-navy mb-6 px-4">Categorías</h3>
+        <h3 class="font-headline-md text-deep-navy mb-6 px-4">{copy.categoriesLabel}</h3>
         <button class="category-btn w-full text-left p-4 rounded-lg bg-electric-blue text-white font-bold flex items-center justify-between group transition-all" data-category="all">
-          <span>General</span>
+          <span>{copy.generalLabel}</span>
           <span class="material-symbols-outlined">chevron_right</span>
         </button>
       </aside>
       <!-- FAQ Content -->
       <div class="lg:col-span-9 space-y-12">
-        <!-- General Section -->
-        <section class="faq-section">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
-              <span class="material-symbols-outlined text-electric-blue">info</span>
-            </div>
-            <h2 class="font-headline-lg text-deep-navy">Información General</h2>
-          </div>
-          <div class="space-y-4">
-            <!-- Accordion Item 1 -->
-            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
-                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Cuál es su área de servicio en Miami?</span>
-                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-              </button>
-              <div class="accordion-content">
-                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
-                  Genesis Electrical Corporation sirve a todo el condado de Miami-Dade, incluyendo Coral Gables, Coconut Grove, Pinecrest, Doral y Miami Beach. También cubrimos áreas seleccionadas del sur de Broward para proyectos comerciales de gran escala.
-                </div>
+        {copy.sections.map((section) => (
+          <section class="faq-section">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-electric-blue">{section.icon}</span>
               </div>
+              <h2 class="font-headline-lg text-deep-navy">{section.heading}</h2>
             </div>
-            <!-- Accordion Item 2 -->
-            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
-                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Están disponibles para emergencias 24/7?</span>
-                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-              </button>
-              <div class="accordion-content">
-                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
-                  Sí, contamos con un equipo de guardia los 365 días del año. Las emergencias eléctricas no esperan, y nosotros tampoco. Puede contactarnos directamente al (786) 720-2328 para asistencia inmediata.
+            <div class="space-y-4">
+              {section.items.map((item) => (
+                <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
+                  <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
+                    <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">{item.q}</span>
+                    <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
+                  </button>
+                  <div class="accordion-content">
+                    <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
+                      {item.a}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-            <!-- Accordion Item 3 -->
-            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
-                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Tienen licencia y seguro en Florida?</span>
-                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-              </button>
-              <div class="accordion-content">
-                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
-                  Absolutamente. Genesis Electrical Corporation es una empresa totalmente certificada y asegurada (Florida Electrical Contractor License). Cumplimos con todos los estándares del NEC (National Electrical Code) y las regulaciones locales de construcción.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Services Section -->
-        <section class="faq-section">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
-              <span class="material-symbols-outlined text-electric-blue">bolt</span>
-            </div>
-            <h2 class="font-headline-lg text-deep-navy">Servicios e Instalaciones</h2>
-          </div>
-          <div class="space-y-4">
-            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
-                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Realizan instalaciones de cargadores para vehículos eléctricos?</span>
-                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-              </button>
-              <div class="accordion-content">
-                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
-                  Somos instaladores certificados para Tesla Wall Connector y otras marcas principales como ChargePoint y JuiceBox. Realizamos el estudio de carga de su panel existente y gestionamos los permisos necesarios.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
-                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Qué incluye un mantenimiento preventivo comercial?</span>
-                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-              </button>
-              <div class="accordion-content">
-                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
-                  Nuestros planes incluyen termografía infrarroja para detectar puntos calientes, torqueo de conexiones, limpieza de paneles y pruebas de sistemas de emergencia/iluminación de salida para cumplir con OSHA.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Payments Section -->
-        <section class="faq-section">
-          <div class="flex items-center gap-4 mb-8">
-            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center">
-              <span class="material-symbols-outlined text-electric-blue">payments</span>
-            </div>
-            <h2 class="font-headline-lg text-deep-navy">Pagos y Garantía</h2>
-          </div>
-          <div class="space-y-4">
-            <div class="accordion-item bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm transition-all hover:shadow-md">
-              <button class="w-full flex items-center justify-between p-6 text-left group accordion-toggle">
-                <span class="font-bold text-lg text-deep-navy/90 group-hover:text-electric-blue transition-colors">¿Qué métodos de pago aceptan?</span>
-                <span class="icon-plus material-symbols-outlined text-outline transition-transform duration-300">add</span>
-              </button>
-              <div class="accordion-content">
-                <div class="px-6 pb-6 pt-4 bg-white text-body-md text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
-                  Aceptamos todas las tarjetas de crédito principales, Zelle, transferencias ACH y cheques corporativos. Para proyectos residenciales grandes, ofrecemos opciones de financiamiento a través de socios seleccionados.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+        ))}
       </div>
     </div>
   </main>
@@ -180,14 +200,14 @@ const description = "Preguntas frecuentes sobre servicios eléctricos, tarifas d
   <!-- Final CTA Section -->
   <section class="py-20 px-margin-mobile bg-deep-navy relative overflow-hidden text-center text-white">
     <div class="max-w-2xl mx-auto space-y-6">
-      <h2 class="font-headline-lg text-safety-yellow">¿No encontraste respuesta a tu pregunta?</h2>
-      <p class="font-body-md text-white/80">Escríbenos directamente o llámanos para resolver cualquier consulta en tiempo récord.</p>
+      <h2 class="font-headline-lg text-safety-yellow">{copy.ctaHeading}</h2>
+      <p class="font-body-md text-white/80">{copy.ctaBody}</p>
       <div class="flex flex-wrap justify-center gap-4 pt-4">
-        <a class="bg-safety-yellow text-deep-navy px-8 py-3 rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2" href="tel:7867202328">
-          <span class="material-symbols-outlined">call</span> (786) 720-2328
+        <a class="bg-safety-yellow text-deep-navy px-8 py-3 rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2" href={telHref(tenant.phone)}>
+          <span class="material-symbols-outlined">call</span> {formatPhoneDisplay(tenant.phone)}
         </a>
-        <a class="bg-transparent border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-all flex items-center gap-2" href={`${import.meta.env.BASE_URL}contacto`}>
-          <span class="material-symbols-outlined">mail</span> Enviar Mensaje
+        <a class="bg-transparent border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-all flex items-center gap-2" href="/contacto">
+          <span class="material-symbols-outlined">mail</span> {copy.sendMessage}
         </a>
       </div>
     </div>

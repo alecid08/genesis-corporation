@@ -1,8 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { formatPhoneDisplay, telHref } from '../lib/tenant';
 
-const title = "¡Gracias! - Genesis Electrical Corporation";
-const description = "Mensaje recibido con éxito. Nos pondremos en contacto con usted lo antes posible.";
+const tenant = Astro.locals.tenant;
+const locale = Astro.locals.locale;
+
+const copy = {
+  es: {
+    title: `¡Gracias! - ${tenant.businessName}`,
+    description: 'Mensaje recibido con éxito. Nos pondremos en contacto con usted lo antes posible.',
+    heading: '¡Gracias por Contactarnos!',
+    body1: 'Hemos recibido su mensaje y nos pondremos en contacto con usted dentro de las próximas 24-48 horas.',
+    body2Prefix: 'Si es una emergencia, por favor llámenos directamente al',
+    highlightPrefix: '¿Necesita Atención Inmediata? Llámenos:',
+    backHome: 'Volver al Inicio',
+  },
+  en: {
+    title: `Thank You! - ${tenant.businessName}`,
+    description: 'Message received successfully. We will get in touch with you as soon as possible.',
+    heading: 'Thank You for Contacting Us!',
+    body1: 'We have received your message and will get in touch with you within the next 24-48 hours.',
+    body2Prefix: 'If this is an emergency, please call us directly at',
+    highlightPrefix: 'Need Immediate Attention? Call Us:',
+    backHome: 'Back to Home',
+  },
+}[locale];
+
+const title = copy.title;
+const description = copy.description;
 ---
 
 <Layout title={title} description={description}>
@@ -27,29 +52,29 @@ const description = "Mensaje recibido con éxito. Nos pondremos en contacto con 
       </div>
       <!-- Heading -->
       <h1 class="font-display-lg text-[48px] leading-[1.2] font-bold text-deep-navy mb-8">
-        ¡Gracias por Contactarnos!
+        {copy.heading}
       </h1>
       <!-- Body Text -->
       <div class="space-y-4 mb-10">
         <p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
-          Hemos recibido su mensaje y nos pondremos en contacto con usted dentro de las próximas 24-48 horas.
+          {copy.body1}
         </p>
         <p class="font-body-lg text-[18px] text-on-surface-variant max-w-[550px]">
-          Si es una emergencia, por favor llámenos directamente al <span class="font-bold text-deep-navy">(786) 720-2328</span>.
+          {copy.body2Prefix} <span class="font-bold text-deep-navy">{formatPhoneDisplay(tenant.phone)}</span>.
         </p>
       </div>
       <!-- Highlight Box -->
       <div class="w-full bg-[#E3F2FD] p-8 rounded-[12px] border border-[#BBDEFB] mb-12">
         <p class="font-headline-md text-deep-navy text-xl md:text-2xl flex items-center justify-center gap-3">
           <span>📞</span>
-          ¿Necesita Atención Inmediata? Llámenos: 
-          <a class="font-bold hover:underline" href="tel:7867202328">(786) 720-2328</a>
+          {copy.highlightPrefix}
+          <a class="font-bold hover:underline" href={telHref(tenant.phone)}>{formatPhoneDisplay(tenant.phone)}</a>
         </p>
       </div>
       <!-- Button -->
-      <a class="group inline-flex items-center gap-2 px-8 py-3 border-2 border-electric-blue text-electric-blue rounded-lg font-label-lg text-label-lg font-bold hover:bg-electric-blue/5 transition-all" href={import.meta.env.BASE_URL}>
+      <a class="group inline-flex items-center gap-2 px-8 py-3 border-2 border-electric-blue text-electric-blue rounded-lg font-label-lg text-label-lg font-bold hover:bg-electric-blue/5 transition-all" href="/">
         <span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
-        Volver al Inicio
+        {copy.backHome}
       </a>
     </div>
   </main>

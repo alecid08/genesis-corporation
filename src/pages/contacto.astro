@@ -3,9 +3,75 @@ import Layout from '../layouts/Layout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { Image } from 'astro:assets';
 import aboutHeroImage from '../assets/about-hero.jpg';
+import { formatPhoneDisplay, telHref } from '../lib/tenant';
 
-const title = "Contacto | Genesis Electrical Corporation";
-const description = "Póngase en contacto con los electricistas licenciados de Genesis Electrical Corporation en Miami, Florida. Solicite un presupuesto o contáctenos por emergencias.";
+const tenant = Astro.locals.tenant;
+const locale = Astro.locals.locale;
+const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(tenant.address)}&output=embed`;
+
+const copy = {
+  es: {
+    title: `Contacto | ${tenant.businessName}`,
+    description: `Póngase en contacto con los electricistas licenciados de ${tenant.businessName} en Miami, Florida. Solicite un presupuesto o contáctenos por emergencias.`,
+    heroTitle: 'Contacto',
+    heroBody: '¿Tiene alguna duda o necesita un presupuesto? Estamos aquí para ayudarle en todo Miami.',
+    getInTouch: 'Póngase en Contacto',
+    getInTouchBody: 'Ya sea para una pequeña reparación en casa, la planificación eléctrica de un local comercial o una emergencia de madrugada, nuestro equipo de técnicos licenciados en Miami está listo para asistirle.',
+    phoneLabel: 'Teléfono',
+    emailLabel: 'Email',
+    addressLabel: 'Dirección',
+    hoursLabel: 'Horario: Lunes a Domingo, 7:00 AM - 7:00 PM',
+    emergencyNote: 'Emergencias: Disponibles fuera de horario regular',
+    locationHeading: 'Nuestra Ubicación',
+    emergencyHeading: '¿Tiene una Emergencia Eléctrica?',
+    emergencyBody1: 'Las fallas eléctricas no esperan. Un cortocircuito o un apagón total en su negocio o residencia puede representar un riesgo serio para la seguridad y la operatividad de sus instalaciones.',
+    emergencyBody2: `En ${tenant.businessName}, contamos con personal altamente capacitado y certificado para responder de manera inmediata ante cualquier situación crítica, garantizando una solución segura y duradera en el menor tiempo posible.`,
+    emergencyCta: 'Emergencia 24/7',
+    whenToCall: 'Cuándo Llamar Inmediatamente:',
+    whenToCallItems: [
+      'Humo o chispas provenientes de paneles eléctricos o tomas.',
+      'Olor a quemado persistente cerca de cableado.',
+      'Pérdida total de energía sin reporte de falla general en la zona.',
+      'Disyuntores (breakers) que se disparan repetidamente.',
+      'Zumbidos o ruidos extraños en el sistema eléctrico.',
+    ],
+    serviceAreaHeading: 'Sirviendo a Todo Miami-Dade County',
+    finalCtaBody: '¿Listo para comenzar su proyecto eléctrico? Ya sea una pequeña reparación o una instalación industrial, estamos aquí para brindarle excelencia técnica.',
+    callNow: 'Llamar Ahora',
+  },
+  en: {
+    title: `Contact | ${tenant.businessName}`,
+    description: `Get in touch with the licensed electricians at ${tenant.businessName} in Miami, Florida. Request a quote or reach us for emergencies.`,
+    heroTitle: 'Contact',
+    heroBody: 'Have a question or need a quote? We are here to help you throughout Miami.',
+    getInTouch: 'Get In Touch',
+    getInTouchBody: 'Whether it is a small repair at home, electrical planning for a commercial space, or a middle-of-the-night emergency, our team of licensed technicians in Miami is ready to assist you.',
+    phoneLabel: 'Phone',
+    emailLabel: 'Email',
+    addressLabel: 'Address',
+    hoursLabel: 'Hours: Monday to Sunday, 7:00 AM - 7:00 PM',
+    emergencyNote: 'Emergencies: Available outside regular hours',
+    locationHeading: 'Our Location',
+    emergencyHeading: 'Have an Electrical Emergency?',
+    emergencyBody1: 'Electrical failures do not wait. A short circuit or total blackout at your business or home can pose a serious risk to safety and operations.',
+    emergencyBody2: `At ${tenant.businessName}, we have highly trained, certified staff ready to respond immediately to any critical situation, ensuring a safe and lasting solution as quickly as possible.`,
+    emergencyCta: '24/7 Emergency',
+    whenToCall: 'When to Call Immediately:',
+    whenToCallItems: [
+      'Smoke or sparks coming from electrical panels or outlets.',
+      'Persistent burning smell near wiring.',
+      'Total loss of power with no reported outage in the area.',
+      'Breakers that trip repeatedly.',
+      'Buzzing or unusual noises in the electrical system.',
+    ],
+    serviceAreaHeading: 'Serving All of Miami-Dade County',
+    finalCtaBody: 'Ready to start your electrical project? Whether it is a small repair or an industrial installation, we are here to deliver technical excellence.',
+    callNow: 'Call Now',
+  },
+}[locale];
+
+const title = copy.title;
+const description = copy.description;
 ---
 
 <Layout title={title} description={description}>
@@ -24,8 +90,8 @@ const description = "Póngase en contacto con los electricistas licenciados de G
       <div class="absolute inset-0 bg-deep-navy/80 backdrop-blur-[2px]"></div>
     </div>
     <div class="relative z-10 text-center px-margin-mobile">
-      <h1 class="font-display-lg text-white text-[32px] md:text-[48px] font-bold mb-4">Contacto</h1>
-      <p class="text-white/95 font-body-md text-lg">¿Tiene alguna duda o necesita un presupuesto? Estamos aquí para ayudarle en todo Miami.</p>
+      <h1 class="font-display-lg text-white text-[32px] md:text-[48px] font-bold mb-4">{copy.heroTitle}</h1>
+      <p class="text-white/95 font-body-md text-lg">{copy.heroBody}</p>
     </div>
   </section>
 
@@ -35,40 +101,40 @@ const description = "Póngase en contacto con los electricistas licenciados de G
       <!-- Left Side: Info -->
       <div class="space-y-12">
         <div>
-          <h2 class="font-headline-lg text-[32px] font-bold text-deep-navy mb-6">Póngase en Contacto</h2>
+          <h2 class="font-headline-lg text-[32px] font-bold text-deep-navy mb-6">{copy.getInTouch}</h2>
           <p class="text-on-surface-variant font-body-md text-base leading-relaxed">
-            Ya sea para una pequeña reparación en casa, la planificación eléctrica de un local comercial o una emergencia de madrugada, nuestro equipo de técnicos licenciados en Miami está listo para asistirle.
+            {copy.getInTouchBody}
           </p>
         </div>
         <div class="space-y-6">
           <div class="flex items-center gap-6">
             <span class="material-symbols-outlined text-[40px] text-electric-blue">call</span>
             <div class="text-body-lg text-[18px] font-body-lg">
-              <span>Teléfono: (786) 720-2328</span>
+              <span>{copy.phoneLabel}: {formatPhoneDisplay(tenant.phone)}</span>
             </div>
           </div>
           <div class="flex items-center gap-6">
             <span class="material-symbols-outlined text-[40px] text-electric-blue">mail</span>
             <div class="text-body-lg text-[18px] font-body-lg">
-              <span>Email: info@genesiselectrical.com</span>
+              <span>{copy.emailLabel}: {tenant.email}</span>
             </div>
           </div>
           <div class="flex items-center gap-6">
             <span class="material-symbols-outlined text-[40px] text-electric-blue">location_on</span>
             <div class="text-body-lg text-[18px] font-body-lg">
-              <span>Dirección: 185 NW 13th Ave Suite 736, Miami, FL 33125</span>
+              <span>{copy.addressLabel}: {tenant.address}</span>
             </div>
           </div>
           <div class="flex items-center gap-6">
             <span class="material-symbols-outlined text-[40px] text-electric-blue">schedule</span>
             <div class="text-body-lg text-[18px] font-body-lg">
-              <span>Horario: Lunes a Domingo, 7:00 AM - 7:00 PM</span>
+              <span>{copy.hoursLabel}</span>
             </div>
           </div>
           <div class="flex items-center gap-6">
             <span class="material-symbols-outlined text-[40px] text-electric-blue">warning</span>
             <div class="text-body-lg text-[18px] font-body-lg font-semibold text-emergency-red">
-              <span>Emergencias: Disponibles fuera de horario regular</span>
+              <span>{copy.emergencyNote}</span>
             </div>
           </div>
         </div>
@@ -82,48 +148,34 @@ const description = "Póngase en contacto con los electricistas licenciados de G
   <!-- [LOCATION MAP SECTION] -->
   <section class="bg-[#F5F7FA] py-[100px] px-base md:px-margin-desktop text-center">
     <div class="max-w-container-max mx-auto">
-      <h2 class="font-headline-lg text-[36px] font-bold text-deep-navy mb-12">Nuestra Ubicación</h2>
+      <h2 class="font-headline-lg text-[36px] font-bold text-deep-navy mb-12">{copy.locationHeading}</h2>
       <div class="w-full h-[500px] rounded-[12px] overflow-hidden shadow-lg border border-outline-variant mb-6">
-        <iframe allowfullscreen="" class="w-full h-full border-0" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.833502905389!2d-80.21855662366881!3d25.776019577344933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6e08c4e7235%3A0xb3df6c27f7f45a0e!2s185%20NW%2013th%20Ave%2C%20Miami%2C%20FL%2033125!5e0!3m2!1sen!2sus!4v1715600000000!5m2!1sen!2sus" title="Mapa de ubicación de Genesis Electrical Corporation"></iframe>
+        <iframe allowfullscreen="" class="w-full h-full border-0" loading="lazy" src={mapEmbedSrc} title={`Mapa de ubicación de ${tenant.businessName}`}></iframe>
       </div>
-      <p class="text-deep-navy font-bold text-body-lg">📍 185 NW 13th Ave Suite 736, Miami, FL 33125</p>
+      <p class="text-deep-navy font-bold text-body-lg">📍 {tenant.address}</p>
     </div>
   </section>
 
   <!-- [EMERGENCIES SECTION] -->
   <section class="bg-[#FFF5F5] py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto flex flex-col items-center text-center">
-      <h2 class="font-headline-lg text-[42px] font-bold text-[#CC0000] mb-8">¿Tiene una Emergencia Eléctrica?</h2>
+      <h2 class="font-headline-lg text-[42px] font-bold text-[#CC0000] mb-8">{copy.emergencyHeading}</h2>
       <div class="max-w-3xl space-y-4 mb-10">
-        <p class="text-on-surface-variant font-body-lg text-[18px]">Las fallas eléctricas no esperan. Un cortocircuito o un apagón total en su negocio o residencia puede representar un riesgo serio para la seguridad y la operatividad de sus instalaciones.</p>
-        <p class="text-on-surface-variant font-body-lg text-[18px]">En Genesis Electrical Corporation, contamos con personal altamente capacitado y certificado para responder de manera inmediata ante cualquier situación crítica, garantizando una solución segura y duradera en el menor tiempo posible.</p>
+        <p class="text-on-surface-variant font-body-lg text-[18px]">{copy.emergencyBody1}</p>
+        <p class="text-on-surface-variant font-body-lg text-[18px]">{copy.emergencyBody2}</p>
       </div>
-      <a class="bg-emergency-red text-white px-12 py-6 rounded-xl font-bold flex items-center gap-3 hover:bg-red-700 transition-all scale-up shadow-xl mb-12 text-[24px]" href="tel:7867202328">
-        🚨 Emergencia 24/7: (786) 720-2328
+      <a class="bg-emergency-red text-white px-12 py-6 rounded-xl font-bold flex items-center gap-3 hover:bg-red-700 transition-all scale-up shadow-xl mb-12 text-[24px]" href={telHref(tenant.phone)}>
+        🚨 {copy.emergencyCta}: {formatPhoneDisplay(tenant.phone)}
       </a>
       <div class="text-left max-w-2xl bg-white p-8 rounded-2xl shadow-sm border border-red-100">
-        <h3 class="font-headline-md text-deep-navy mb-4">Cuándo Llamar Inmediatamente:</h3>
+        <h3 class="font-headline-md text-deep-navy mb-4">{copy.whenToCall}</h3>
         <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-emergency-red">priority_high</span>
-            <span class="text-body-md">Humo o chispas provenientes de paneles eléctricos o tomas.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-emergency-red">priority_high</span>
-            <span class="text-body-md">Olor a quemado persistente cerca de cableado.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-emergency-red">priority_high</span>
-            <span class="text-body-md">Pérdida total de energía sin reporte de falla general en la zona.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-emergency-red">priority_high</span>
-            <span class="text-body-md">Disyuntores (breakers) que se disparan repetidamente.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="material-symbols-outlined text-emergency-red">priority_high</span>
-            <span class="text-body-md">Zumbidos o ruidos extraños en el sistema eléctrico.</span>
-          </li>
+          {copy.whenToCallItems.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-emergency-red">priority_high</span>
+              <span class="text-body-md">{item}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -132,7 +184,7 @@ const description = "Póngase en contacto con los electricistas licenciados de G
   <!-- [SERVICE AREA SECTION] -->
   <section class="bg-white py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto text-center">
-      <h2 class="font-headline-lg text-[42px] font-bold text-deep-navy mb-16">Sirviendo a Todo Miami-Dade County</h2>
+      <h2 class="font-headline-lg text-[42px] font-bold text-deep-navy mb-16">{copy.serviceAreaHeading}</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left max-w-4xl mx-auto">
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Miami Beach</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-electric-blue">check_circle</span> <span class="font-body-md">Coral Gables</span></div>
@@ -157,9 +209,9 @@ const description = "Póngase en contacto con los electricistas licenciados de G
   <!-- [FINAL CTA] -->
   <section class="bg-electric-blue py-[100px] px-base md:px-margin-desktop">
     <div class="max-w-container-max mx-auto text-center text-white">
-      <p class="font-body-lg text-[18px] mb-8 max-w-2xl mx-auto">¿Listo para comenzar su proyecto eléctrico? Ya sea una pequeña reparación o una instalación industrial, estamos aquí para brindarle excelencia técnica.</p>
-      <a class="inline-flex items-center bg-safety-yellow text-deep-navy px-10 py-5 rounded-lg font-bold text-[24px] hover:brightness-110 transition-all scale-up" href="tel:7867202328">
-        📞 Llamar Ahora: (786) 720-2328
+      <p class="font-body-lg text-[18px] mb-8 max-w-2xl mx-auto">{copy.finalCtaBody}</p>
+      <a class="inline-flex items-center bg-safety-yellow text-deep-navy px-10 py-5 rounded-lg font-bold text-[24px] hover:brightness-110 transition-all scale-up" href={telHref(tenant.phone)}>
+        📞 {copy.callNow}: {formatPhoneDisplay(tenant.phone)}
       </a>
     </div>
   </section>

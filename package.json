@@ -1,5 +1,5 @@
 {
-  "name": "genesis-corporation",
+  "name": "nitza-demo-platform",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -10,16 +10,23 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "git-sync": "./git-sync.sh"
+    "cf-typegen": "wrangler types",
+    "git-sync": "./git-sync.sh",
+    "db:migrate:local": "wrangler d1 migrations apply nitza-demo-platform --local",
+    "db:migrate:remote": "wrangler d1 migrations apply nitza-demo-platform --remote"
   },
   "dependencies": {
-    "astro": "^7.0.4",
-    "dev": "^0.1.5",
-    "pnpm": "^11.9.0"
+    "@astrojs/cloudflare": "^14.1.5",
+    "astro": "^7.0.4"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.2",
-    "tailwindcss": "^4.3.2"
+    "@types/node": "^26.1.2",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.114.0"
   }
 }

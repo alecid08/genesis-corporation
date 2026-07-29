@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+
+const navItems = [
+  { label: 'Tenants', href: '/admin', icon: 'storefront' },
+  { label: '+ Nuevo', href: '/admin/tenants/new', icon: 'add' },
+];
+const cleanPath = Astro.url.pathname.endsWith('/') && Astro.url.pathname.length > 1
+  ? Astro.url.pathname.slice(0, -1)
+  : Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{title} | Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,check_circle,delete,edit,image,star,storefront,upload&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+  <header class="bg-deep-navy text-white px-base md:px-margin-desktop py-4 flex items-center justify-between">
+    <a href="/admin" class="font-display-lg text-xl font-bold text-white hover:opacity-90 transition-opacity">
+      Nitza — Plataforma de Demos
+    </a>
+    <nav class="flex items-center gap-6">
+      {navItems.map((item) => {
+        const isActive = cleanPath === item.href;
+        return (
+          <a
+            href={item.href}
+            class={`font-label-lg text-label-lg flex items-center gap-1.5 transition-opacity ${isActive ? 'opacity-100 font-bold' : 'opacity-85 hover:opacity-100'}`}
+          >
+            <span class="material-symbols-outlined text-lg">{item.icon}</span>
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+  </header>
+  <main class="max-w-[960px] mx-auto px-base md:px-margin-desktop py-8 pb-20">
+    <slot />
+  </main>
+</body>
+</html>
