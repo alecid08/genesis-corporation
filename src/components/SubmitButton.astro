@@ -3,36 +3,27 @@ import { BUTTON_VARIANT_CLASSES, BUTTON_SIZE_CLASSES, type ButtonVariant, type B
 
 interface Props {
   text: string;
-  href: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: string;
-  external?: boolean;
   class?: string;
 }
 
 const {
   text,
-  href,
-  variant = 'primary',
+  variant = 'secondary',
   size = 'medium',
   icon,
-  external = false,
   class: className = '',
 } = Astro.props;
-
-const variantClasses = BUTTON_VARIANT_CLASSES;
-const sizeClasses = BUTTON_SIZE_CLASSES;
 ---
 
-<a
-  href={href}
-  target={external ? "_blank" : undefined}
-  rel={external ? "noopener noreferrer" : undefined}
-  class={`inline-flex items-center justify-center gap-2 transition-all duration-200 text-center ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+<button
+  type="submit"
+  class={`inline-flex items-center justify-center gap-2 transition-all duration-200 text-center cursor-pointer ${BUTTON_VARIANT_CLASSES[variant]} ${BUTTON_SIZE_CLASSES[size]} ${className}`}
 >
   {icon && (
     <span class="material-symbols-outlined select-none text-xl">{icon}</span>
   )}
   <span>{text}</span>
-</a>
+</button>

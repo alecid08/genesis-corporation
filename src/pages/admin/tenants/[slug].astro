@@ -1,5 +1,6 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
+import SubmitButton from '../../../components/SubmitButton.astro';
 import { getTenantForAdmin, updateTenant, setTenantAssetKey, addTestimonial, deleteTestimonial } from '../../../lib/db';
 import { uploadTenantAsset } from '../../../lib/r2';
 import { normalizePhoneToE164, formatPhoneDisplay } from '../../../lib/tenant';
@@ -105,131 +106,149 @@ const tenant = await getTenantForAdmin(env.DB, slug);
 if (!tenant) {
   return new Response('Not found', { status: 404 });
 }
+
+const inputClass = "w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-2 focus:ring-electric-blue/20 outline-none transition-all bg-white text-body-md";
+const labelClass = "font-label-lg text-deep-navy block font-semibold mb-2";
+const cardClass = "bg-white p-8 rounded-xl shadow-sm border border-outline-variant mb-6";
 ---
 
 <AdminLayout title={tenant.businessName}>
-  <h1>{tenant.businessName}</h1>
-  <p class="hint">
-    <a href={`https://${tenant.slug}.tacocars.com`} target="_blank">https://{tenant.slug}.tacocars.com</a>
-    · <span class={`badge ${tenant.status === 'live' ? 'badge-live' : 'badge-draft'}`}>{tenant.status}</span>
+  <h1 class="font-headline-lg text-headline-lg text-deep-navy mb-2">{tenant.businessName}</h1>
+  <p class="text-label-md text-outline mb-6">
+    <a class="text-electric-blue font-semibold" href={`https://${tenant.slug}.tacocars.com`} target="_blank">https://{tenant.slug}.tacocars.com</a>
+    · <span class={`inline-block px-3 py-0.5 rounded-full text-label-md font-semibold ${tenant.status === 'live' ? 'bg-success-green/15 text-success-green' : 'bg-tertiary-container/25 text-tertiary'}`}>{tenant.status}</span>
   </p>
 
-  {notice && <div class="flash">{notice}</div>}
-  {error && <div class="card" style="background:#ffdad6;color:#93000a;">{error}</div>}
+  {notice && <div class="p-4 bg-success-green/15 text-success-green rounded-lg text-sm font-medium mb-6">{notice}</div>}
+  {error && <div class="p-4 bg-error-container text-on-error-container rounded-lg text-sm font-medium mb-6">{error}</div>}
 
-  <form class="card" method="POST">
+  <form class={`${cardClass} space-y-6`} method="POST">
     <input type="hidden" name="_action" value="update-tenant" />
-    <label for="business_name">Nombre del negocio *</label>
-    <input id="business_name" name="business_name" required value={tenant.businessName} />
+    <div>
+      <label class={labelClass} for="business_name">Nombre del negocio *</label>
+      <input class={inputClass} id="business_name" name="business_name" required value={tenant.businessName} />
+    </div>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="phone">Teléfono *</label>
-        <input id="phone" name="phone" required value={formatPhoneDisplay(tenant.phone)} />
+        <label class={labelClass} for="phone">Teléfono *</label>
+        <input class={inputClass} id="phone" name="phone" required value={formatPhoneDisplay(tenant.phone)} />
       </div>
       <div>
-        <label for="email">Email *</label>
-        <input id="email" name="email" type="email" required value={tenant.email} />
+        <label class={labelClass} for="email">Email *</label>
+        <input class={inputClass} id="email" name="email" type="email" required value={tenant.email} />
       </div>
     </div>
 
-    <label for="address">Dirección *</label>
-    <input id="address" name="address" required value={tenant.address} />
+    <div>
+      <label class={labelClass} for="address">Dirección *</label>
+      <input class={inputClass} id="address" name="address" required value={tenant.address} />
+    </div>
 
-    <label for="google_place_id">Google Place ID (opcional, referencia)</label>
-    <input id="google_place_id" name="google_place_id" />
+    <div>
+      <label class={labelClass} for="google_place_id">Google Place ID (opcional, referencia)</label>
+      <input class={inputClass} id="google_place_id" name="google_place_id" />
+    </div>
 
-    <label for="palette_preset">Paleta</label>
-    <select id="palette_preset" name="palette_preset">
-      {PALETTE_PRESETS.map((p) => <option value={p} selected={p === tenant.palettePreset}>{p}</option>)}
-    </select>
+    <div>
+      <label class={labelClass} for="palette_preset">Paleta</label>
+      <select class={inputClass} id="palette_preset" name="palette_preset">
+        {PALETTE_PRESETS.map((p) => <option value={p} selected={p === tenant.palettePreset}>{p}</option>)}
+      </select>
+    </div>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="facebook">Facebook (opcional)</label>
-        <input id="facebook" name="facebook" value={tenant.socialLinks.facebook ?? ''} />
+        <label class={labelClass} for="facebook">Facebook (opcional)</label>
+        <input class={inputClass} id="facebook" name="facebook" value={tenant.socialLinks.facebook ?? ''} />
       </div>
       <div>
-        <label for="instagram">Instagram (opcional)</label>
-        <input id="instagram" name="instagram" value={tenant.socialLinks.instagram ?? ''} />
+        <label class={labelClass} for="instagram">Instagram (opcional)</label>
+        <input class={inputClass} id="instagram" name="instagram" value={tenant.socialLinks.instagram ?? ''} />
       </div>
     </div>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="locale_default">Idioma por defecto</label>
-        <select id="locale_default" name="locale_default">
+        <label class={labelClass} for="locale_default">Idioma por defecto</label>
+        <select class={inputClass} id="locale_default" name="locale_default">
           <option value="es" selected={tenant.localeDefault === 'es'}>Español</option>
           <option value="en" selected={tenant.localeDefault === 'en'}>English</option>
         </select>
       </div>
       <div>
-        <label for="status">Estado</label>
-        <select id="status" name="status">
+        <label class={labelClass} for="status">Estado</label>
+        <select class={inputClass} id="status" name="status">
           <option value="draft" selected={tenant.status === 'draft'}>Borrador</option>
           <option value="live" selected={tenant.status === 'live'}>Publicado</option>
         </select>
       </div>
     </div>
 
-    <div class="actions">
-      <button class="btn" type="submit">Guardar Cambios</button>
+    <div class="pt-2">
+      <SubmitButton text="Guardar Cambios" />
     </div>
   </form>
 
-  <div class="card">
-    <h3 style="margin-top:0;">Logo</h3>
-    {tenant.logoR2Key && <p><img src={`/assets/${tenant.logoR2Key}`} alt="Logo actual" style="max-height:60px;" /></p>}
-    <form method="POST" enctype="multipart/form-data">
+  <div class={cardClass}>
+    <h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Logo</h3>
+    {tenant.logoR2Key && <p class="mb-4"><img src={`/assets/${tenant.logoR2Key}`} alt="Logo actual" class="max-h-[60px]" /></p>}
+    <form method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
       <input type="hidden" name="_action" value="upload-logo" />
-      <input type="file" name="logo" accept="image/*" required />
-      <div class="actions"><button class="btn btn-secondary" type="submit">Subir Logo</button></div>
+      <input type="file" name="logo" accept="image/*" required class="text-label-md" />
+      <SubmitButton text="Subir Logo" variant="outline" size="small" icon="upload" />
     </form>
 
-    <h3>Imagen Hero</h3>
-    {tenant.heroR2Key && <p><img src={`/assets/${tenant.heroR2Key}`} alt="Hero actual" style="max-height:120px;" /></p>}
-    <form method="POST" enctype="multipart/form-data">
+    <h3 class="font-headline-md text-headline-md text-deep-navy mb-4 mt-8">Imagen Hero</h3>
+    {tenant.heroR2Key && <p class="mb-4"><img src={`/assets/${tenant.heroR2Key}`} alt="Hero actual" class="max-h-[120px]" /></p>}
+    <form method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
       <input type="hidden" name="_action" value="upload-hero" />
-      <input type="file" name="hero" accept="image/*" required />
-      <div class="actions"><button class="btn btn-secondary" type="submit">Subir Hero</button></div>
+      <input type="file" name="hero" accept="image/*" required class="text-label-md" />
+      <SubmitButton text="Subir Hero" variant="outline" size="small" icon="upload" />
     </form>
   </div>
 
-  <div class="card">
-    <h3 style="margin-top:0;">Reseñas (copiadas de Google Places)</h3>
+  <div class={cardClass}>
+    <h3 class="font-headline-md text-headline-md text-deep-navy mb-4">Reseñas (copiadas de Google Places)</h3>
     {tenant.adminTestimonials.map((t) => (
-      <div style="border-top:1px solid #e0e3e6; padding:12px 0;">
-        <strong>{t.author}</strong> — {t.location} ({t.rating}★)
-        <p style="margin:6px 0;">{t.quoteEs}</p>
-        <form method="POST" style="display:inline;">
+      <div class="border-t border-outline-variant py-3">
+        <strong class="text-deep-navy">{t.author}</strong> <span class="text-outline">— {t.location} ({t.rating}★)</span>
+        <p class="text-body-md my-1.5">{t.quoteEs}</p>
+        <form method="POST" class="inline">
           <input type="hidden" name="_action" value="delete-testimonial" />
           <input type="hidden" name="testimonial_id" value={t.id} />
-          <button class="btn btn-danger" type="submit" style="padding:6px 12px;font-size:12px;">Eliminar</button>
+          <SubmitButton text="Eliminar" variant="emergency" size="small" icon="delete" />
         </form>
       </div>
     ))}
 
-    <h4>Agregar reseña</h4>
-    <form method="POST">
+    <h4 class="font-label-lg text-deep-navy font-semibold mt-6 mb-4">Agregar reseña</h4>
+    <form method="POST" class="space-y-4">
       <input type="hidden" name="_action" value="add-testimonial" />
-      <div class="row">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label for="author">Autor *</label>
-          <input id="author" name="author" required placeholder="Juan P." />
+          <label class={labelClass} for="author">Autor *</label>
+          <input class={inputClass} id="author" name="author" required placeholder="Juan P." />
         </div>
         <div>
-          <label for="location">Ubicación *</label>
-          <input id="location" name="location" required placeholder="Miami, FL" />
+          <label class={labelClass} for="location">Ubicación *</label>
+          <input class={inputClass} id="location" name="location" required placeholder="Miami, FL" />
         </div>
       </div>
-      <label for="rating">Rating (1-5)</label>
-      <input id="rating" name="rating" type="number" min="1" max="5" value="5" />
-      <label for="quote_es">Reseña (Español) *</label>
-      <textarea id="quote_es" name="quote_es" rows="3" required></textarea>
-      <label for="quote_en">Reseña (English, opcional)</label>
-      <textarea id="quote_en" name="quote_en" rows="3"></textarea>
-      <div class="actions">
-        <button class="btn" type="submit">Agregar Reseña</button>
+      <div>
+        <label class={labelClass} for="rating">Rating (1-5)</label>
+        <input class={inputClass} id="rating" name="rating" type="number" min="1" max="5" value="5" />
+      </div>
+      <div>
+        <label class={labelClass} for="quote_es">Reseña (Español) *</label>
+        <textarea class={inputClass} id="quote_es" name="quote_es" rows="3" required></textarea>
+      </div>
+      <div>
+        <label class={labelClass} for="quote_en">Reseña (English, opcional)</label>
+        <textarea class={inputClass} id="quote_en" name="quote_en" rows="3"></textarea>
+      </div>
+      <div class="pt-2">
+        <SubmitButton text="Agregar Reseña" icon="star" />
       </div>
     </form>
   </div>

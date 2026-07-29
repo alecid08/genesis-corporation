@@ -1,5 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
+import Button from '../../../components/Button.astro';
+import SubmitButton from '../../../components/SubmitButton.astro';
 import { createTenant } from '../../../lib/db';
 import { normalizePhoneToE164 } from '../../../lib/tenant';
 import { PALETTE_PRESETS } from '../../../lib/palettes';
@@ -53,72 +55,89 @@ if (Astro.request.method === 'POST' && env.DB) {
     }
   }
 }
+
+const inputClass = "w-full p-4 rounded-lg border border-outline-variant focus:border-electric-blue focus:ring-2 focus:ring-electric-blue/20 outline-none transition-all bg-white text-body-md";
+const labelClass = "font-label-lg text-deep-navy block font-semibold mb-2";
 ---
 
 <AdminLayout title="Nuevo tenant">
-  <h1>Nuevo Tenant</h1>
-  {error && <div class="card" style="background:#ffdad6;color:#93000a;">{error}</div>}
-  <form class="card" method="POST">
-    <label for="business_name">Nombre del negocio *</label>
-    <input id="business_name" name="business_name" required placeholder="Acme Electric LLC" />
+  <h1 class="font-headline-lg text-headline-lg text-deep-navy mb-6">Nuevo Tenant</h1>
 
-    <label for="slug">Subdominio *</label>
-    <input id="slug" name="slug" required pattern="[a-z0-9-]+" placeholder="acme-electric" />
-    <p class="hint">Quedará en https://&lt;subdominio&gt;.tacocars.com</p>
+  {error && (
+    <div class="p-4 bg-error-container text-on-error-container rounded-lg text-sm font-medium mb-6">{error}</div>
+  )}
 
-    <div class="row">
+  <form class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant space-y-6" method="POST">
+    <div>
+      <label class={labelClass} for="business_name">Nombre del negocio *</label>
+      <input class={inputClass} id="business_name" name="business_name" required placeholder="Acme Electric LLC" />
+    </div>
+
+    <div>
+      <label class={labelClass} for="slug">Subdominio *</label>
+      <input class={inputClass} id="slug" name="slug" required pattern="[a-z0-9-]+" placeholder="acme-electric" />
+      <p class="text-label-md text-outline mt-2">Quedará en https://&lt;subdominio&gt;.tacocars.com</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="phone">Teléfono *</label>
-        <input id="phone" name="phone" required placeholder="(305) 555-1234" />
+        <label class={labelClass} for="phone">Teléfono *</label>
+        <input class={inputClass} id="phone" name="phone" required placeholder="(305) 555-1234" />
       </div>
       <div>
-        <label for="email">Email *</label>
-        <input id="email" name="email" type="email" required placeholder="contacto@negocio.com" />
+        <label class={labelClass} for="email">Email *</label>
+        <input class={inputClass} id="email" name="email" type="email" required placeholder="contacto@negocio.com" />
       </div>
     </div>
 
-    <label for="address">Dirección *</label>
-    <input id="address" name="address" required placeholder="123 Main St, Miami, FL 33125" />
+    <div>
+      <label class={labelClass} for="address">Dirección *</label>
+      <input class={inputClass} id="address" name="address" required placeholder="123 Main St, Miami, FL 33125" />
+    </div>
 
-    <label for="google_place_id">Google Place ID (opcional, referencia)</label>
-    <input id="google_place_id" name="google_place_id" placeholder="ChIJ..." />
+    <div>
+      <label class={labelClass} for="google_place_id">Google Place ID (opcional, referencia)</label>
+      <input class={inputClass} id="google_place_id" name="google_place_id" placeholder="ChIJ..." />
+    </div>
 
-    <label for="palette_preset">Paleta</label>
-    <select id="palette_preset" name="palette_preset">
-      {PALETTE_PRESETS.map((p) => <option value={p}>{p}</option>)}
-    </select>
+    <div>
+      <label class={labelClass} for="palette_preset">Paleta</label>
+      <select class={inputClass} id="palette_preset" name="palette_preset">
+        {PALETTE_PRESETS.map((p) => <option value={p}>{p}</option>)}
+      </select>
+    </div>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="facebook">Facebook (opcional)</label>
-        <input id="facebook" name="facebook" placeholder="https://facebook.com/..." />
+        <label class={labelClass} for="facebook">Facebook (opcional)</label>
+        <input class={inputClass} id="facebook" name="facebook" placeholder="https://facebook.com/..." />
       </div>
       <div>
-        <label for="instagram">Instagram (opcional)</label>
-        <input id="instagram" name="instagram" placeholder="https://instagram.com/..." />
+        <label class={labelClass} for="instagram">Instagram (opcional)</label>
+        <input class={inputClass} id="instagram" name="instagram" placeholder="https://instagram.com/..." />
       </div>
     </div>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label for="locale_default">Idioma por defecto</label>
-        <select id="locale_default" name="locale_default">
+        <label class={labelClass} for="locale_default">Idioma por defecto</label>
+        <select class={inputClass} id="locale_default" name="locale_default">
           <option value="es">Español</option>
           <option value="en">English</option>
         </select>
       </div>
       <div>
-        <label for="status">Estado</label>
-        <select id="status" name="status">
+        <label class={labelClass} for="status">Estado</label>
+        <select class={inputClass} id="status" name="status">
           <option value="draft">Borrador</option>
           <option value="live">Publicado</option>
         </select>
       </div>
     </div>
 
-    <div class="actions">
-      <button class="btn" type="submit">Crear Tenant</button>
-      <a class="btn btn-secondary" href="/admin">Cancelar</a>
+    <div class="flex gap-3 pt-2">
+      <SubmitButton text="Crear Tenant" />
+      <Button text="Cancelar" href="/admin" variant="outline" />
     </div>
   </form>
 </AdminLayout>
