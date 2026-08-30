@@ -21,7 +21,9 @@
     }
   ],
   "routes": [
-    { "pattern": "*.tacocars.com/*", "zone_name": "tacocars.com" },
-    { "pattern": "admin.ladetec.com/*", "zone_name": "ladetec.com" }
+    // Un solo comodín: cubre tanto los demos (<slug>.nitza.dev) como los
+    // paneles por vertical (<vertical>-admin.nitza.dev). La separación entre
+    // unos y otros la hace src/middleware.ts, no el enrutado.
+    { "pattern": "*.nitza.dev/*", "zone_name": "nitza.dev" }
   ]
 }

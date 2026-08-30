@@ -5,6 +5,7 @@ import SubmitButton from '../../../components/SubmitButton.astro';
 import { createTenant } from '../../../lib/db';
 import { normalizePhoneToE164 } from '../../../lib/tenant';
 import { PALETTE_PRESETS } from '../../../lib/palettes';
+import { DEMOS_SUFFIX, isReservedSlug } from '../../../lib/domains';
 import { LANDING_STYLE_OPTIONS, DEFAULT_LANDING_STYLE, resolveStyleId } from '../../../lib/landingStyles';
 import { env } from 'cloudflare:workers';
 
@@ -29,6 +30,8 @@ if (Astro.request.method === 'POST' && env.DB) {
 
   if (!/^[a-z0-9-]+$/.test(slug)) {
     error = 'El subdominio solo puede tener minúsculas, números y guiones.';
+  } else if (isReservedSlug(slug)) {
+    error = 'Ese subdominio está reservado por la plataforma. Los que terminan en "-admin" son del panel.';
   } else if (!businessName || !email || !address) {
     error = 'Nombre, email y dirección son obligatorios.';
   } else if (!phone) {
@@ -79,7 +82,7 @@ const labelClass = "font-label-lg text-deep-navy block font-semibold mb-2";
     <div>
       <label class={labelClass} for="slug">Subdominio *</label>
       <input class={inputClass} id="slug" name="slug" required pattern="[a-z0-9-]+" placeholder="acme-electric" />
-      <p class="text-label-md text-outline mt-2">Quedará en https://&lt;subdominio&gt;.tacocars.com</p>
+      <p class="text-label-md text-outline mt-2">Quedará en https://&lt;subdominio&gt;{DEMOS_SUFFIX}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
