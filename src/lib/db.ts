@@ -8,6 +8,7 @@ interface TenantRow {
   phone: string;
   email: string;
   address: string;
+  google_place_id: string | null;
   palette_preset: string;
   style_preset: string;
   logo_r2_key: string | null;
@@ -33,6 +34,7 @@ function mapTenant(row: TenantRow, testimonials: Testimonial[]): Tenant {
     phone: row.phone,
     email: row.email,
     address: row.address,
+    googlePlaceId: row.google_place_id,
     palettePreset: row.palette_preset,
     stylePreset: row.style_preset,
     logoR2Key: row.logo_r2_key,

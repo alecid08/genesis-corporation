@@ -169,7 +169,7 @@ const cardClass = "bg-white p-8 rounded-xl shadow-sm border border-outline-varia
 
     <div>
       <label class={labelClass} for="google_place_id">Google Place ID (opcional, referencia)</label>
-      <input class={inputClass} id="google_place_id" name="google_place_id" />
+      <input class={inputClass} id="google_place_id" name="google_place_id" value={tenant.googlePlaceId ?? ''} />
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

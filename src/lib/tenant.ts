@@ -14,6 +14,7 @@ export interface Tenant {
   phone: string; // E.164, ej. +17867202328
   email: string;
   address: string;
+  googlePlaceId: string | null;
   palettePreset: string;
   stylePreset: string;
   logoR2Key: string | null;
@@ -34,6 +35,7 @@ export const DEFAULT_TENANT: Tenant = {
   phone: '+17867202328',
   email: 'info@genesiselectrical.com',
   address: '185 NW 13th Ave Suite 736, Miami, FL 33125',
+  googlePlaceId: null,
   palettePreset: 'electric-blue',
   stylePreset: 'classic-corporate',
   logoR2Key: null,
