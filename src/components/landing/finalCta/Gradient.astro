@@ -1,0 +1,24 @@
+---
+import { telHref } from '../../../lib/tenant';
+import type { FinalCtaProps } from '../types';
+
+const { tenant, copy } = Astro.props as FinalCtaProps;
+---
+
+<section class="py-24 bg-gradient-to-r from-deep-navy via-primary to-electric-blue text-on-primary">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-center">
+    <h2 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6">{copy.finalCta.heading}</h2>
+    <p class="font-body-lg text-lg mb-12 max-w-2xl mx-auto">{copy.finalCta.body}</p>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a class="bg-safety-yellow text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href={telHref(tenant.phone)}>
+        <span class="material-symbols-outlined">call</span> {copy.finalCta.callNow}
+      </a>
+      <a class="bg-white text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href="/contacto">
+        <span class="material-symbols-outlined">chat</span> {copy.finalCta.sendMessage}
+      </a>
+      <a class="bg-transparent border-2 border-white text-white font-bold py-5 px-10 rounded-full hover:bg-white/10 transition-all flex items-center gap-3" href="/contacto">
+        <span class="material-symbols-outlined">description</span> {copy.finalCta.requestQuote}
+      </a>
+    </div>
+  </div>
+</section>

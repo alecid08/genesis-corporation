@@ -1,0 +1,22 @@
+---
+import TestimonialCard from '../../TestimonialCard.astro';
+import type { TestimonialsProps } from '../types';
+
+const { tenant, copy, locale } = Astro.props as TestimonialsProps;
+---
+
+<section class="py-24 bg-electric-blue">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-on-primary">
+    <h2 class="font-headline-lg text-headline-lg text-center mb-16">{copy.testimonials.heading}</h2>
+    <div class="flex overflow-x-auto snap-x snap-mandatory gap-gutter pb-8 no-scrollbar">
+      {tenant.testimonials.map((testimonial) => (
+        <TestimonialCard
+          rating={testimonial.rating}
+          quote={locale === 'en' && testimonial.quoteEn ? testimonial.quoteEn : testimonial.quoteEs}
+          author={testimonial.author}
+          location={testimonial.location}
+        />
+      ))}
+    </div>
+  </div>
+</section>

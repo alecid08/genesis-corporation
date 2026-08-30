@@ -7,6 +7,11 @@ interface Props {
   description?: string;
   image?: string;
   keywords?: string;
+  robots?: string;
+  /** CSS extra inyectado tras la paleta, ej. los tokens de un estilo de landing. */
+  extraStyleCss?: string;
+  /** Hoja de fuentes extra que pida el estilo de landing. */
+  fontHref?: string;
 }
 
 const tenant = Astro.locals.tenant;
@@ -15,7 +20,10 @@ const {
   title = `${tenant.businessName} | Electricistas Profesionales en Miami`,
   description = `Servicios eléctricos profesionales residenciales, comerciales y de emergencia 24/7 en Miami, Florida. Electricistas licenciados y certificados.`,
   image = "/images/og-image.jpg",
-  keywords = "electricista miami, servicios electricos, emergencia 24/7, electricista residencial, electricista comercial"
+  keywords = "electricista miami, servicios electricos, emergencia 24/7, electricista residencial, electricista comercial",
+  robots = "index, follow",
+  extraStyleCss,
+  fontHref,
 } = Astro.props;
 
 const siteUrl = `https://${Astro.url.hostname}`;
@@ -32,7 +40,7 @@ const palette = getPalette(tenant.palettePreset);
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="keywords" content={keywords} />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content={robots} />
   <meta name="author" content={tenant.businessName} />
   <meta name="theme-color" content={palette.deepNavy} />
   <link rel="canonical" href={canonicalURL} />
@@ -60,6 +68,7 @@ const palette = getPalette(tenant.palettePreset);
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  {fontHref && <link href={fontHref} rel="stylesheet" />}
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=arrow_back,arrow_forward,bolt,business,calendar_today,call,chat,check,check_circle,close,description,elevator,emergency_home,engineering,ev_station,home,info,lightbulb,location_on,lock,mail,menu,payments,person_search,priority_high,schedule,search,shield_with_heart,star,support_agent,troubleshoot,verified_user,warning,workspace_premium&display=swap" rel="stylesheet"/>
 
   <!-- LocalBusiness Schema.org Structured Data -->
@@ -91,6 +100,7 @@ const palette = getPalette(tenant.palettePreset);
 
   <!-- Paleta del tenant: sobreescribe los defaults de @theme en global.css -->
   <style set:html={palette.css} />
+  {extraStyleCss && <style set:html={extraStyleCss} />}
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
   <slot />

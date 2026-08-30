@@ -101,6 +101,32 @@
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
+
+  /* Tokens de estilo de landing (ver src/lib/landingStyles.ts).
+     Los valores por defecto reproducen el estilo `classic-corporate`; cada
+     preset los sobreescribe dentro de [data-landing-style], no en :root. */
+  --font-display: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+  --radius-card: 0.75rem;
+  --radius-button: 0.5rem;
+  --color-card-border: transparent;
+  --color-card-surface: var(--color-surface-container-low);
+  --color-heading: var(--color-deep-navy);
+  --color-scrim: var(--color-deep-navy);
+  /* Acento de iconos: por defecto el azul de marca del tenant. Un estilo oscuro
+     puede subirle luminancia sin perder el tono de la paleta. */
+  --color-accent: var(--color-electric-blue);
+  --spacing-section-y: 6rem;
+}
+
+:root {
+  /* No va en @theme: Tailwind inlina el valor de los tokens --shadow-* al
+     compilar, así que un override dentro de [data-landing-style] no llegaría.
+     Se consume con la utilidad arbitraria shadow-[var(--shadow-card)]. */
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  /* Idem: se consume con [text-transform:var(--display-transform)] en las
+     variantes que comparten dos o más estilos. */
+  --display-transform: none;
 }
 
 /* Design System Utility Classes */
@@ -122,7 +148,7 @@
 
 /* Font classes */
 .font-display-lg {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-display);
   font-size: 48px;
   line-height: 56px;
   letter-spacing: -0.02em;
@@ -130,7 +156,7 @@
 }
 
 .font-display-lg-mobile {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-display);
   font-size: 32px;
   line-height: 40px;
   letter-spacing: -0.01em;
@@ -138,42 +164,42 @@
 }
 
 .font-headline-lg {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-display);
   font-size: 32px;
   line-height: 40px;
   font-weight: 700;
 }
 
 .font-headline-md {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-display);
   font-size: 24px;
   line-height: 32px;
   font-weight: 700;
 }
 
 .font-body-lg {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 18px;
   line-height: 28px;
   font-weight: 400;
 }
 
 .font-body-md {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 }
 
 .font-label-lg {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-display);
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
 }
 
 .font-label-md {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-display);
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
@@ -223,5 +249,5 @@
 body {
   background-color: var(--color-background);
   color: var(--color-on-background);
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-body);
 }

@@ -5,6 +5,7 @@ import SubmitButton from '../../../components/SubmitButton.astro';
 import { createTenant } from '../../../lib/db';
 import { normalizePhoneToE164 } from '../../../lib/tenant';
 import { PALETTE_PRESETS } from '../../../lib/palettes';
+import { LANDING_STYLE_OPTIONS, DEFAULT_LANDING_STYLE, resolveStyleId } from '../../../lib/landingStyles';
 import { env } from 'cloudflare:workers';
 
 let error: string | null = null;
@@ -18,6 +19,7 @@ if (Astro.request.method === 'POST' && env.DB) {
   const address = String(form.get('address') ?? '').trim();
   const googlePlaceId = String(form.get('google_place_id') ?? '').trim();
   const palettePreset = String(form.get('palette_preset') ?? PALETTE_PRESETS[0]);
+  const stylePreset = resolveStyleId(String(form.get('style_preset') ?? ''), DEFAULT_LANDING_STYLE);
   const facebook = String(form.get('facebook') ?? '').trim();
   const instagram = String(form.get('instagram') ?? '').trim();
   const localeDefault = form.get('locale_default') === 'en' ? 'en' : 'es';
@@ -45,6 +47,7 @@ if (Astro.request.method === 'POST' && env.DB) {
         address,
         googlePlaceId: googlePlaceId || undefined,
         palettePreset,
+        stylePreset,
         socialLinks,
         localeDefault,
         status,
@@ -100,11 +103,19 @@ const labelClass = "font-label-lg text-deep-navy block font-semibold mb-2";
       <input class={inputClass} id="google_place_id" name="google_place_id" placeholder="ChIJ..." />
     </div>
 
-    <div>
-      <label class={labelClass} for="palette_preset">Paleta</label>
-      <select class={inputClass} id="palette_preset" name="palette_preset">
-        {PALETTE_PRESETS.map((p) => <option value={p}>{p}</option>)}
-      </select>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class={labelClass} for="palette_preset">Paleta</label>
+        <select class={inputClass} id="palette_preset" name="palette_preset">
+          {PALETTE_PRESETS.map((p) => <option value={p}>{p}</option>)}
+        </select>
+      </div>
+      <div>
+        <label class={labelClass} for="style_preset">Estilo de la landing</label>
+        <select class={inputClass} id="style_preset" name="style_preset">
+          {LANDING_STYLE_OPTIONS.map((s) => <option value={s.id}>{s.label}</option>)}
+        </select>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

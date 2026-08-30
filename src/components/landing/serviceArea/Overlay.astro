@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import type { ServiceAreaProps } from '../types';
+
+const { tenant, copy, image } = Astro.props as ServiceAreaProps;
+---
+
+<section class="relative">
+  <div class="absolute inset-0">
+    <Image
+      src={image}
+      alt="Mapa de área de servicio de electricistas en Miami"
+      class="w-full h-full object-cover"
+      loading="lazy"
+      decoding="async"
+      width={800}
+      height={800}
+    />
+    <div class="absolute inset-0 bg-scrim/70"></div>
+  </div>
+  <div class="relative px-base md:px-margin-desktop max-w-container-max mx-auto py-section-y">
+    <div data-reveal class="max-w-2xl bg-scrim text-on-primary border border-white/15 rounded-card shadow-[var(--shadow-card)] p-10">
+      <h2 class="font-headline-lg text-headline-lg mb-6">{copy.serviceArea.heading}</h2>
+      <p class="font-body-lg mb-8 opacity-90">{copy.serviceArea.body}</p>
+      <div class="flex flex-wrap gap-2 mb-10">
+        {copy.serviceArea.areas.map((area) => (
+          <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-button bg-white/10 border border-white/20 font-label-lg">
+            <span class="material-symbols-outlined text-safety-yellow text-[18px]">location_on</span>{area}
+          </span>
+        ))}
+      </div>
+      <p class="font-bold font-label-lg mb-2 uppercase tracking-[0.2em]">{copy.serviceArea.hqLabel}</p>
+      <p class="font-body-md text-safety-yellow">{tenant.address}</p>
+    </div>
+  </div>
+</section>

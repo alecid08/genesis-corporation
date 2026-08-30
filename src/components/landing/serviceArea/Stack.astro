@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { ServiceAreaProps } from '../types';
+
+const { tenant, copy, image } = Astro.props as ServiceAreaProps;
+---
+
+<section class="py-section-y bg-surface-subtle">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="font-headline-lg text-headline-lg text-heading mb-4">{copy.serviceArea.heading}</h2>
+      <p class="font-body-lg text-on-surface-variant">{copy.serviceArea.body}</p>
+    </div>
+
+    <div data-reveal class="rounded-card overflow-hidden shadow-[var(--shadow-card)] border border-card-border mb-10">
+      <Image
+        src={image}
+        alt="Mapa de área de servicio de electricistas en Miami"
+        class="w-full h-[360px] md:h-[440px] object-cover"
+        loading="lazy"
+        decoding="async"
+        width={800}
+        height={800}
+      />
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      {copy.serviceArea.areas.map((area) => (
+        <span class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-card-surface border border-card-border font-label-lg text-on-surface">
+          <span class="material-symbols-outlined text-accent text-[18px]">location_on</span>{area}
+        </span>
+      ))}
+    </div>
+
+    <div class="max-w-xl mx-auto text-center bg-card-surface border border-card-border rounded-card shadow-[var(--shadow-card)] p-8">
+      <p class="font-bold font-label-lg text-on-surface-variant mb-2">{copy.serviceArea.hqLabel}</p>
+      <p class="font-body-md text-on-surface">{tenant.address}</p>
+    </div>
+  </div>
+</section>

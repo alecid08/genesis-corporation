@@ -5,6 +5,7 @@ import { getTenantForAdmin, updateTenant, setTenantAssetKey, addTestimonial, del
 import { uploadTenantAsset } from '../../../lib/r2';
 import { normalizePhoneToE164, formatPhoneDisplay } from '../../../lib/tenant';
 import { PALETTE_PRESETS } from '../../../lib/palettes';
+import { LANDING_STYLE_OPTIONS, resolveStyleId } from '../../../lib/landingStyles';
 import { env } from 'cloudflare:workers';
 
 const { slug } = Astro.params;
@@ -31,6 +32,7 @@ if (Astro.request.method === 'POST') {
     const address = String(form.get('address') ?? '').trim();
     const googlePlaceId = String(form.get('google_place_id') ?? '').trim();
     const palettePreset = String(form.get('palette_preset') ?? PALETTE_PRESETS[0]);
+    const stylePreset = resolveStyleId(String(form.get('style_preset') ?? ''), current.stylePreset);
     const facebook = String(form.get('facebook') ?? '').trim();
     const instagram = String(form.get('instagram') ?? '').trim();
     const localeDefault = form.get('locale_default') === 'en' ? 'en' : 'es';
@@ -54,6 +56,7 @@ if (Astro.request.method === 'POST') {
         address,
         googlePlaceId: googlePlaceId || undefined,
         palettePreset,
+        stylePreset,
         socialLinks,
         localeDefault,
         status,
@@ -119,6 +122,25 @@ const cardClass = "bg-white p-8 rounded-xl shadow-sm border border-outline-varia
     · <span class={`inline-block px-3 py-0.5 rounded-full text-label-md font-semibold ${tenant.status === 'live' ? 'bg-success-green/15 text-success-green' : 'bg-tertiary-container/25 text-tertiary'}`}>{tenant.status}</span>
   </p>
 
+  <div class="mb-6">
+    <p class="text-label-md text-outline mb-2">Previsualizar estilos (no guarda nada):</p>
+    <div class="flex flex-wrap gap-2">
+      {LANDING_STYLE_OPTIONS.map((s) => (
+        <a
+          class:list={[
+            'px-3 py-1.5 rounded-full text-label-md font-semibold border transition-all',
+            s.id === tenant.stylePreset
+              ? 'bg-electric-blue text-on-primary border-electric-blue'
+              : 'bg-white text-electric-blue border-outline-variant hover:border-electric-blue',
+          ]}
+          href={`https://${tenant.slug}.tacocars.com/?style=${s.id}`}
+          target="_blank"
+          rel="noopener"
+        >{s.label}</a>
+      ))}
+    </div>
+  </div>
+
   {notice && <div class="p-4 bg-success-green/15 text-success-green rounded-lg text-sm font-medium mb-6">{notice}</div>}
   {error && <div class="p-4 bg-error-container text-on-error-container rounded-lg text-sm font-medium mb-6">{error}</div>}
 
@@ -150,11 +172,22 @@ const cardClass = "bg-white p-8 rounded-xl shadow-sm border border-outline-varia
       <input class={inputClass} id="google_place_id" name="google_place_id" />
     </div>
 
-    <div>
-      <label class={labelClass} for="palette_preset">Paleta</label>
-      <select class={inputClass} id="palette_preset" name="palette_preset">
-        {PALETTE_PRESETS.map((p) => <option value={p} selected={p === tenant.palettePreset}>{p}</option>)}
-      </select>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class={labelClass} for="palette_preset">Paleta</label>
+        <select class={inputClass} id="palette_preset" name="palette_preset">
+          {PALETTE_PRESETS.map((p) => <option value={p} selected={p === tenant.palettePreset}>{p}</option>)}
+        </select>
+      </div>
+      <div>
+        <label class={labelClass} for="style_preset">Estilo de la landing</label>
+        <select class={inputClass} id="style_preset" name="style_preset">
+          {LANDING_STYLE_OPTIONS.map((s) => <option value={s.id} selected={s.id === tenant.stylePreset}>{s.label}</option>)}
+        </select>
+        <p class="text-label-md text-on-surface-variant mt-2">
+          Previsualizá cualquiera sin guardar con <code>?style=&lt;id&gt;</code> en la landing.
+        </p>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

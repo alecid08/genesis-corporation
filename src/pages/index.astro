@@ -1,298 +1,70 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import TestimonialCard from '../components/TestimonialCard.astro';
 import homeHeroImage from '../assets/home-hero.jpg';
 import serviceAreaImage from '../assets/service-area.jpg';
-import { telHref } from '../lib/tenant';
+import { getLandingCopy } from '../lib/landingCopy';
+import { getLandingStyle, resolveStyleId } from '../lib/landingStyles';
+import RevealScript from '../components/landing/RevealScript.astro';
+
+import HeroOverlay from '../components/landing/hero/Overlay.astro';
+import HeroSplit from '../components/landing/hero/Split.astro';
+import HeroCentered from '../components/landing/hero/Centered.astro';
+import FeaturesGrid from '../components/landing/features/Grid.astro';
+import FeaturesBento from '../components/landing/features/Bento.astro';
+import FeaturesList from '../components/landing/features/List.astro';
+import ServicesCards from '../components/landing/services/Cards.astro';
+import ServicesFlat from '../components/landing/services/Flat.astro';
+import ServicesStacked from '../components/landing/services/Stacked.astro';
+import TestimonialsCarousel from '../components/landing/testimonials/Carousel.astro';
+import TestimonialsGrid from '../components/landing/testimonials/Grid.astro';
+import TestimonialsQuotes from '../components/landing/testimonials/Quotes.astro';
+import ServiceAreaSplit from '../components/landing/serviceArea/Split.astro';
+import ServiceAreaOverlay from '../components/landing/serviceArea/Overlay.astro';
+import ServiceAreaStack from '../components/landing/serviceArea/Stack.astro';
+import FinalCtaGradient from '../components/landing/finalCta/Gradient.astro';
+import FinalCtaSolid from '../components/landing/finalCta/Solid.astro';
+import FinalCtaCard from '../components/landing/finalCta/Card.astro';
+
+const HERO_VARIANTS = { overlay: HeroOverlay, split: HeroSplit, centered: HeroCentered };
+const FEATURES_VARIANTS = { grid: FeaturesGrid, bento: FeaturesBento, list: FeaturesList };
+const SERVICES_VARIANTS = { cards: ServicesCards, flat: ServicesFlat, stacked: ServicesStacked };
+const TESTIMONIALS_VARIANTS = { carousel: TestimonialsCarousel, grid: TestimonialsGrid, quotes: TestimonialsQuotes };
+const SERVICE_AREA_VARIANTS = { split: ServiceAreaSplit, overlay: ServiceAreaOverlay, stack: ServiceAreaStack };
+const FINAL_CTA_VARIANTS = { gradient: FinalCtaGradient, solid: FinalCtaSolid, card: FinalCtaCard };
 
 const tenant = Astro.locals.tenant;
 const locale = Astro.locals.locale;
+const copy = getLandingCopy(tenant, locale);
 
-const copy = {
-  es: {
-    title: `${tenant.businessName} | Electricistas Profesionales en Miami`,
-    description: `${tenant.businessName} - Electricistas Profesionales en Miami, Florida. Servicios residenciales, comerciales y emergencias.`,
-    heroSubtitle: 'Electricistas Profesionales en Miami, Florida',
-    ctaServices: 'Nuestros Servicios',
-    ctaQuote: 'Solicitar Presupuesto',
-    whyUsHeading: '¿Por Qué Elegirnos?',
-    feature1Title: 'Licenciados',
-    feature1Body: 'Personal certificado y totalmente asegurado para su total tranquilidad en cada proyecto.',
-    feature2Title: '7 Días',
-    feature2Body: 'Disponibilidad total los 7 días de la semana para atender cualquier necesidad eléctrica urgente.',
-    feature3Title: 'Precios',
-    feature3Body: 'Tarifas competitivas y presupuestos transparentes sin cargos ocultos ni sorpresas finales.',
-    feature4Title: 'Experiencia',
-    feature4Body: 'Años de trayectoria resolviendo los retos eléctricos más complejos en todo Miami-Dade.',
-    feature5Title: 'Garantía',
-    feature5Body: 'Respaldamos cada trabajo con garantías sólidas que certifican nuestra calidad y compromiso.',
-    feature6Title: 'Personalizado',
-    feature6Body: 'Soluciones a medida diseñadas específicamente para sus necesidades residenciales o comerciales.',
-    servicesHeading: 'Servicios Principales',
-    residentialTitle: 'Residencial',
-    residentialItems: ['Instalaciones de Iluminación LED', 'Actualización de Paneles Eléctricos', 'Instalación de Ventiladores de Techo', 'Reparación de Cableado Antiguo'],
-    commercialTitle: 'Comercial',
-    commercialItems: ['Mantenimiento Preventivo Industrial', 'Sistemas Eléctricos Trifásicos', 'Iluminación de Seguridad y Exterior', 'Auditorías de Eficiencia Energética'],
-    emergencyTitle: 'Emergencia 24/7',
-    emergencyItems: ['Reparación Inmediata de Apagones', 'Cortocircuitos y Fallos de Panel', 'Atención en Menos de 60 Minutos', 'Servicio en Toda el Área de Miami'],
-    testimonialsHeading: 'Lo Que Dicen Nuestros Clientes',
-    serviceAreaHeading: 'Nuestra Área de Servicio',
-    serviceAreaBody: 'Atendemos a toda la comunidad de Miami-Dade con tiempos de respuesta rápidos y equipo local.',
-    hqLabel: 'Sede Principal:',
-    finalCtaHeading: '¿Listo para solucionar sus problemas eléctricos?',
-    finalCtaBody: `No arriesgue su seguridad. Contacte hoy mismo a los expertos licenciados de ${tenant.businessName}.`,
-    callNow: 'Llamar Ahora',
-    sendMessage: 'Enviar Mensaje',
-    requestQuote: 'Pedir Cotización',
-  },
-  en: {
-    title: `${tenant.businessName} | Professional Electricians in Miami`,
-    description: `${tenant.businessName} - Professional Electricians in Miami, Florida. Residential, commercial, and emergency services.`,
-    heroSubtitle: 'Professional Electricians in Miami, Florida',
-    ctaServices: 'Our Services',
-    ctaQuote: 'Request a Quote',
-    whyUsHeading: 'Why Choose Us?',
-    feature1Title: 'Licensed',
-    feature1Body: 'Certified and fully insured staff for your total peace of mind on every project.',
-    feature2Title: '7 Days',
-    feature2Body: 'Full availability 7 days a week to handle any urgent electrical need.',
-    feature3Title: 'Pricing',
-    feature3Body: 'Competitive rates and transparent quotes with no hidden fees or last-minute surprises.',
-    feature4Title: 'Experience',
-    feature4Body: 'Years of experience solving the most complex electrical challenges across Miami-Dade.',
-    feature5Title: 'Guarantee',
-    feature5Body: 'We back every job with solid warranties that certify our quality and commitment.',
-    feature6Title: 'Personalized',
-    feature6Body: 'Custom-tailored solutions designed specifically for your residential or commercial needs.',
-    servicesHeading: 'Main Services',
-    residentialTitle: 'Residential',
-    residentialItems: ['LED Lighting Installations', 'Electrical Panel Upgrades', 'Ceiling Fan Installation', 'Old Wiring Repair'],
-    commercialTitle: 'Commercial',
-    commercialItems: ['Industrial Preventive Maintenance', 'Three-Phase Electrical Systems', 'Security & Outdoor Lighting', 'Energy Efficiency Audits'],
-    emergencyTitle: '24/7 Emergency',
-    emergencyItems: ['Immediate Power Outage Repair', 'Short Circuits & Panel Failures', 'Response in Under 60 Minutes', 'Service Across All of Miami'],
-    testimonialsHeading: 'What Our Clients Say',
-    serviceAreaHeading: 'Our Service Area',
-    serviceAreaBody: 'We serve the entire Miami-Dade community with fast response times and local crews.',
-    hqLabel: 'Headquarters:',
-    finalCtaHeading: 'Ready to solve your electrical problems?',
-    finalCtaBody: `Don't risk your safety. Contact the licensed experts at ${tenant.businessName} today.`,
-    callNow: 'Call Now',
-    sendMessage: 'Send Message',
-    requestQuote: 'Request a Quote',
-  },
-}[locale];
+// `?style=` permite enseñar los estilos sobre el contenido real del tenant sin
+// guardar nada. Se valida contra el registro: nunca se confía en el query crudo.
+const previewParam = Astro.url.searchParams.get('style');
+const style = getLandingStyle(resolveStyleId(previewParam, tenant.stylePreset));
+// Un preview no debe indexarse: serían N copias de la misma página.
+const robots = previewParam ? 'noindex, nofollow' : 'index, follow';
 
-const title = copy.title;
-const description = copy.description;
+const Hero = HERO_VARIANTS[style.sections.hero];
+const Features = FEATURES_VARIANTS[style.sections.features];
+const Services = SERVICES_VARIANTS[style.sections.services];
+const Testimonials = TESTIMONIALS_VARIANTS[style.sections.testimonials];
+const ServiceArea = SERVICE_AREA_VARIANTS[style.sections.serviceArea];
+const FinalCta = FINAL_CTA_VARIANTS[style.sections.finalCta];
 ---
 
-<Layout title={title} description={description}>
-  <!-- Hero Section -->
-  <section class="relative h-[819px] flex items-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <Image 
-        src={homeHeroImage} 
-        alt="Electricista profesional en Miami trabajando en un panel eléctrico moderno" 
-        class="w-full h-full object-cover" 
-        loading="eager" 
-        fetchpriority="high"
-        width={1920}
-        height={1080}
-      />
-      <div class="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
-    </div>
-    <div class="relative z-10 px-base md:px-margin-desktop max-w-container-max mx-auto w-full">
-      <div class="max-w-2xl text-on-primary">
-        <h1 class="font-display-lg text-[60px] leading-[1.1] font-bold mb-6">
-          {tenant.businessName}
-        </h1>
-        <p class="font-headline-md text-headline-md mb-8 opacity-90">
-          {copy.heroSubtitle}
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/servicios" class="bg-safety-yellow text-deep-navy font-bold py-4 px-8 rounded-lg shadow-lg hover:brightness-95 transition-all text-lg inline-block text-center">
-            {copy.ctaServices}
-          </a>
-          <a href="/contacto" class="bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white/10 transition-all text-lg inline-block text-center">
-            {copy.ctaQuote}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ¿Por Qué Elegirnos? -->
-  <section class="py-24 bg-surface-subtle">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
-      <h2 class="font-headline-lg text-headline-lg text-deep-navy text-center mb-16">{copy.whyUsHeading}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-        <!-- Feature Cards -->
-        <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all group">
-          <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">verified_user</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-3">{copy.feature1Title}</h3>
-          <p class="text-on-surface-variant font-body-md">{copy.feature1Body}</p>
-        </div>
-        <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
-          <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">calendar_today</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-3">{copy.feature2Title}</h3>
-          <p class="text-on-surface-variant font-body-md">{copy.feature2Body}</p>
-        </div>
-        <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
-          <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">payments</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-3">{copy.feature3Title}</h3>
-          <p class="text-on-surface-variant font-body-md">{copy.feature3Body}</p>
-        </div>
-        <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
-          <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">engineering</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-3">{copy.feature4Title}</h3>
-          <p class="text-on-surface-variant font-body-md">{copy.feature4Body}</p>
-        </div>
-        <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
-          <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">workspace_premium</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-3">{copy.feature5Title}</h3>
-          <p class="text-on-surface-variant font-body-md">{copy.feature5Body}</p>
-        </div>
-        <div class="bg-surface-container-low p-8 rounded-xl shadow-md border-t-4 border-transparent hover:border-electric-blue transition-all">
-          <span class="material-symbols-outlined text-4xl text-electric-blue mb-4 block">person_search</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-3">{copy.feature6Title}</h3>
-          <p class="text-on-surface-variant font-body-md">{copy.feature6Body}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Servicios Principales -->
-  <section class="py-24 bg-white">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
-      <h2 class="font-headline-lg text-headline-lg text-deep-navy text-center mb-16">{copy.servicesHeading}</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <!-- Residencial -->
-        <div class="glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all">
-          <span class="material-symbols-outlined text-[80px] text-electric-blue mb-6">home</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-6">{copy.residentialTitle}</h3>
-          <ul class="space-y-4 mb-8">
-            {copy.residentialItems.map((item) => (
-              <li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">{item}</span></li>
-            ))}
-          </ul>
-        </div>
-        <!-- Comercial -->
-        <div class="glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all">
-          <span class="material-symbols-outlined text-[80px] text-electric-blue mb-6">business</span>
-          <h3 class="font-headline-md text-headline-md text-deep-navy mb-6">{copy.commercialTitle}</h3>
-          <ul class="space-y-4 mb-8">
-            {copy.commercialItems.map((item) => (
-              <li class="flex items-start gap-3"><span class="material-symbols-outlined text-success-green">check_circle</span> <span class="font-body-md text-on-surface">{item}</span></li>
-            ))}
-          </ul>
-        </div>
-        <!-- Emergencia -->
-        <div class="glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all bg-emergency-red/5 border-emergency-red/20">
-          <span class="material-symbols-outlined text-[80px] text-emergency-red mb-6" style="font-variation-settings: 'FILL' 1;">warning</span>
-          <h3 class="font-headline-md text-headline-md text-emergency-red mb-6">{copy.emergencyTitle}</h3>
-          <ul class="space-y-4 mb-8">
-            {copy.emergencyItems.map((item) => (
-              <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emergency-red">emergency_home</span> <span class="font-body-md text-on-surface">{item}</span></li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonios -->
-  <section class="py-24 bg-electric-blue">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-on-primary">
-      <h2 class="font-headline-lg text-headline-lg text-center mb-16">{copy.testimonialsHeading}</h2>
-      <div class="flex overflow-x-auto snap-x snap-mandatory gap-gutter pb-8 no-scrollbar">
-        {tenant.testimonials.map((testimonial) => (
-          <TestimonialCard
-            rating={testimonial.rating}
-            quote={locale === 'en' && testimonial.quoteEn ? testimonial.quoteEn : testimonial.quoteEs}
-            author={testimonial.author}
-            location={testimonial.location}
-          />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Área de Servicio -->
-  <section class="py-24">
-    <div class="flex flex-col lg:flex-row h-full">
-      <!-- Map Column -->
-      <div class="w-full lg:w-1/2 h-[500px] lg:h-auto min-h-[400px] relative">
-        <Image 
-          src={serviceAreaImage} 
-          alt="Mapa de área de servicio de electricistas en Miami" 
-          class="w-full h-full object-cover absolute inset-0"
-          loading="lazy"
-          decoding="async"
-          width={800}
-          height={600}
-        />
-      </div>
-      <!-- Service List Column -->
-      <div class="w-full lg:w-1/2 px-base md:px-margin-desktop py-12 bg-deep-navy text-on-primary">
-        <h2 class="font-headline-lg text-headline-lg mb-8">{copy.serviceAreaHeading}</h2>
-        <p class="font-body-lg mb-8 opacity-90">{copy.serviceAreaBody}</p>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Miami Beach</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Coral Gables</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Doral</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Hialeah</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Kendall</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Homestead</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Aventura</div>
-          <div class="flex items-center gap-2"><span class="material-symbols-outlined text-safety-yellow">location_on</span> Pinecrest</div>
-        </div>
-        <div class="mt-12 p-6 bg-white/10 rounded-lg border border-white/20">
-          <p class="font-bold font-label-lg mb-2">{copy.hqLabel}</p>
-          <p class="font-body-md opacity-80 italic text-safety-yellow">{tenant.address}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Final -->
-  <section class="py-24 bg-gradient-to-r from-deep-navy via-primary to-electric-blue text-on-primary">
-    <div class="px-base md:px-margin-desktop max-w-container-max mx-auto text-center">
-      <h2 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6">{copy.finalCtaHeading}</h2>
-      <p class="font-body-lg text-lg mb-12 max-w-2xl mx-auto">{copy.finalCtaBody}</p>
-      <div class="flex flex-wrap justify-center gap-6">
-        <a class="bg-safety-yellow text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href={telHref(tenant.phone)}>
-          <span class="material-symbols-outlined">call</span> {copy.callNow}
-        </a>
-        <a class="bg-white text-deep-navy font-bold py-5 px-10 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center gap-3" href="/contacto">
-          <span class="material-symbols-outlined">chat</span> {copy.sendMessage}
-        </a>
-        <a class="bg-transparent border-2 border-white text-white font-bold py-5 px-10 rounded-full hover:bg-white/10 transition-all flex items-center gap-3" href="/contacto">
-          <span class="material-symbols-outlined">description</span> {copy.requestQuote}
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <script is:inline>
-    // Smooth reveal animations on scroll
-    const observerOptions = {
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.glass-card, .bg-surface-container-low').forEach(el => {
-      el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-      observer.observe(el);
-    });
-  </script>
+<Layout
+  title={copy.title}
+  description={copy.description}
+  robots={robots}
+  extraStyleCss={style.css}
+  fontHref={style.fontHref}
+>
+  <div data-landing-style={style.id}>
+    <Hero tenant={tenant} copy={copy} image={homeHeroImage} />
+    <Features copy={copy} />
+    <Services copy={copy} />
+    <Testimonials tenant={tenant} copy={copy} locale={locale} />
+    <ServiceArea tenant={tenant} copy={copy} image={serviceAreaImage} />
+    <FinalCta tenant={tenant} copy={copy} />
+  </div>
+  <RevealScript />
 </Layout>

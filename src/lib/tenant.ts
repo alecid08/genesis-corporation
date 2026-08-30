@@ -15,6 +15,7 @@ export interface Tenant {
   email: string;
   address: string;
   palettePreset: string;
+  stylePreset: string;
   logoR2Key: string | null;
   heroR2Key: string | null;
   socialLinks: Record<string, string>;
@@ -34,6 +35,7 @@ export const DEFAULT_TENANT: Tenant = {
   email: 'info@genesiselectrical.com',
   address: '185 NW 13th Ave Suite 736, Miami, FL 33125',
   palettePreset: 'electric-blue',
+  stylePreset: 'classic-corporate',
   logoR2Key: null,
   heroR2Key: null,
   socialLinks: {

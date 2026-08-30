@@ -1,0 +1,46 @@
+---
+import type { TestimonialsProps } from '../types';
+
+const { tenant, copy, locale } = Astro.props as TestimonialsProps;
+
+const items = tenant.testimonials.map((t) => ({
+  ...t,
+  quote: locale === 'en' && t.quoteEn ? t.quoteEn : t.quoteEs,
+}));
+const [lead, ...rest] = items;
+---
+
+<section class="py-section-y bg-card-surface">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-heading text-center mb-16">{copy.testimonials.heading}</h2>
+
+    {lead && (
+      <figure data-reveal class="max-w-4xl mx-auto text-center mb-20">
+        <div class="flex justify-center text-safety-yellow mb-8">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <span class="material-symbols-outlined select-none" style={`font-variation-settings: 'FILL' ${index < lead.rating ? 1 : 0};`}>star</span>
+          ))}
+        </div>
+        <blockquote class="font-display-lg text-[clamp(24px,3vw,40px)] leading-[1.35] text-on-surface">
+          “{lead.quote}”
+        </blockquote>
+        <figcaption class="mt-8 font-label-lg text-on-surface-variant uppercase tracking-[0.2em]">
+          {lead.author} · {lead.location}
+        </figcaption>
+      </figure>
+    )}
+
+    {rest.length > 0 && (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+        {rest.map((t) => (
+          <figure data-reveal class="border-t border-card-border pt-8">
+            <blockquote class="font-body-lg text-on-surface mb-6">“{t.quote}”</blockquote>
+            <figcaption class="font-label-lg text-on-surface-variant uppercase tracking-[0.2em]">
+              {t.author} · {t.location}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
