@@ -21,9 +21,10 @@
     }
   ],
   "routes": [
-    // Un solo comodín: cubre tanto los demos (<slug>.nitza.dev) como los
-    // paneles por vertical (<vertical>-admin.nitza.dev). La separación entre
-    // unos y otros la hace src/middleware.ts, no el enrutado.
-    { "pattern": "*.nitza.dev/*", "zone_name": "nitza.dev" }
+    // Dos patrones estrechos en vez de un comodín *.nitza.dev, que se tragaría
+    // www.nitza.dev, donde vive el sitio propio de Nitza. El apex nunca lo
+    // matchea un comodín de subdominio, pero www sí.
+    { "pattern": "*-demo.nitza.dev/*", "zone_name": "nitza.dev" },
+    { "pattern": "*-admin.nitza.dev/*", "zone_name": "nitza.dev" }
   ]
 }

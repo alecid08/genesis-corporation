@@ -1,17 +1,18 @@
 /**
  * Dominios de la plataforma, en un solo sitio.
  *
- * Los demos de cada tenant se sirven en `<slug>.nitza.dev`. El panel de
- * administración vive en `<vertical>-admin.nitza.dev` (por ejemplo
- * `electro-admin.nitza.dev`), un hostname por rubro.
+ * Los demos de cada tenant se sirven en `<slug>-demo.nitza.dev` y el panel de
+ * administración en `<vertical>-admin.nitza.dev`, un hostname por rubro.
  *
- * Ambos caen bajo el mismo comodín `*.nitza.dev` de `wrangler.jsonc`, así que
- * la separación entre uno y otro la hace el middleware, no el enrutado.
+ * Los sufijos son deliberadamente estrechos, no un comodín `*.nitza.dev`: la
+ * raíz y `www.nitza.dev` sirven el sitio propio de Nitza y un comodín los
+ * interceptaría. Las rutas de `wrangler.jsonc` reflejan estos dos patrones.
  */
 
 export const ROOT_DOMAIN = 'nitza.dev';
 
-export const DEMOS_SUFFIX = `.${ROOT_DOMAIN}`;
+/** Sufijo del subdominio de demo: `<slug>` + esto = host público del tenant. */
+export const DEMOS_SUFFIX = `-demo.${ROOT_DOMAIN}`;
 
 /** `<vertical>-admin.nitza.dev`. El vertical sigue las mismas reglas que un slug. */
 const ADMIN_HOST_RE = /^[a-z0-9-]+-admin\.nitza\.dev$/;
@@ -26,9 +27,10 @@ export function isAdminHost(hostname: string): boolean {
 }
 
 /**
- * Slugs que no se pueden dar de alta porque su subdominio chocaría con un
- * hostname de la plataforma. Sin esto, un tenant `electro-admin` se serviría
- * justo en el host del panel.
+ * Slugs que no se dan de alta. Con los sufijos actuales ningún slug puede
+ * chocar con un host de admin (`-demo` y `-admin` son disjuntos), así que esto
+ * es defensa en profundidad: si el esquema de subdominios vuelve a cambiar, el
+ * choque no aparece en silencio.
  */
 const RESERVED_SLUGS = new Set(['www', 'admin', 'api', 'assets', 'app']);
 

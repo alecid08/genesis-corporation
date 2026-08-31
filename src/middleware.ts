@@ -10,7 +10,8 @@ function resolveSlugFromHost(hostname: string, searchParams: URLSearchParams): s
     return null;
   }
   if (hostname.endsWith(DEMOS_SUFFIX)) {
-    return hostname.slice(0, -DEMOS_SUFFIX.length);
+    // `-demo.nitza.dev` a secas no lleva slug: no es el demo de nadie.
+    return hostname.slice(0, -DEMOS_SUFFIX.length) || null;
   }
   // Conveniencia para desarrollo local (localhost, 127.0.0.1, *.localhost):
   // permite simular cualquier tenant con ?tenant=<slug>, si no cae al default.
