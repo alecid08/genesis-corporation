@@ -2,7 +2,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { env } from 'cloudflare:workers';
 import { getTenantBySlug } from './lib/db';
 import { DEFAULT_TENANT } from './lib/tenant';
-import { DEMOS_SUFFIX, isAdminHost, isLocalHost } from './lib/domains';
+import { DEMOS_SUFFIX, isAdminHost, isLocalHost, legacyRedirectTarget } from './lib/domains';
 
 function resolveSlugFromHost(hostname: string, searchParams: URLSearchParams): string | null {
   // Un host de admin nunca es un tenant, aunque encaje con el sufijo.
@@ -24,6 +24,13 @@ function resolveSlugFromHost(hostname: string, searchParams: URLSearchParams): s
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
   const hostname = context.url.hostname;
+
+  // Los dominios anteriores siguen enrutados a este Worker: se redirigen antes
+  // que nada, para que un enlace viejo a un demo llegue a su equivalente nuevo.
+  const legacyTarget = legacyRedirectTarget(context.url);
+  if (legacyTarget) {
+    return Response.redirect(legacyTarget, 301);
+  }
 
   // /assets no necesita tenant: sirve directo desde R2 por key.
   if (pathname.startsWith('/assets')) {

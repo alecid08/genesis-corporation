@@ -47,3 +47,41 @@ export function tenantUrl(slug: string): string {
 export function tenantHost(slug: string): string {
   return `${slug}${DEMOS_SUFFIX}`;
 }
+
+// ---------------------------------------------------------------------------
+// Dominios anteriores
+// ---------------------------------------------------------------------------
+
+/**
+ * Los demos vivían en `<slug>.tacocars.com` y el panel en `admin.ladetec.com`.
+ * Sus rutas siguen apuntando a este Worker y no se pueden borrar con el token
+ * actual, que solo alcanza la zona `nitza.dev`. Mientras sigan ahí, el tráfico
+ * llega igual, así que se redirige en vez de contestar 404.
+ */
+const LEGACY_DEMOS_SUFFIX = '.tacocars.com';
+const LEGACY_ADMIN_HOST = 'admin.ladetec.com';
+
+/** Panel al que apunta el hostname de admin anterior, que no indicaba vertical. */
+export const DEFAULT_ADMIN_HOST = `electro-admin.${ROOT_DOMAIN}`;
+
+/**
+ * Destino al que redirigir una petición a un dominio anterior, conservando
+ * ruta y query. Devuelve null si el host no es uno de los antiguos.
+ */
+export function legacyRedirectTarget(url: URL): string | null {
+  const { hostname, pathname, search } = url;
+
+  if (hostname === LEGACY_ADMIN_HOST) {
+    return `https://${DEFAULT_ADMIN_HOST}${pathname}${search}`;
+  }
+
+  if (hostname.endsWith(LEGACY_DEMOS_SUFFIX)) {
+    const slug = hostname.slice(0, -LEGACY_DEMOS_SUFFIX.length);
+    // Un host sin slug (o con punto, como `a.b.tacocars.com`) no mapea a
+    // ningún demo: mejor 404 que inventar un destino.
+    if (!slug || slug.includes('.')) return null;
+    return `https://${slug}${DEMOS_SUFFIX}${pathname}${search}`;
+  }
+
+  return null;
+}
