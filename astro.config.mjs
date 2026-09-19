@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://ladetec.com',
+  site: 'https://nitza.dev',
   output: 'server',
   adapter: cloudflare({
     imageService: 'compile',

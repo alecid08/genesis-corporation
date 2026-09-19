@@ -21,7 +21,10 @@
     }
   ],
   "routes": [
-    { "pattern": "*.tacocars.com/*", "zone_name": "tacocars.com" },
-    { "pattern": "admin.ladetec.com/*", "zone_name": "ladetec.com" }
+    // Dos patrones estrechos en vez de un comodín *.nitza.dev, que se tragaría
+    // www.nitza.dev, donde vive el sitio propio de Nitza. El apex nunca lo
+    // matchea un comodín de subdominio, pero www sí.
+    { "pattern": "*-demo.nitza.dev/*", "zone_name": "nitza.dev" },
+    { "pattern": "*-admin.nitza.dev/*", "zone_name": "nitza.dev" }
   ]
 }

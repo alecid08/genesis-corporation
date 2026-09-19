@@ -1,0 +1,20 @@
+---
+import type { FeaturesProps } from '../types';
+
+const { copy } = Astro.props as FeaturesProps;
+---
+
+<section class="py-section-y bg-surface-subtle">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-heading text-center mb-16">{copy.whyUs.heading}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      {copy.whyUs.features.map((feature) => (
+        <div data-reveal class="bg-card-surface p-8 rounded-card shadow-[var(--shadow-card)] border-t-4 border-transparent hover:border-electric-blue transition-all">
+          <span class="material-symbols-outlined text-4xl text-accent mb-4 block">{feature.icon}</span>
+          <h3 class="font-headline-md text-headline-md text-heading mb-3">{feature.title}</h3>
+          <p class="text-on-surface-variant font-body-md">{feature.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

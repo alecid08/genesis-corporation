@@ -1,0 +1,25 @@
+---
+// Anima al entrar en viewport cualquier elemento marcado con `data-reveal`.
+// Antes se acoplaba a `.glass-card` / `.bg-surface-container-low`, clases que no
+// existen en la mayoría de las variantes de estilo.
+---
+
+<script is:inline>
+  const observerOptions = {
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        entry.target.classList.remove('opacity-0', 'translate-y-10');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+    observer.observe(el);
+  });
+</script>

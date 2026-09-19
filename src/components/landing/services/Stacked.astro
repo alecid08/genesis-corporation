@@ -1,0 +1,45 @@
+---
+import type { ServicesProps } from '../types';
+
+const { copy } = Astro.props as ServicesProps;
+---
+
+<section class="py-section-y bg-card-surface">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-heading text-center mb-16">{copy.services.heading}</h2>
+    <div class="space-y-8">
+      {copy.services.items.map((service, index) => {
+        const emergency = service.tone === 'emergency';
+        return (
+          <div
+            data-reveal
+            class:list={[
+              'grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-surface-subtle border border-card-border rounded-card shadow-[var(--shadow-card)] p-8 lg:p-12',
+              emergency && 'bg-emergency-red/5',
+            ]}
+          >
+            <div class:list={['lg:col-span-4', index % 2 === 1 && 'lg:order-2']}>
+              <span
+                class:list={['material-symbols-outlined text-[72px] mb-4 block', emergency ? 'text-emergency-red' : 'text-accent']}
+                style={emergency ? "font-variation-settings: 'FILL' 1;" : undefined}
+              >{service.icon}</span>
+              <h3 class:list={['font-headline-md text-headline-md', emergency ? 'text-emergency-red' : 'text-on-surface']}>
+                {service.title}
+              </h3>
+            </div>
+            <ul class:list={['lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4', index % 2 === 1 && 'lg:order-1']}>
+              {service.items.map((item) => (
+                <li class="flex items-start gap-3 bg-card-surface border border-card-border rounded-button px-4 py-3">
+                  <span class:list={['material-symbols-outlined shrink-0', emergency ? 'text-emergency-red' : 'text-success-green']}>
+                    {emergency ? 'emergency_home' : 'check_circle'}
+                  </span>
+                  <span class="font-body-md text-on-surface">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

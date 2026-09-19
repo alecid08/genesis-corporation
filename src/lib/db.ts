@@ -8,7 +8,9 @@ interface TenantRow {
   phone: string;
   email: string;
   address: string;
+  google_place_id: string | null;
   palette_preset: string;
+  style_preset: string;
   logo_r2_key: string | null;
   hero_r2_key: string | null;
   social_links: string;
@@ -32,7 +34,9 @@ function mapTenant(row: TenantRow, testimonials: Testimonial[]): Tenant {
     phone: row.phone,
     email: row.email,
     address: row.address,
+    googlePlaceId: row.google_place_id,
     palettePreset: row.palette_preset,
+    stylePreset: row.style_preset,
     logoR2Key: row.logo_r2_key,
     heroR2Key: row.hero_r2_key,
     socialLinks: JSON.parse(row.social_links || '{}'),
@@ -117,6 +121,7 @@ export interface TenantInput {
   address: string;
   googlePlaceId?: string;
   palettePreset: string;
+  stylePreset: string;
   socialLinks: Record<string, string>;
   localeDefault: 'es' | 'en';
   status: 'draft' | 'live';
@@ -125,8 +130,8 @@ export interface TenantInput {
 export async function createTenant(db: D1Database, input: TenantInput): Promise<void> {
   await db
     .prepare(
-      `INSERT INTO tenants (slug, status, business_name, phone, email, address, google_place_id, palette_preset, social_links, locale_default)
-       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)`
+      `INSERT INTO tenants (slug, status, business_name, phone, email, address, google_place_id, palette_preset, style_preset, social_links, locale_default)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)`
     )
     .bind(
       input.slug,
@@ -137,6 +142,7 @@ export async function createTenant(db: D1Database, input: TenantInput): Promise<
       input.address,
       input.googlePlaceId ?? null,
       input.palettePreset,
+      input.stylePreset,
       JSON.stringify(input.socialLinks),
       input.localeDefault
     )
@@ -147,8 +153,9 @@ export async function updateTenant(db: D1Database, tenantId: number, input: Tena
   await db
     .prepare(
       `UPDATE tenants SET slug = ?1, status = ?2, business_name = ?3, phone = ?4, email = ?5,
-       address = ?6, google_place_id = ?7, palette_preset = ?8, social_links = ?9, locale_default = ?10
-       WHERE id = ?11`
+       address = ?6, google_place_id = ?7, palette_preset = ?8, style_preset = ?9, social_links = ?10,
+       locale_default = ?11
+       WHERE id = ?12`
     )
     .bind(
       input.slug,
@@ -159,6 +166,7 @@ export async function updateTenant(db: D1Database, tenantId: number, input: Tena
       input.address,
       input.googlePlaceId ?? null,
       input.palettePreset,
+      input.stylePreset,
       JSON.stringify(input.socialLinks),
       input.localeDefault,
       tenantId

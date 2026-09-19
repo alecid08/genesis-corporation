@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { HeroProps } from '../types';
+
+const { tenant, copy, image } = Astro.props as HeroProps;
+---
+
+<section class="relative min-h-[720px] flex items-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={image}
+      alt="Electricista profesional en Miami trabajando en un panel eléctrico moderno"
+      class="w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      width={1920}
+      height={1080}
+    />
+    <div class="absolute inset-0 bg-surface-subtle/85"></div>
+  </div>
+  <div class="relative z-10 px-base md:px-margin-desktop max-w-container-max mx-auto w-full py-24">
+    <div class="max-w-3xl mx-auto text-center text-on-surface">
+      <p class="font-label-lg text-label-lg uppercase tracking-[0.3em] text-on-surface-variant mb-8">
+        {copy.hero.subtitle}
+      </p>
+      <h1 class="font-display-lg text-[clamp(40px,6vw,76px)] leading-[1.06] font-normal mb-10">
+        {tenant.businessName}
+      </h1>
+      <div class="flex flex-wrap justify-center items-center gap-8">
+        <a href="/servicios" class="bg-deep-navy text-on-primary font-semibold py-4 px-10 rounded-button hover:opacity-90 transition-all inline-block">
+          {copy.hero.ctaServices}
+        </a>
+        <a href="/contacto" class="font-semibold text-on-surface underline underline-offset-8 decoration-1 hover:opacity-70 transition-all">
+          {copy.hero.ctaQuote}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

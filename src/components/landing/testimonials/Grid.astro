@@ -1,0 +1,40 @@
+---
+import type { TestimonialsProps } from '../types';
+
+const { tenant, copy, locale } = Astro.props as TestimonialsProps;
+
+const items = tenant.testimonials.map((t) => ({
+  ...t,
+  quote: locale === 'en' && t.quoteEn ? t.quoteEn : t.quoteEs,
+  initials: t.author.split(' ').map((n) => n.charAt(0)).join('').toUpperCase().slice(0, 2),
+}));
+---
+
+<section class="py-section-y bg-surface-subtle">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-heading text-center mb-16">{copy.testimonials.heading}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      {items.map((t) => (
+        <div data-reveal class="bg-card-surface border border-card-border rounded-card shadow-[var(--shadow-card)] p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex text-safety-yellow mb-4">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <span class="material-symbols-outlined select-none" style={`font-variation-settings: 'FILL' ${index < t.rating ? 1 : 0};`}>star</span>
+              ))}
+            </div>
+            <p class="font-body-lg text-on-surface mb-8">"{t.quote}"</p>
+          </div>
+          <div class="flex items-center gap-4 pt-6 border-t border-card-border">
+            <div class="w-12 h-12 rounded-full bg-electric-blue text-on-primary flex items-center justify-center font-bold text-lg select-none">
+              {t.initials}
+            </div>
+            <div>
+              <p class="font-label-lg text-on-surface font-bold">{t.author}</p>
+              <p class="text-sm text-on-surface-variant">{t.location}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

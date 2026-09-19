@@ -1,0 +1,45 @@
+---
+import type { ServicesProps } from '../types';
+
+const { copy } = Astro.props as ServicesProps;
+---
+
+<section class="py-24 bg-white">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-deep-navy text-center mb-16">{copy.services.heading}</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {copy.services.items.map((service) => {
+        const emergency = service.tone === 'emergency';
+        return (
+          <div
+            data-reveal
+            class:list={[
+              'glass-card p-10 rounded-2xl shadow-xl hover:-translate-y-2 transition-all',
+              emergency && 'bg-emergency-red/5 border-emergency-red/20',
+            ]}
+          >
+            <span
+              class:list={['material-symbols-outlined text-[80px] mb-6', emergency ? 'text-emergency-red' : 'text-accent']}
+              style={emergency ? "font-variation-settings: 'FILL' 1;" : undefined}
+            >
+              {service.icon}
+            </span>
+            <h3 class:list={['font-headline-md text-headline-md mb-6', emergency ? 'text-emergency-red' : 'text-deep-navy']}>
+              {service.title}
+            </h3>
+            <ul class="space-y-4 mb-8">
+              {service.items.map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class:list={['material-symbols-outlined', emergency ? 'text-emergency-red' : 'text-success-green']}>
+                    {emergency ? 'emergency_home' : 'check_circle'}
+                  </span>
+                  <span class="font-body-md text-on-surface">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

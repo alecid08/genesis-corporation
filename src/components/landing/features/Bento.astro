@@ -1,0 +1,32 @@
+---
+import type { FeaturesProps } from '../types';
+
+const { copy } = Astro.props as FeaturesProps;
+
+// Reparto asimétrico: la 1ra y la 4ta ocupan doble ancho en desktop.
+const WIDE_INDEXES = new Set([0, 3]);
+---
+
+<section class="py-section-y bg-surface-subtle">
+  <div class="px-base md:px-margin-desktop max-w-container-max mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-heading text-center mb-16">{copy.whyUs.heading}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      {copy.whyUs.features.map((feature, index) => (
+        <div
+          data-reveal
+          class:list={[
+            'relative bg-card-surface border border-card-border rounded-card shadow-[var(--shadow-card)] p-8 overflow-hidden transition-all hover:-translate-y-1',
+            WIDE_INDEXES.has(index) && 'lg:col-span-2',
+          ]}
+        >
+          <span class="material-symbols-outlined text-4xl text-accent mb-6 block">{feature.icon}</span>
+          <h3 class="font-headline-md text-headline-md text-heading mb-3">{feature.title}</h3>
+          <p class="text-on-surface-variant font-body-md max-w-prose">{feature.body}</p>
+          <span class="absolute -right-6 -bottom-8 font-display-lg text-[120px] leading-none text-accent/10 select-none">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

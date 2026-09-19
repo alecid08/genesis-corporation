@@ -35,8 +35,21 @@ jobs:
       - name: Build with Astro
         run: pnpm build
 
-      # Requiere el secret CLOUDFLARE_API_TOKEN (permisos Workers Scripts:Edit,
-      # D1:Edit, R2:Edit) y CLOUDFLARE_ACCOUNT_ID configurados en el repo.
+      # Los dos pasos siguientes requieren el secret CLOUDFLARE_API_TOKEN
+      # (permisos Workers Scripts:Edit, D1:Edit, R2:Edit, Account Settings:Read)
+      # y CLOUDFLARE_ACCOUNT_ID configurados en el repo.
+
+      # Las migraciones van ANTES del deploy: solo añaden columnas con DEFAULT,
+      # así que el código viejo sigue funcionando contra el esquema nuevo. Al
+      # revés no: el código nuevo contra el esquema viejo sí rompería.
+      # wrangler es idempotente, solo aplica las migraciones pendientes.
+      - name: Apply D1 migrations
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 migrations apply nitza-demo-platform --remote
+
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:

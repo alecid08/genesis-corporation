@@ -4,6 +4,7 @@ import Button from '../../components/Button.astro';
 import { listTenants } from '../../lib/db';
 import { env } from 'cloudflare:workers';
 import { formatPhoneDisplay } from '../../lib/tenant';
+import { tenantHost } from '../../lib/domains';
 
 const tenants = env.DB ? await listTenants(env.DB) : [];
 ---
@@ -40,7 +41,7 @@ const tenants = env.DB ? await listTenants(env.DB) : [];
           {tenants.map((t) => (
             <tr class="border-t border-outline-variant">
               <td class="py-3 px-4 text-body-md">{t.businessName}</td>
-              <td class="py-3 px-4 text-body-md">{t.slug}.tacocars.com</td>
+              <td class="py-3 px-4 text-body-md">{tenantHost(t.slug)}</td>
               <td class="py-3 px-4 text-body-md">{formatPhoneDisplay(t.phone)}</td>
               <td class="py-3 px-4">
                 <span class={`inline-block px-3 py-0.5 rounded-full text-label-md font-semibold ${t.status === 'live' ? 'bg-success-green/15 text-success-green' : 'bg-tertiary-container/25 text-tertiary'}`}>
